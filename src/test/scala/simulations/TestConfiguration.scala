@@ -10,4 +10,5 @@ case class TestConfiguration() {
   var numUpdates = config.getInt("numUpdates")
   var updateDelay = config.getInt("updateDelay")
   var batchSize = config.getInt("batchSize")
+  var notificationServerUrl = config.getString("notificationServerUrl")
 }

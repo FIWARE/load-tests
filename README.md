@@ -6,7 +6,6 @@ or any other implementation of the [ngsi-v2](https://github.com/FIWARE/specifica
 ## General guidelines
 
 * all scenarios should describe the involved components
-* all scenarios that create something should cleanup afterwards
 * if a scenario requires components that are not part of the fiware system(f.e. an echo server), they should at least link to a deployment 
    documentation.
 
@@ -22,14 +21,21 @@ or any other implementation of the [ngsi-v2](https://github.com/FIWARE/specifica
 
 Testresults are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
 ``target/gatling/results``
+
 ### Orion without security
 
-The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.). 
+The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefor the involved 
+components are:
+* [Orion](https://github.com/telefonicaid/fiware-orion)
+* [MongoDB](https://www.mongodb.com/)
+* optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or Loadbalancer in front of orion
 
 #### Single value updates for entities
 
 A number of  entities will be created, then update 2 attributes with a delay between each of the updates. 
 Configuration parameters:
+
+##### Config
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
@@ -43,6 +49,8 @@ Configuration parameters:
 A number of entites will be created in batches, then update 2 attibutes also in batches. The number of parallel calls can be calculated
 by dividing the number of entities to be simulated through the batchsize.
 
+##### Config
+
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
 | baseUrl        | Url of orion                                                | http://localhost  |                            
@@ -50,3 +58,24 @@ by dividing the number of entities to be simulated through the batchsize.
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 | batchSize | Number of entities to be updated in each batch | 10 | 
+
+#### Single value updates for entities with active subscriptions.
+
+A number of  entities will be created, then update 2 attributes with a delay between each of the updates.  Each entity will have an active individual 
+subscription, that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications. 
+
+##### Echo Server preparation
+
+If running Orion on Kubernetes, an easy solution would be to install an [echo server](https://ealenn.github.io/Echo-Server/) into the cluster. That 
+solutions takes out the network as a bottleneck to the notification endpoint.
+Use ``helm install echo-server ealenn/echo-server``  to provide an endpoint cluster internal at the address ``http://echo-server``.
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of orion                                                | http://localhost  |                            
+| numEntities | Number of entities to be simulated.        |  100                  |
+| numUpdates| How many updates should be executed for each attribute. | 100  |
+| updateDelay| Delay between attribute updates in seconds. | 1 |
+| notificationServerUrl | URL to be notified by orion | http://echo-server | 
