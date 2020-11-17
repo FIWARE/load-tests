@@ -10,8 +10,18 @@ or any other implementation of the [ngsi-v2](https://github.com/FIWARE/specifica
 * if a scenario requires components that are not part of the fiware system(f.e. an echo server), they should at least link to a deployment 
    documentation.
 
+## How to run
+
+### Maven
+1. configure your test run inside the ``src/test/resources/test.conf `` 
+2. run all scenarios using ``mvn install gatling:test `` or single scenarios via ``mvn install gatling:test -Dgatling.simulationClass=<CLASSNAME>``
+(f.e. ``CLASSNAME=simulations.nosec.BatchUpdateSimulation ``)
 ## Scenarios
 
+## Testresults
+
+Testresults are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
+``target/gatling/results``
 ### Orion without security
 
 The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.). 
