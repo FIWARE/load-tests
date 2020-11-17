@@ -57,12 +57,9 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling-maven-plugin.version}</version>
                 <configuration>
-                    <!--<disableCompiler>true</disableCompiler>-->
                     <configFolder>${project.basedir}/src/test/resources</configFolder>
                     <resultsFolder>${project.build.directory}/gatling/results</resultsFolder>
                     <simulationsFolder>${project.basedir}/src/test/scala</simulationsFolder>
-                    <runDescription>This-is-the-run-description</runDescription>
-<!--                    <simulationClass>${project.basedir}\src\test\scala\performance\TillScenario</simulationClass>-->
                 </configuration>
             </plugin>
 
@@ -73,80 +70,6 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>net.alchim31.maven</groupId>-->
-<!--                <artifactId>scala-maven-plugin</artifactId>-->
-<!--                <version>${scala-maven-plugin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>testCompile</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <jvmArgs>-->
-<!--                                <jvmArg>-Xss100M</jvmArg>-->
-<!--                            </jvmArgs>-->
-<!--                            <args>-->
-<!--                                <arg>-target:jvm-1.8</arg>-->
-<!--                                <arg>-deprecation</arg>-->
-<!--                                <arg>-feature</arg>-->
-<!--                                <arg>-unchecked</arg>-->
-<!--                                <arg>-language:implicitConversions</arg>-->
-<!--                                <arg>-language:postfixOps</arg>-->
-<!--                            </args>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
-<!--            &lt;!&ndash; add generated sources &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.codehaus.mojo</groupId>-->
-<!--                <artifactId>build-helper-maven-plugin</artifactId>-->
-<!--                <version>${version.org.codehouse.mojo.build-helper}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>openapi-sources</id>-->
-<!--                        <phase>generate-sources</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>add-source</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <sources>-->
-<!--                                <source>${project.build.directory}/generated-sources/openapi/src/gatling</source>-->
-<!--                            </sources>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
-<!--            <plugin>-->
-<!--                <groupId>org.openapitools</groupId>-->
-<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                <version>${version.org.openapitools.generator}</version>-->
-<!--                <configuration>-->
-<!--                    <generatorName>scala-gatling</generatorName>-->
-<!--                    <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>openapi-ngsi-ld</id>-->
-<!--                        <phase>generate-sources</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <inputSpec>-->
-<!--                                https://raw.githubusercontent.com/FIWARE/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json-->
-<!--                            </inputSpec>-->
-<!--                            <skipValidateSpec>true</skipValidateSpec>-->
-<!--                            <configOptions>-->
-<!--                                <introspected>false</introspected>-->
-<!--                            </configOptions>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>
