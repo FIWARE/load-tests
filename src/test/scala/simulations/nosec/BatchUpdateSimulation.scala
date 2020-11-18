@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
+import simulations.FiwareOrionBaseSimulation
 
 class BatchUpdateSimulation extends FiwareOrionBaseSimulation {
 

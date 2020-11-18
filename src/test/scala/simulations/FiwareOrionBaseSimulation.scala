@@ -1,10 +1,11 @@
+package simulations
+
 import java.util.UUID
 
 import io.gatling.core.Predef._
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
-import simulations.TestConfiguration
 
 import scala.util.Random
 
