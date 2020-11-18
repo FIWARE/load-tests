@@ -20,5 +20,5 @@ jobs:
     - stage: dockr
       name: "Build and push test container"
       script:
-        - docker build -t ${IMAGE_NAME}:{IMAGE_TAG} -f docker/Dockerfile .
-        - docker push ${IMAGE_NAME}:{IMAGE_TAG}
+        - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f docker/Dockerfile .
+        - docker push ${IMAGE_NAME}:${IMAGE_TAG}
