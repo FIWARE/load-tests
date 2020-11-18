@@ -1,5 +1,3 @@
-package simulations.nosec
-
 import java.util.UUID
 
 import io.gatling.core.Predef._
@@ -46,7 +44,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def createEntityAction(): ActionBuilder = {
     http("create entity")
-      .post("/v2/entities")
+      .post("/entities")
       .body(StringBody((s: Session) => getEntityString(s("entityId").as[String])))
       .asJson
   }
@@ -56,7 +54,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
-      .post((s: Session) => "/v2/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
+      .post((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
       .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"value":""" + Random.nextFloat() * 10 + """}}"""))
       .asJson
   }
@@ -66,7 +64,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def deleteEntityAction(): ActionBuilder = {
     http("delete entity")
-      .delete((s: Session) => "/v2/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
+      .delete((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
   }
 
   /*
@@ -74,7 +72,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def batchCreateEntitiesAction(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("create batch of entities")
-      .post("/v2/op/update")
+      .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("append", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
   }
@@ -84,7 +82,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def batchUpdateEntitiesAction(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("update batch of entities")
-      .post("/v2/op/update")
+      .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("update", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
   }
@@ -94,7 +92,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def batchDeleteEntities(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("delete batch of entities")
-      .post("/v2/op/update")
+      .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("delete", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
   }
@@ -129,7 +127,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
    */
   def createSubscriptionAction(serverUrl: String): ActionBuilder = {
     http("create subscriptions")
-      .post((s: Session) => "/v2/subscriptions")
+      .post((s: Session) => "/subscriptions")
       .body(StringBody((s: Session) =>
         """{
             "subject":  {

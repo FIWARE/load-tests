@@ -1,0 +1,22 @@
+dist: xenial
+services:
+  - docker
+
+git:
+  depth: false
+
+env:
+  global:
+    - IMAGE_NAME=wistefan/orion-loadtest
+    - IMAGE_TAG=latest
+
+stages:
+  - docker
+
+jobs:
+  include:
+    - stage: dockr
+      name: "Build and push test container"
+      script:
+        - docker build -t ${IMAGE_NAME}:{IMAGE_TAG} -f docker/Dockerfile .
+        - docker push ${IMAGE_NAME}:{IMAGE_TAG}
