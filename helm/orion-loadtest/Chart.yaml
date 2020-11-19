@@ -1,0 +1,20 @@
+apiVersion: v2
+name: orion-loadtest
+version: 0.0.1
+appVersion: 0.0.1
+description: A Helm chart for running the orion-loadtests on kubernetes.
+icon: https://fiware.github.io/catalogue/img/fiware.png
+keywords:
+- fiware
+- orion
+- orion-ld
+- loadtests
+sources:
+- https://github.com/wistefan/orion-loadtest
+maintainers:
+- name: wistefan
+  email: stefan.wiedemann@fiware.org
+dependencies:
+- name: echo-server
+  version: 0.3.0
+  repository: "https://ealenn.github.io/charts"

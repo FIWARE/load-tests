@@ -1,0 +1,30 @@
+{{- $collectorService := include "orion-loadtest.fullname" .  -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "orion-loadtest.fullname" . }}
+  labels:
+      {{ include "orion-loadtest.labels" . | nindent 4 }}
+spec:
+  backoffLimit: 1
+  parallelism: {{ div .Values.test.conf.numberOfEntities .Values.test.conf.entitiesPerInstance }}
+  completions: {{ div .Values.test.conf.numberOfEntities .Values.test.conf.entitiesPerInstance }}
+  template:
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.test.image.pullPolicy }}
+          image: "{{ .Values.test.image.repository }}:{{ .Values.test.image.tag }}"
+          command: ["mvn",  "install", "gatling:test", "-Dgatling.simulationClass={{ .Values.test.simulationClass }}", "wagon:upload", "-DuploadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/orion-loadtest/src/test/resources/test.conf
+              subPath: test.conf
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "orion-loadtest.fullname" .}}
+            items:
+              - key: test.conf
+                path: test.conf
+      restartPolicy: Never

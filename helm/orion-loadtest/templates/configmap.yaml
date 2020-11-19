@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "orion-loadtest.fullname" . }}
+  labels:
+    {{- include "orion-loadtest.labels" . | nindent 4 }}
+data:
+  test.conf: |-
+    numEntities={{ .Values.test.conf.entitiesPerInstance }}
+    baseUrl="{{ .Values.test.conf.orionUrl }}"
+    numUpdates={{ .Values.test.conf.numberOfUpdates }}
+    updateDelay={{ .Values.test.conf.updateDelay }}
+    batchSize={{ .Values.test.conf.batchSize }}
+    notificationServerUrl="{{ .Values.test.conf.notificationServer }}"

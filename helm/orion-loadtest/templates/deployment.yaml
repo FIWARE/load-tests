@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "orion-loadtest.fullname" . }}
+  labels:
+    {{ include "orion-loadtest.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "orion-loadtest.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{ include "orion-loadtest.labels" . | nindent 8 }}
+        {{- with .Values.collector.additionalLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- if .Values.collector.additionalAnnotations -}}
+      annotations:
+        {{- with .Values.collector.additionalAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
+          image: "{{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag }}"
+          ports:
+            - name: ftp
+              containerPort: {{ .Values.collector.port}}
+              protocol: TCP
+          env:
+            # general
+            - name: USERS
+              value: "{{ .Values.collector.username }}|{{ .Values.collector.password }}|{{ .Values.collector.resultFolder }}"
+          resources:
+            {{- toYaml .Values.collector.resources | nindent 12 }}
