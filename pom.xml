@@ -84,7 +84,7 @@
                 <configuration>
                     <serverId>ftp-collector</serverId>
                     <fromDir>${project.build.directory}/gatling/results</fromDir>
-                    <includes>simulation.log</includes>
+                    <includes>*/simulation.log</includes>
                     <url>${uploadUrl}</url>
                     <toDir>results</toDir>
                 </configuration>
