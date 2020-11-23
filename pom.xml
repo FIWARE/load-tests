@@ -82,7 +82,7 @@
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <configuration>
-                    <reportsFolder>${project.basedir}/results</reportsFolder>
+                    <reportsFolder>results</reportsFolder>
                 </configuration>
             </plugin>
 
