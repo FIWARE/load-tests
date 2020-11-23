@@ -11,7 +11,6 @@ on:
       - v*
 
 env:
-  # TODO: Change variable to your image's name.
   IMAGE_NAME_TEST: wistefan/orion_loadtest
   IMAGE_NAME_AGGREGATION: wistefan/loadtest_aggregation
 
@@ -40,20 +39,10 @@ jobs:
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
 
-          docker tag $IMAGE_NAME_TEST $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME_TEST $IMAGE_NAME_TEST:latest
+          docker push $IMAGE_ID:latest
           
   push-aggregation:
 
@@ -76,17 +65,7 @@ jobs:
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
 
-          docker tag $IMAGE_NAME_AGGREGATION $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME_AGGREGATION $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
