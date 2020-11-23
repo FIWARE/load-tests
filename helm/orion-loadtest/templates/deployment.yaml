@@ -32,8 +32,14 @@ spec:
             - name: ftp
               containerPort: {{ .Values.collector.port}}
               protocol: TCP
+            {{- range untilStep 21000 21010 1 }}
+            - containerPort: {{ . }}
+              protocol: TCP
+              name: ftp-{{ . }}
+            {{- end }}
           env:
-            # general
+            - name: ADDRESS
+              value: {{ include "orion-loadtest.fullname" . }}
             - name: USERS
               value: "{{ .Values.collector.username }}|{{ .Values.collector.password }}|{{ .Values.collector.resultFolder }}"
           resources:

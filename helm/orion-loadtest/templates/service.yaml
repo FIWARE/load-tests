@@ -15,6 +15,12 @@ spec:
       targetPort: {{ .Values.collector.port }}
       protocol: TCP
       name: http
+    {{- range untilStep 21000 21010 1 }}
+    - port: {{ . }}
+      targetPort: {{ .}}
+      protocol: TCP
+      name: ftp-{{ . }}
+    {{- end }}
   selector:
     app.kubernetes.io/name: {{ include "orion-loadtest.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
