@@ -28,6 +28,9 @@
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
                 <version>0.0.1</version>
+                <configuration>
+                    <reportsFolder>./</reportsFolder>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
