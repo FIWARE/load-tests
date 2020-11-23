@@ -9,17 +9,25 @@ git:
 
 env:
   global:
-    - IMAGE_NAME=wistefan/orion-loadtest
+    - IMAGE_NAME_TEST=wistefan/orion-loadtest
+    - IMAGE_NAME_AGGREGATION=wistefan/aggregation-loadtest
     - IMAGE_TAG=latest
 
 stages:
-  - docker
+  - docker-test
+  - docker-aggregation
 
 jobs:
   include:
-    - stage: dockr
+    - stage: docker-test
       name: "Build and push test container"
       script:
-        - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f docker/Dockerfile .
+        - docker build -t ${IMAGE_NAME_TEST}:${IMAGE_TAG} -f docker/test/Dockerfile .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker push ${IMAGE_NAME}:${IMAGE_TAG}
+        - docker push ${IMAGE_NAME_TEST}:${IMAGE_TAG}
+    - stage: docker-aggregation
+      name: "Build and push aggregation container"
+      script:
+        - docker build -t ${IMAGE_NAME_AGGREGATION}:${IMAGE_TAG} -f docker/aggregation/Dockerfile .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push ${IMAGE_NAME_AGGREGATION}:${IMAGE_TAG}

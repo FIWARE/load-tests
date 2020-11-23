@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.fiware</groupId>
+    <artifactId>orion-report-aggreator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+
+        <gatling.version>3.4.1</gatling.version>
+        <gatling-maven-plugin.version>3.1.0</gatling-maven-plugin.version>
+
+        <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+
+        <downloadUrl>ftp://result-collector/</downloadUrl>
+        <uploadUrl>ftp://result-collector/</uploadUrl>
+        <resultFolder>results</resultFolder>
+        <ftpUser>user</ftpUser>
+        <ftpPassword>password</ftpPassword>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.wistefan</groupId>
+                <artifactId>gatling-aggregation-maven-plugin</artifactId>
+                <version>0.0.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <target>
+                        <ftp action="get"
+                             server="${downloadUrl}"
+                             remotedir="${resultFolder}"
+                             userid="${ftpUser}"
+                             password="${ftpPassword}">
+                            <fileset dir="${project.build.directory}">
+                                <include name="**/*.log"/>
+                            </fileset>
+                        </ftp>
+                    </target>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>commons-net</groupId>
+                        <artifactId>commons-net</artifactId>
+                        <version>1.4.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-commons-net</artifactId>
+                        <version>1.8.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <serverId>ftp-collector</serverId>
+                    <fromDir>${resultFolder}/</fromDir>
+                    <includes>*</includes>
+                    <url>${uploadUrl}</url>
+                    <toDir>results/aggregation/</toDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

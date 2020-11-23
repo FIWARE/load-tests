@@ -5,6 +5,9 @@
             <id>ftp-collector</id>
             <username>collector</username>
             <password>pass</password>
+            <configuration>
+                <endpointChecking>false</endpointChecking>
+            </configuration>
         </server>
     </servers>
 </settings>
