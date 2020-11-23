@@ -12,8 +12,8 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME_TEST: wistefan/orion-loadtest
-  IMAGE_NAME_AGGREGATION: wistefan/aggregation-loadtest
+  IMAGE_NAME_TEST: wistefan/orion_loadtest
+  IMAGE_NAME_AGGREGATION: wistefan/loadtest_aggregation
 
 jobs:
   
