@@ -23,22 +23,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build -t $IMAGE_NAME_TEST:latest -f docker/test/Dockerfile .
+        run: docker build -t docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_TEST:latest -f docker/test/Dockerfile .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_TEST
-
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          echo IMAGE_ID=$IMAGE_ID
-
-          docker tag $IMAGE_NAME_TEST $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+          run: docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_TEST:latest
           
   push-aggregation:
 
@@ -49,19 +40,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build -t $IMAGE_NAME_AGGREGATION -f docker/test/Dockerfile .
+        run: docker build -t docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_AGGREGATION:latest -f docker/aggregation/Dockerfile .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_AGGREGATION
-
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          echo IMAGE_ID=$IMAGE_ID
-
-          docker tag $IMAGE_NAME_AGGREGATION $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+        run: docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_AGGREGATION:latest
