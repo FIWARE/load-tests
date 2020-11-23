@@ -6,13 +6,9 @@ on:
     branches:
       - master
 
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-
 env:
-  IMAGE_NAME_TEST: wistefan/orion_loadtest
-  IMAGE_NAME_AGGREGATION: wistefan/loadtest_aggregation
+  IMAGE_NAME_TEST: wistefan/orion-loadtest
+  IMAGE_NAME_AGGREGATION: wistefan/loadtest-aggregation
 
 jobs:
   
@@ -27,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build -t $IMAGE_NAME_TEST -f docker/test/Dockerfile .
+        run: docker build -t $IMAGE_NAME_TEST:latest -f docker/test/Dockerfile .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
@@ -41,7 +37,7 @@ jobs:
 
           echo IMAGE_ID=$IMAGE_ID
 
-          docker tag $IMAGE_NAME_TEST $IMAGE_NAME_TEST:latest
+          docker tag $IMAGE_NAME_TEST $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
           
   push-aggregation:
