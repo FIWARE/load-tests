@@ -17,8 +17,7 @@
         <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 
-        <downloadUrl>ftp://result-collector/</downloadUrl>
-        <uploadUrl>ftp://result-collector/</uploadUrl>
+        <ftpUrl>ftp://result-collector/</ftpUrl>
         <resultFolder>results</resultFolder>
     </properties>
 
@@ -38,9 +37,9 @@
                 <version>2.0.0</version>
                 <configuration>
                     <serverId>ftp-collector</serverId>
-                    <fromDir>${resultFolder}/</fromDir>
+                    <fromDir>${resultFolder}</fromDir>
                     <includes>*</includes>
-                    <url>${uploadUrl}</url>
+                    <url>${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
                 </configuration>
             </plugin>
