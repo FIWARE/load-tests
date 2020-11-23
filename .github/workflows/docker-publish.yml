@@ -29,8 +29,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        run: |
-          docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_TEST:latest
+        run: docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_TEST:latest
           
   push-aggregation:
 
@@ -47,5 +46,4 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
-        run: |
-          docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_AGGREGATION:latest
+        run: docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_AGGREGATION:latest
