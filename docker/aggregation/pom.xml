@@ -20,8 +20,6 @@
         <downloadUrl>ftp://result-collector/</downloadUrl>
         <uploadUrl>ftp://result-collector/</uploadUrl>
         <resultFolder>results</resultFolder>
-        <ftpUser>user</ftpUser>
-        <ftpPassword>password</ftpPassword>
     </properties>
 
     <build>
@@ -30,36 +28,6 @@
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
                 <version>0.0.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
-                <configuration>
-                    <target>
-                        <ftp action="get"
-                             server="${downloadUrl}"
-                             remotedir="${resultFolder}"
-                             userid="${ftpUser}"
-                             password="${ftpPassword}">
-                            <fileset dir="${project.build.directory}">
-                                <include name="**/*.log"/>
-                            </fileset>
-                        </ftp>
-                    </target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>commons-net</groupId>
-                        <artifactId>commons-net</artifactId>
-                        <version>1.4.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.ant</groupId>
-                        <artifactId>ant-commons-net</artifactId>
-                        <version>1.8.1</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -74,5 +42,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>3.4.1</version>
+            </extension>
+        </extensions>
     </build>
 </project>
