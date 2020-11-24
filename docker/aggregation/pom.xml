@@ -32,6 +32,7 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>aggregate-results</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>aggregate</goal>
@@ -52,12 +53,14 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>download-test-results</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>download</goal>
                         </goals>
                     </execution>
                     <execution>
+                        <id>upload-aggregation-result</id>
                         <phase>deploy</phase>
                         <goals>
                             <goal>upload</goal>
