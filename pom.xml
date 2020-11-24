@@ -77,14 +77,6 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
             </plugin>
-            <plugin>
-                <groupId>org.wistefan</groupId>
-                <artifactId>gatling-aggregation-maven-plugin</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <configuration>
-                    <reportsFolder>results</reportsFolder>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

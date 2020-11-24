@@ -21,12 +21,19 @@
         <resultFolder>results</resultFolder>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.wistefan</groupId>
+            <artifactId>gatling-aggregation-maven-plugin</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
-                <version>0.0.1</version>
                 <configuration>
                     <reportsFolder>./</reportsFolder>
                 </configuration>
