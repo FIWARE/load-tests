@@ -18,7 +18,8 @@
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 
         <ftpUrl>ftp://result-collector/</ftpUrl>
-        <resultFolder>results</resultFolder>
+        <remoteFolder>results</remoteFolder>
+        <reportsFolder>results</reportsFolder>
     </properties>
 
     <build>
@@ -26,8 +27,9 @@
             <plugin>
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
+                <version>0.0.1</version>
                 <configuration>
-                    <reportsFolder>./</reportsFolder>
+                    <reportsFolder>${reportsFolder}</reportsFolder>
                 </configuration>
                 <executions>
                     <execution>
@@ -45,7 +47,7 @@
                 <version>2.0.0</version>
                 <configuration>
                     <serverId>ftp-collector</serverId>
-                    <fromDir>${resultFolder}</fromDir>
+                    <fromDir>${remoteFolder}</fromDir>
                     <includes>*</includes>
                     <url>${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
