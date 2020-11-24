@@ -48,7 +48,7 @@
                 <configuration>
                     <serverId>ftp-collector</serverId>
                     <fromDir>${remoteFolder}</fromDir>
-                    <includes>*</includes>
+                    <includes>*/**</includes>
                     <url>${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
                 </configuration>
