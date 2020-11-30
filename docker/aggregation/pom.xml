@@ -47,7 +47,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <executable>wget</executable>
+                    <executable>/user/bin/wget</executable>
                     <workingDirectory>/usr/src/aggregation</workingDirectory>
                     <arguments>
                         <argument>--user=${ftpUser}</argument>
