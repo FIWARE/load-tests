@@ -1,7 +1,7 @@
 FROM alpine
-FROM maven:3
-
 RUN apk add --update wget
+
+FROM maven:3
 
 COPY docker/aggregation/pom.xml /usr/src/aggregation/pom.xml
 
