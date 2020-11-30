@@ -1,4 +1,4 @@
-FROM maven:3.6-openjdk-8
+FROM maven:3.6-openjdk-11
 RUN apt-get install wget
 
 WORKDIR /usr/src/aggregation

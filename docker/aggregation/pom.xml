@@ -51,7 +51,7 @@
                     <workingDirectory>/usr/src/aggregation</workingDirectory>
                     <arguments>
                         <argument>-m</argument>
-                        <argument>ftp://${ftpUser}:${ftpPassword}@${ftpUrl}${remoteFolder}</argument>
+                        <argument>ftp://${ftpUser}:${ftpPassword}@${ftpUrl}</argument>
                     </arguments>
                 </configuration>
             </plugin>
@@ -61,7 +61,6 @@
                 <version>2.0.0</version>
                 <configuration>
                     <serverId>ftp-collector</serverId>
-                    <fromDir>${remoteFolder}</fromDir>
                     <includes>*/**</includes>
                     <url>${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
