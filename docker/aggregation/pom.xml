@@ -54,6 +54,15 @@
                         <argument>-m</argument>
                         <argument>ftp://${ftpUser}:${ftpPassword}@${ftpUrl}</argument>
                     </arguments>
+                    <executions>
+                        <execution>
+                            <id>download-report</id>
+                            <phase>initialize</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </configuration>
             </plugin>
             <plugin>
