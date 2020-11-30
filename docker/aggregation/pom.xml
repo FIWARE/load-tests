@@ -73,7 +73,7 @@
                     <serverId>ftp-collector</serverId>
                     <fromDir>${reportsFolder}</fromDir>
                     <includes>*/**</includes>
-                    <url>${ftpUrl}</url>
+                    <url>ftp://${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
                 </configuration>
                 <executions>
