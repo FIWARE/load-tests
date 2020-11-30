@@ -1,12 +1,12 @@
-# Loadtest for Fiware Orion
+# Loadtest for FIWARE Orion
 
-[Gatling](https://github.com/gatling/gatling) load tests to run against the [Fiware Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
+[Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
 or any other implementation of the [ngsi-v2](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2) api.
 
 ## General guidelines
 
 * all scenarios should describe the involved components
-* if a scenario requires components that are not part of the fiware system(f.e. an echo server), they should at least link to a deployment 
+* if a scenario requires components that are not part of the FIWARE system(f.e. an echo server), they should at least link to a deployment 
    documentation.
 
 ## How to run
@@ -26,7 +26,7 @@ Testresults are published in the standard [Gatling Report format](https://gatlin
 
 The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefor the involved 
 components are:
-* [Orion](https://github.com/telefonicaid/fiware-orion)
+* [Orion](https://github.com/telefonicaid/FIWARE-orion)
 * [MongoDB](https://www.mongodb.com/)
 * optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or Loadbalancer in front of orion
 
