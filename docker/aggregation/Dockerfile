@@ -1,8 +1,6 @@
 FROM maven:3
 
-RUN  apt-get update \
-  && apt-get install -y wget \
-  && rm -rf /var/lib/apt/lists/*
+RUN apk add --update wget
 
 COPY docker/aggregation/pom.xml /usr/src/aggregation/pom.xml
 
