@@ -48,6 +48,7 @@
                 <version>3.0.0</version>
                 <configuration>
                     <executable>wget</executable>
+                    <workingDirectory>/usr/src/aggregation</workingDirectory>
                     <arguments>
                         <argument>--user=${ftpUser}</argument>
                         <argument>--password=${ftpPassword}</argument>
