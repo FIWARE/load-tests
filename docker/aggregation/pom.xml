@@ -47,12 +47,11 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <executable>curl</executable>
+                    <executable>wget</executable>
                     <workingDirectory>/usr/src/aggregation</workingDirectory>
                     <arguments>
-                        <argument>-u ${ftpUser}:${ftpPassword}</argument>
-                        <argument>${ftpUrl}</argument>
-                        <argument>-O</argument>
+                        <argument>-m</argument>
+                        <argument>ftp://${ftpUser}:${ftpPassword}@${ftpUrl}${remoteFolder}</argument>
                     </arguments>
                 </configuration>
             </plugin>
