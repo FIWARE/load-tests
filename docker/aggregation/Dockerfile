@@ -1,4 +1,5 @@
 FROM maven:3
+FROM alpine
 
 RUN apk add --update wget
 
