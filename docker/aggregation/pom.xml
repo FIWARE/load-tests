@@ -71,6 +71,7 @@
                 <version>2.0.0</version>
                 <configuration>
                     <serverId>ftp-collector</serverId>
+                    <fromDir>${reportsFolder}</fromDir>
                     <includes>*/**</includes>
                     <url>${ftpUrl}</url>
                     <toDir>results/aggregation/</toDir>
