@@ -7,4 +7,3 @@ RUN  apt-get update \
 COPY docker/aggregation/pom.xml /usr/src/aggregation/pom.xml
 
 WORKDIR /usr/src/aggregation
-RUN  mvn dependency:copy-dependencies

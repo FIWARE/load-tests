@@ -39,11 +39,11 @@
             <artifactId>gatling-recorder</artifactId>
             <version>${gatling.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.softwaremill.sttp.client3</groupId>-->
-<!--            <artifactId>core_2.13</artifactId>-->
-<!--            <version>3.0.0-RC9</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.softwaremill.sttp.client3</groupId>
+            <artifactId>core_2.13</artifactId>
+            <version>3.0.0-RC9</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
