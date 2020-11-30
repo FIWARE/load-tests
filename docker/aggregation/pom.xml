@@ -51,7 +51,7 @@
                     <workingDirectory>/usr/src/aggregation</workingDirectory>
                     <arguments>
                         <argument>-u ${ftpUser}:${ftpPassword}</argument>
-                        <argument>${ftpUrl}/${remoteFolder}*</argument>
+                        <argument>${ftpUrl}</argument>
                         <argument>-O</argument>
                     </arguments>
                 </configuration>
