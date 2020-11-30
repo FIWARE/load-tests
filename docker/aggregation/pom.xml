@@ -21,6 +21,7 @@
         <ftpUser>user</ftpUser>
         <ftpPassword>password</ftpPassword>
         <remoteFolder>results</remoteFolder>
+        <reportsFolder>results</reportsFolder>
     </properties>
 
     <build>
