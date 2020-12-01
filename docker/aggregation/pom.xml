@@ -8,64 +8,20 @@
 
     <properties>
         <encoding>UTF-8</encoding>
-
-        <ftpUrl>ftp://result-collector/</ftpUrl>
-        <ftpUser>user</ftpUser>
-        <ftpPassword>password</ftpPassword>
-        <remoteFolder>results</remoteFolder>
         <reportsFolder>results</reportsFolder>
     </properties>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <executable>wget</executable>
-                    <workingDirectory>/usr/src/aggregation</workingDirectory>
-                    <arguments>
-                        <argument>-m</argument>
-                        <argument>ftp://${ftpUser}:${ftpPassword}@${ftpUrl}</argument>
-                    </arguments>
-                    <executions>
-                        <execution>
-                            <id>download-report</id>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2</version>
                 <configuration>
                     <reportsFolder>${reportsFolder}</reportsFolder>
+                    <!-- since we are running as a sidecar, its possible(and ok) that nothing is there on first try -->
+                    <failOnEmptyReports>false</failOnEmptyReports>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>upload-results</id>
-                        <phase>site-deploy</phase>
-                        <configuration>
-                            <target>
-                                <ftp action="send" server="${ftpUrl}" remotedir="/results/aggregation/" userid="${ftpUser}" password="${ftpPassword}" depends="yes" verbose="yes">
-                                    <fileset dir="${reportsFolder}"/>
-                                </ftp>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
