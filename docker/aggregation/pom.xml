@@ -16,11 +16,11 @@
             <plugin>
                 <groupId>io.github.wistefan</groupId>
                 <artifactId>gatling-aggregation-maven-plugin</artifactId>
-                <version>0.0.2</version>
+                <version>0.0.1</version>
                 <configuration>
                     <reportsFolder>${reportsFolder}</reportsFolder>
                     <!-- since we are running as a sidecar, its possible(and ok) that nothing is there on first try -->
-                    <failOnEmptyReports>false</failOnEmptyReports>
+                    <!-- <failOnEmptyReports>false</failOnEmptyReports> -->
                 </configuration>
             </plugin>
         </plugins>
