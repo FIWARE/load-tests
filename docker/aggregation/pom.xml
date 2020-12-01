@@ -27,23 +27,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.github.wistefan</groupId>
-                <artifactId>gatling-aggregation-maven-plugin</artifactId>
-                <version>0.0.1</version>
-                <configuration>
-                    <reportsFolder>${reportsFolder}</reportsFolder>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>aggregate-results</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
@@ -66,6 +49,23 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>io.github.wistefan</groupId>
+                <artifactId>gatling-aggregation-maven-plugin</artifactId>
+                <version>0.0.1</version>
+                <configuration>
+                    <reportsFolder>${reportsFolder}</reportsFolder>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>aggregate-results</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>wagon-maven-plugin</artifactId>
                 <version>2.0.0</version>
@@ -79,7 +79,7 @@
                 <executions>
                     <execution>
                         <id>upload-aggregation-result</id>
-                        <phase>deploy</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>upload</goal>
                         </goals>
