@@ -47,15 +47,6 @@
                 <configuration>
                     <reportsFolder>${reportsFolder}</reportsFolder>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>aggregate-results</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
