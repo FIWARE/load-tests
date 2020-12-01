@@ -24,15 +24,24 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      serviceAccountName: api-umbrella
+      serviceAccount: api-umbrella
+      securityContext:
+        runAsUser: 0
+      volumes:
+        - name: shared-results
+          emptyDir: { }
       containers:
         - name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.collector.image.pullPolicy }}
           image: "{{ .Values.collector.image.repository }}:{{ .Values.collector.image.tag }}"
+          securityContext:
+            privileged: true
           ports:
             - name: ftp
               containerPort: {{ .Values.collector.port}}
               protocol: TCP
-            {{- range untilStep 21000 21010 1 }}
+            {{- range untilStep 21000 21011 1 }}
             - containerPort: {{ . }}
               protocol: TCP
               name: ftp-{{ . }}
@@ -44,3 +53,31 @@ spec:
               value: "{{ .Values.collector.username }}|{{ .Values.collector.password }}|{{ .Values.collector.resultFolder }}"
           resources:
             {{- toYaml .Values.collector.resources | nindent 12 }}
+          volumeMounts:
+            - name: shared-results
+              mountPath: /{{ .Values.collector.resultFolder }}
+        - name: {{ .Chart.Name }}-aggregation-sidecar
+          imagePullPolicy: {{ .Values.aggregation.image.pullPolicy }}
+          image: "{{ .Values.aggregation.image.repository }}:{{ .Values.aggregation.image.tag }}"
+          command: [ "watch", "-n 10", "mvn", "gatling-aggregation:aggregate", "-DreportsFolder={{ .Values.collector.resultFolder }}"]
+          volumeMounts:
+            - name: shared-results
+              mountPath: {{ .Values.collector.resultFolder }}
+        - name: {{ .Chart.Name }}-result-server
+          image: halverneus/static-file-server
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: FOLDER
+              value: "{{ .Values.collector.resultFolder }}"
+            - name: PORT
+              value: "8080"
+            - name: DEBUG
+              value: "true"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: shared-results
+              mountPath: {{ .Values.collector.resultFolder }}
+

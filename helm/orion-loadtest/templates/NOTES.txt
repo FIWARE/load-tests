@@ -1,0 +1,4 @@
+Aggregated results will be available after the jobs finished via:
+
+$ kubectl proxy --port 8002
+http://localhost:8002/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "orion-loadtest.fullname" . }}:8080/proxy/

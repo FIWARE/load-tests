@@ -1,17 +1,17 @@
 ## configuration for the result collector
 collector:
-  ## additional labels for the deployment, if required
+  # -- additional labels for the deployment, if required
   additionalLabels: { }
-  ## additional annotations for the deployment, if required
+  # -- additional annotations for the deployment, if required
   additionalAnnotations: { }
-  ## port to access the collector at
+  # -- port to access the collector at
   port: 21
-  ## username to authenticate with
+  # -- username to authenticate with
   username: loadtest
-  ## password to authenticate with
-  password: myPassword
-  ## folder to put results at
-  resultFolder: results
+  # -- password to authenticate with
+  password: mypassword
+  # -- folder to put results at
+  resultFolder: /results
   ## collector resource requests and limits, we leave the default empty to make that a concious choice by the user.
   # resources:
     # limits:
@@ -20,59 +20,59 @@ collector:
     # requests:
       # cpu: 100m
       # memory: 128Mi
-  ## image to be used for result collection
+  # -- image to be used for result collection
   image:
-    ## collector image name
+    # -- collector image name
     repository: delfer/alpine-ftp-server
-    ## collector image tag
+    # -- collector image tag
     tag: latest
-    ## specification of the image pull policy
+    # -- specification of the image pull policy
     pullPolicy: IfNotPresent
-  ## configuration for the k8s service to access the result collector
+  # -- configuration for the k8s service to access the result collector
   service:
-    ## service type
+    # -- service type
     type: ClusterIP
-    ## port to be used by the service
+    # -- port to be used by the service
     port: 21
-    ## addtional annotations, if required
+    # -- addtional annotations, if required
     annotations: {}
 
 ## configuration of the actual load tests
 test:
-  ## image to be used for result collection
+  # -- image to be used for result collection
   image:
-    ## test image name
+    # -- test image name
     repository: wistefan/orion-loadtest
-    ## test image tag
+    # -- test image tag
     tag: latest
-    ## specification of the image pull policy
+    # -- specification of the image pull policy
     pullPolicy: Always
-  ## class of the concrete test to run
+  # -- class of the concrete test to run
   simulationClass: simulations.nosec.EntityUpdateSimulation
-  ## test specific configuration
+  # -- test specific configuration
   conf:
-    ## how many entities should one test instance simulate
-    entitiesPerInstance: 50
-    ## number of entities to simulate
+    # -- how many entities should one test instance simulate
+    entitiesPerInstance: 100
+    # -- number of entities to simulate
     numberOfEntities: 100
-    ## number of updates every entity should send
+    # -- number of updates every entity should send
     numberOfUpdates: 10
-    ## url of the orion instance to test
+    # -- url of the orion instance to test
     orionUrl: http://orion:1026/v2
-    ## delay between calls in seconds(only in context of one instance)
+    # -- delay between calls in seconds(only in context of one instance)
     updateDelay: 1
-    ## number of entities to be updated in each batch
+    # -- number of entities to be updated in each batch
     batchSize: 10
-    ## url of the notification server.
+    # -- url of the notification server.
     notificationServer: http://orion-ldt-echo-server
 
-# configuration for the post-test report aggregation
+# -- configuration for the post-test report aggregation
 aggregation:
-  ## image to be used for result aggregation
+  # -- image to be used for result aggregation
   image:
-    ## test image name
+    # -- test image name
     repository: wistefan/loadtest-aggregation
-    ## test image tag
+    # -- test image tag
     tag: latest
-    ## specification of the image pull policy
+    # -- specification of the image pull policy
     pullPolicy: Always

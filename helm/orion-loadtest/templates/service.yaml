@@ -11,10 +11,14 @@ metadata:
 spec:
   type: {{ .Values.collector.service.type }}
   ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
     - port: {{ .Values.collector.service.port }}
       targetPort: {{ .Values.collector.port }}
       protocol: TCP
-      name: http
+      name: ftp
     {{- range untilStep 21000 21010 1 }}
     - port: {{ . }}
       targetPort: {{ .}}

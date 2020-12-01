@@ -79,3 +79,15 @@ Use ``helm install echo-server ealenn/echo-server``  to provide an endpoint clus
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 | notificationServerUrl | URL to be notified by orion | http://echo-server | 
+
+### Helm 
+
+In scenarios with a large number of entities, multiple machines should be used. For such cases, the helm chart can be used. The chart will run the 
+tests as kubernetes jobs an distribute them through the cluster according to your configuration. Every job will upload its result to a central ftp server.
+The uploaded results will be aggregated by the ftp's sidecar container. You can view them in a browser via:
+
+```
+kubectl proxy --port <YOUR_PREFERD_LOCAL_PORT>
+http://localhost:<YOUR_PREFERD_LOCAL_PORT>/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "orion-loadtest.fullname" . }}:8080/proxy/
+```
+See the chart docu for all configuration options.

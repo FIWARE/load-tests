@@ -4,47 +4,41 @@ kind: Job
 metadata:
   name: {{ include "orion-loadtest.fullname" . }}
   labels:
-      {{ include "orion-loadtest.labels" . | nindent 4 }}
+    {{ include "orion-loadtest.labels" . | nindent 4 }}
 spec:
   backoffLimit: 1
   parallelism: {{ div .Values.test.conf.numberOfEntities .Values.test.conf.entitiesPerInstance }}
   completions: {{ div .Values.test.conf.numberOfEntities .Values.test.conf.entitiesPerInstance }}
   template:
     spec:
-      initContainers:
-        - name: {{ .Chart.Name }}
-            imagePullPolicy: {{ .Values.test.image.pullPolicy }}
-            image: "{{ .Values.test.image.repository }}:{{ .Values.test.image.tag }}"
-            command: [ "mvn",  "install", "gatling:test", "-Dgatling.simulationClass={{ .Values.test.simulationClass }}", "wagon:upload", "-DuploadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}" ]
-            volumeMounts:
-              - name: config-volume-test-conf
-                mountPath: /usr/src/orion-loadtest/src/test/resources/test.conf
-                subPath: test.conf
-              - name: config-volume-settings-xml
-                mountPath: /root/.m2/settings.xml
-                subPath: settings.xml
+      serviceAccountName: api-umbrella
+      serviceAccount: api-umbrella
+      securityContext:
+        runAsUser: 0
       containers:
-        - name: {{ .Chart.Name }}
-            imagePullPolicy: {{ .Values.aggregation.image.pullPolicy }}
-            image: "{{ .Values.aggregation.image.repository }}:{{ .Values.aggregation.image.tag }}"
-            command: [ "mvn",  "antrun:run", "-DdownloadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}", "-DftpUser={{.Values.collector.username}}",  "-DftpPassword={{.Values.collector.password}}", "gatling-aggregation:aggregate", "wagon:upload", "-DuploadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}" ]
-            volumeMounts:
-              - name: config-volume-test-conf
-                mountPath: /usr/src/orion-loadtest/src/test/resources/test.conf
-                subPath: test.conf
-              - name: config-volume-settings-xml
-                mountPath: /root/.m2/settings.xml
-                subPath: settings.xml
+        - name: {{ .Chart.Name }}-test
+          imagePullPolicy: {{ .Values.test.image.pullPolicy }}
+          image: "{{ .Values.test.image.repository }}:{{ .Values.test.image.tag }}"
+          command: ["mvn",  "install", "gatling:test", "-Dgatling.simulationClass={{ .Values.test.simulationClass }}", "wagon:upload", "-DuploadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}" ]
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: config-volume-test-conf
+              mountPath: /usr/src/orion-loadtest/src/test/resources/test.conf
+              subPath: test.conf
+            - name: config-volume-settings-xml
+              mountPath: /root/.m2/settings.xml
+              subPath: settings.xml
       volumes:
         - name: config-volume-test-conf
           configMap:
-            name: {{ include "orion-loadtest.fullname" .}}
+            name: {{ include "orion-loadtest.fullname" . }}
             items:
               - key: test.conf
                 path: test.conf
         - name: config-volume-settings-xml
           configMap:
-            name: {{ include "orion-loadtest.fullname" .}}
+            name: {{ include "orion-loadtest.fullname" . }}
             items:
               - key: settings.xml
                 path: settings.xml
