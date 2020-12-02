@@ -1,13 +1,13 @@
-package simulations.nosec
+package simulations.nosec.v2
 
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
-import simulations.FiwareOrionBaseSimulation
+import simulations.FiwareV2BaseSimulation
 
-class BatchUpdateSimulation extends FiwareOrionBaseSimulation {
+class BatchUpdateSimulation extends FiwareV2BaseSimulation {
 
   override def getParallelRuns(): Int = {
     (testConfig.numEntities / testConfig.batchSize).ceil.toInt

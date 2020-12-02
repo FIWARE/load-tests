@@ -1,10 +1,10 @@
-package simulations.nosec
+package simulations.nosec.v2
 
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 import io.gatling.core.Predef._
-import io.gatling.core.structure.{ScenarioBuilder, ScenarioContext}
+import io.gatling.core.structure.ScenarioBuilder
 
 
 class BatchUpdateWithSubscriptionSimulation extends BatchUpdateSimulation {

@@ -14,7 +14,7 @@ or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_g
 ### Maven
 1. configure your test run inside the ``src/test/resources/test.conf `` 
 2. run all scenarios using ``mvn install gatling:test `` or single scenarios via ``mvn install gatling:test -Dgatling.simulationClass=<CLASSNAME>``
-(f.e. ``CLASSNAME=simulations.nosec.BatchUpdateSimulation ``)
+(f.e. ``CLASSNAME=simulations.nosec.v2.BatchUpdateSimulation ``)
 ## Scenarios
 
 ## Testresults

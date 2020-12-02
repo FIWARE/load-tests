@@ -1,36 +1,36 @@
-package simulations.nosec
+package simulations.nosec.v2
 
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
+import simulations.FiwareV2BaseSimulation
 
-class EntityUpdateWithSubscriptionSimulation extends EntityUpdateSimulation {
+class EntityUpdateSimulation extends FiwareV2BaseSimulation {
+
+  override def getParallelRuns(): Int = {
+    testConfig.numEntities
+  }
 
   override def getScenario(): ScenarioBuilder = {
-    val notificationServerUrl = testConfig.notificationServerUrl
-    scenario("Parallel entity updates with subscription")
+    scenario("Parallel entity updates")
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
         createEntityAction()
       )
-      .pause(updateDelay.toString, TimeUnit.SECONDS)
-      .exec(
-        createSubscriptionAction(notificationServerUrl)
-      )
-      .pause(updateDelay.toString, TimeUnit.SECONDS)
-      .repeat(numberOfUpdatesToSimulate) {
+      .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
+      .repeat(testConfig.numUpdates) {
         exec(
           updateEntityAction("temperature")
         )
           // wait for the new values to be available
-          .pause("1", TimeUnit.SECONDS)
+          .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
           .exec(
             updateEntityAction("humidity")
           )
           // wait for the new values to be available
-          .pause(updateDelay.toString, TimeUnit.SECONDS)
+          .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       }
       // cleanup
       .exec(

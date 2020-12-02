@@ -13,7 +13,7 @@ import scala.util.Random
  * Base class for all Simulations. Provides a set of common configurations and methods to retrieve different actions that can be used for building
  * scenarios.
  */
-abstract class FiwareOrionBaseSimulation extends Simulation {
+abstract class FiwareV2BaseSimulation extends Simulation {
   val testConfig = TestConfiguration()
 
   val entitiesToSimulate = testConfig.numEntities
@@ -47,7 +47,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
     http("create entity")
       .post("/entities")
       .body(StringBody((s: Session) => getEntityString(s("entityId").as[String])))
-      .asJson
+      .header("Content-Type", "application/ld+json")
   }
 
   /*
@@ -99,7 +99,7 @@ abstract class FiwareOrionBaseSimulation extends Simulation {
   }
 
   def getEntityString(entityId: String): String = {
-    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """}, "humidity":{"value":""" + Random.nextFloat() + """}}"""
+    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """}, "humidity":{"value":""" + Random.nextFloat() + """}} """
   }
 
   def getUpdateBody(actionType: String, startPos: Int, endPos: Int, idList: List[UUID]): String = {
