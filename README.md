@@ -1,7 +1,7 @@
 # Loadtest for FIWARE Orion
 
 [Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
-or any other implementation of the [ngsi-v2](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2) api.
+or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) api.
 
 ## General guidelines
 
