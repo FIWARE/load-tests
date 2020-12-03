@@ -5,6 +5,8 @@ import com.typesafe.config.ConfigFactory
 case class TestConfiguration() {
   val config = ConfigFactory.load("test.conf")
 
+  var numPrefillEntities = config.getInt("numPrefillEntities")
+
   var baseUrl = config.getString("baseUrl")
   var numEntities = config.getInt("numEntities")
   var numUpdates = config.getInt("numUpdates")
