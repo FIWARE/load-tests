@@ -36,6 +36,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       val batches: Int = (entitiesToPrefill / 100).ceil.toInt
       println("Will create " + batches + " batches.")
       for (a <- 0 to batches - 1) {
+        println("Create batch " + a)
         val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString
 
         if (response.code != 200) {
