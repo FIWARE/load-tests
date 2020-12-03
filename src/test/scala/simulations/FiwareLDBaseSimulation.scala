@@ -6,6 +6,7 @@ import io.gatling.core.Predef._
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
+import scalaj.http.Http
 
 import scala.util.Random
 
@@ -20,9 +21,39 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val baseUrl = testConfig.baseUrl
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
+  val entitiesToPrefill = testConfig.numPrefillEntities
 
 
   val httpConf = http.baseUrl(baseUrl)
+
+  val prefillEnitiyIdList: List[UUID] = Stream.fill(entitiesToPrefill)(UUID.randomUUID()).toList
+
+  before {
+    if (entitiesToPrefill > 0) {
+      println("++++++++++++++++++++++++++++++++++++ EXECUTE BEFORE ++++++++++++++++++++++++++++++++++")
+      println("Prefill db with " + entitiesToPrefill + " entities.")
+
+      val batches: Int = (entitiesToPrefill / 100).ceil.toInt
+      println("Will create " + batches + " batches.")
+      for (a <- 0 to batches-1) {
+        if (Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).asString.code != 200) {
+          throw new RuntimeException("Was not able to prefill the database.")
+        }
+      }
+
+    }
+  }
+
+  after {
+    if (entitiesToPrefill > 0) {
+      println("++++++++++++++++++++++++++++++++++++ EXECUTE AFTER +++++++++++++++++++++++++++++++++++")
+      println("Delete " + entitiesToPrefill + " prefilled entities.")
+      val batches: Int = (entitiesToPrefill / 100).ceil.toInt
+      for (a <- 0 to batches-1) {
+        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).asString.code)
+      }
+    }
+  }
 
   val scn = getScenario()
 
@@ -73,8 +104,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def batchCreateEntitiesAction(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("create batch of entities")
-      .post("/op/update")
-      .body(StringBody((s: Session) => getUpdateBody("append", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
+      .post("/entityOperations/create")
+      .body(StringBody((s: Session) => getUpdateBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -83,8 +114,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def batchUpdateEntitiesAction(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("update batch of entities")
-      .post("/op/update")
-      .body(StringBody((s: Session) => getUpdateBody("update", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
+      .post("/entityOperations/update")
+      .body(StringBody((s: Session) => getUpdateBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -93,8 +124,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def batchDeleteEntities(batchSize: Int, idList: List[UUID]): ActionBuilder = {
     http("delete batch of entities")
-      .post("/op/update")
-      .body(StringBody((s: Session) => getUpdateBody("delete", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
+      .post("/entityOperations/delete")
+      .body(StringBody((s: Session) => getDeleteBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -117,17 +148,25 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        ]}"""
   }
 
-  def getUpdateBody(actionType: String, startPos: Int, endPos: Int, idList: List[UUID]): String = {
+  def getDeleteBody(startPos: Int, endPos: Int, idList: List[UUID]): String = {
+    val idIterator: Iterator[UUID] = idList.slice(startPos, endPos).iterator
+    val deleteBodyBuilder: StringBuilder = StringBuilder.newBuilder
+    deleteBodyBuilder.append("""[ """)
+    deleteBodyBuilder.append(""""urn:ngsi-ld:TestEntity:""" + idIterator.next().toString + """"""")
+    while (idIterator.hasNext) {
+      deleteBodyBuilder.append(""","urn:ngsi-ld:TestEntity:""" + idIterator.next().toString + """"""")
+    }
+
+    deleteBodyBuilder.append("]").toString()
+  }
+
+  def getUpdateBody(startPos: Int, endPos: Int, idList: List[UUID]): String = {
     val idIterator: Iterator[UUID] = idList.slice(startPos, endPos).iterator
     val updateBodyBuilder: StringBuilder = StringBuilder.newBuilder
 
     updateBodyBuilder.append(
       """
-      {
-        "actionType" : """" + actionType +
-        """",
-        "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld",
-        "entities" : [
+      [
       """)
 
     updateBodyBuilder.append(getEntityString(idIterator.next().toString))
@@ -136,7 +175,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       updateBodyBuilder.append("," + getEntityString(idIterator.next().toString))
     }
 
-    updateBodyBuilder.append("]}").toString()
+    updateBodyBuilder.append("]").toString()
   }
 
   /*
