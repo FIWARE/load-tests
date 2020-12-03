@@ -36,9 +36,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       val batches: Int = (entitiesToPrefill / 100).ceil.toInt
       println("Will create " + batches + " batches.")
       for (a <- 0 to batches - 1) {
-        val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).asString
+        val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString
 
-        if(response.code != 200) {
+        if (response.code != 200) {
           throw new RuntimeException("Was not able to prefill the database. Response: " + response)
         }
       }
@@ -51,7 +51,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       println("Delete " + entitiesToPrefill + " prefilled entities.")
       val batches: Int = (entitiesToPrefill / 100).ceil.toInt
       for (a <- 0 to batches - 1) {
-        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).asString.code)
+        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
       }
     }
   }
