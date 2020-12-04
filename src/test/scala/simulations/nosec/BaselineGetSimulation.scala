@@ -13,9 +13,11 @@ class BaselineGetSimulation extends Simulation {
   val httpConf = http.baseUrl(baseUrl)
 
   val scn = scenario("Parallel GET version")
-    .exec(
-      http("get version")
-        .get("version"))
+    .repeat(testConfig.numUpdates) {
+      exec(
+        http("get version")
+          .get("version"))
+    }
 
   setUp(scn.inject(atOnceUsers(entitiesToSimulate))).protocols(httpConf)
 
