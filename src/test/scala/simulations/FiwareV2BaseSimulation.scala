@@ -47,7 +47,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
     http("create entity")
       .post("/entities")
       .body(StringBody((s: Session) => getEntityString(s("entityId").as[String])))
-      .header("Content-Type", "application/ld+json")
+      .header("Content-Type", "application/json")
   }
 
   /*
