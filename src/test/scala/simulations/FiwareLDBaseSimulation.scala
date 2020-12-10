@@ -89,7 +89,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "@context": ["https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld"]}""".stripMargin))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -144,10 +144,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
        },
-       "@context": [
-          "https://fiware.github.io/data-models/context.jsonld",
-          "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld"
-       ]}"""
+       "@context": "https://fiware.github.io/data-models/context.jsonld"
+       }"""
   }
 
   def getDeleteBody(startPos: Int, endPos: Int, idList: List[UUID]): String = {
@@ -189,10 +187,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .body(StringBody((s: Session) =>
         """{
             "type": "Subscription",
-            "@context": [
-               "https://fiware.github.io/data-models/context.jsonld",
-               "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld"
-            ],
+            "@context": "https://fiware.github.io/data-models/context.jsonld",
             "entities": [
               {
                   "id": "urn:ngsi-ld:TestEntity:""" + s("entityId").as[String] +
