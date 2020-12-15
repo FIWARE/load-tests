@@ -20,6 +20,13 @@ spec:
           imagePullPolicy: {{ .Values.test.image.pullPolicy }}
           image: "{{ .Values.test.image.repository }}:{{ .Values.test.image.tag }}"
           command: ["mvn",  "install", "gatling:test", "-Dgatling.simulationClass={{ .Values.test.simulationClass }}", "wagon:upload", "-DuploadUrl=ftp://{{ $collectorService }}:{{ .Values.collector.service.port }}" ]
+          resources:
+            limits:
+              cpu: 500m
+              memory: 768Mi
+            requests:
+              cpu: 500m
+              memory: 768Mi
           securityContext:
             privileged: true
           volumeMounts:
