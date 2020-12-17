@@ -5,6 +5,7 @@ The described setup will work stable for setups with:
 - around 600 single value updates/s for the v2 endpoint
 - in case of a more batch centric approach, it's recommended to not set a request poolSize(e.g. broker.reqPoolSize)
 
+Detailed reports can be found at the [reports-folder](./reports). See the renderd reports at [report-page](https://wistefan.github.io/orion-loadtest/index.html)
 
 ## Environment
 
