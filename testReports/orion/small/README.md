@@ -10,6 +10,8 @@ The described setup will work stable for setups with:
 
 - [OpenShift 4.6](https://docs.openshift.com/container-platform/4.6/welcome/index.html) on [Google Compute Engine](https://cloud.google.com/compute)
 - 3 master - 4 worker, each of type [n1-standard-4](https://cloud.google.com/compute/docs/machine-types)
+- orion uses 1 CPUs and 2GiB, mongo uses 4 CPUs and 8GiB
+- test where run inside the same cluster
 
 ## Installation
 
