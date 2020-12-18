@@ -21,7 +21,7 @@ class GetSingleEntitiesSimulation extends FiwareLDBaseSimulation {
         createEntityAction()
       )
       .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
-      .repeat(testConfig.numUpdates) {
+      .repeat(testConfig.numGets) {
         exec(
           singleEntityGetAction()
         )
