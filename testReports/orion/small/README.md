@@ -3,6 +3,7 @@
 The described setup will work stable for setups with:
 - around 250-280 single value updates/s and peaks between 350-400 updates/s for the ngsi-ld endpoint 
 - around 600 single value updates/s for the v2 endpoint
+- getting single entities ~40-50 req/s, might shrink over time with the size of the database
 - in case of a more batch centric approach, it's recommended to not set a request poolSize(e.g. broker.reqPoolSize)
 
 Detailed reports can be found at the [reports-folder](./reports). See the renderd reports at [report-page](https://wistefan.github.io/orion-loadtest/testReports/index.html)

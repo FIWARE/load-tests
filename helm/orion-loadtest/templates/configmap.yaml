@@ -9,6 +9,7 @@ data:
     numEntities={{ .Values.test.conf.entitiesPerInstance }}
     baseUrl="{{ .Values.test.conf.orionUrl }}"
     numUpdates={{ .Values.test.conf.numberOfUpdates }}
+    numGets={{ .Values.test.conf.numberOfGets }}
     updateDelay={{ .Values.test.conf.updateDelay }}
     batchSize={{ .Values.test.conf.batchSize }}
     notificationServerUrl="{{ .Values.test.conf.notificationServer }}"
