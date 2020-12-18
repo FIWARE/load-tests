@@ -131,6 +131,12 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/ld+json")
   }
 
+  def singleEntityGetAction(): ActionBuilder = {
+    http(" get a single entity")
+      .get((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
+      .header("Content-Type", "application/ld+json")
+  }
+
   def getEntityString(entityId: String): String = {
     """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId +
       """",
