@@ -11,6 +11,8 @@ case class TestConfiguration() {
   var numEntities = config.getInt("numEntities")
   var numUpdates = config.getInt("numUpdates")
   var numGets = config.getInt("numGets")
+  var numQueries = config.getInt("numQueries")
+  var numParallelQueries = config.getInt("parallelQueries")
   var updateDelay = config.getInt("updateDelay")
   var batchSize = config.getInt("batchSize")
   var notificationServerUrl = config.getString("notificationServerUrl")

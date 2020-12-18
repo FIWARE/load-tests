@@ -29,6 +29,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val prefillEnitiyIdList: List[UUID] = Stream.fill(entitiesToPrefill)(UUID.randomUUID()).toList
 
   before {
+    beforeScenario();
     if (entitiesToPrefill > 0) {
       println("++++++++++++++++++++++++++++++++++++ EXECUTE BEFORE ++++++++++++++++++++++++++++++++++")
       println("Prefill db with " + entitiesToPrefill + " entities.")
@@ -47,6 +48,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   }
 
   after {
+    afterScenario();
     if (entitiesToPrefill > 0) {
       println("++++++++++++++++++++++++++++++++++++ EXECUTE AFTER +++++++++++++++++++++++++++++++++++")
       println("Delete " + entitiesToPrefill + " prefilled entities.")
@@ -72,6 +74,16 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    * must be implemented by the subclasses and should retrieve the actual  number of parallel connections
    */
   def getParallelRuns(): Int
+
+  /**
+   * Method to override if something specific should be done before the scenario
+   */
+  def beforeScenario() = {};
+
+  /**
+   * Method to override if something specific should be done after the scenario
+   */
+  def afterScenario() = {};
 
   /*
    * creates a single entity, id needs to be fed via session-attribute 'entityId'
@@ -131,6 +143,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/ld+json")
   }
 
+  /**
+   * Get a single entity. Id is expected as a session attribute
+   */
   def singleEntityGetAction(): ActionBuilder = {
     http(" get a single entity")
       .get((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
