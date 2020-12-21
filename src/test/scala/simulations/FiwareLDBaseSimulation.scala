@@ -100,7 +100,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
-      .post((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
+      .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
       .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
@@ -110,7 +110,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def deleteEntityAction(): ActionBuilder = {
     http("delete entity")
-      .delete((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
+      .delete((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
   }
 
   /*
@@ -148,12 +148,12 @@ abstract class FiwareLDBaseSimulation extends Simulation {
    */
   def singleEntityGetAction(): ActionBuilder = {
     http(" get a single entity")
-      .get((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
+      .get((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
       .header("Content-Type", "application/ld+json")
   }
 
   def getEntityString(entityId: String): String = {
-    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId +
+    """{"type":"store", "id":"urn:ngsi-ld:store:""" + entityId +
       """",
        "temperature": {
           "type": "Property",
@@ -163,7 +163,14 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        "humidity": {
           "type": "Property",
           "value": """ + Random.nextFloat() +
-      """
+      """,
+       "open": {
+         "type": "Property",
+         "value": "true"
+       },
+       "owner": {
+        "type": "Relationship",
+        "object": "urn:ngsi-ld:owner:random-owner"
        },
        "@context": "https://fiware.github.io/data-models/context.jsonld"
        }"""
@@ -173,9 +180,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     val idIterator: Iterator[UUID] = idList.slice(startPos, endPos).iterator
     val deleteBodyBuilder: StringBuilder = StringBuilder.newBuilder
     deleteBodyBuilder.append("""[ """)
-    deleteBodyBuilder.append(""""urn:ngsi-ld:TestEntity:""" + idIterator.next().toString + """"""")
+    deleteBodyBuilder.append(""""urn:ngsi-ld:store:""" + idIterator.next().toString + """"""")
     while (idIterator.hasNext) {
-      deleteBodyBuilder.append(""","urn:ngsi-ld:TestEntity:""" + idIterator.next().toString + """"""")
+      deleteBodyBuilder.append(""","urn:ngsi-ld:store:""" + idIterator.next().toString + """"""")
     }
 
     deleteBodyBuilder.append("]").toString()
@@ -211,9 +218,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
             "@context": "https://fiware.github.io/data-models/context.jsonld",
             "entities": [
               {
-                  "id": "urn:ngsi-ld:TestEntity:""" + s("entityId").as[String] +
+                  "id": "urn:ngsi-ld:store:""" + s("entityId").as[String] +
           """",
-                  "type": "TestEntity"
+                  "type": "store"
                }
             ],
            "watchedAttributes": [ "temperature" ],
