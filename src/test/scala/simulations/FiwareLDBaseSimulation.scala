@@ -163,7 +163,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        "humidity": {
           "type": "Property",
           "value": """ + Random.nextFloat() +
-      """,
+      """
+        },
        "open": {
          "type": "Property",
          "value": "true"
