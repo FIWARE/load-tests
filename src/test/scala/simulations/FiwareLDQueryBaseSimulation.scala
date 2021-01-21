@@ -93,7 +93,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
   }
 
   /**
-   * Get all entities with the given type
+   * Get all entities with the given attribute
    */
   def queryByOneAttribute(attribute: String, valueString: String): ActionBuilder = {
     val queryString = "/entities?q=(" + attribute + "==\"" + valueString + "\")"

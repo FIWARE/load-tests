@@ -44,8 +44,8 @@ components are:
 #### Single value updates for entities
 > see [code](src/test/scala/simulations/nosec/ld/EntityUpdateSimulation.scala)
 
-A number of  entities will be created, then update 2 attributes with a delay between each of the updates. 
-Configuration parameters:
+A number of entities(see [store-entity](doc/store-entity.md) for structure of the entities) will be created, then update 2 attributes(temprature and humidity)
+via ```POST /entities/<ID>/attrs``` with a delay between each of the updates. 
 
 ##### Config
 
@@ -59,8 +59,10 @@ Configuration parameters:
 #### Batch updates for entities
 > see [code](src/test/scala/simulations/nosec/ld/BatchUpdateSimulation.scala)
 
-A number of entites will be created in batches, then update 2 attibutes also in batches. The number of parallel calls can be calculated
+A number of entites(see [store-entity](doc/store-entity.md) for structure of the entities) will be created in batches, then update 2 attributes (temprature and humidity) also in batches. The number of parallel calls can be calculated
 by dividing the number of entities to be simulated through the batchsize.
+
+The creation is done via ```POST /entityOperations/create```, the updates via ```POST /entityOperations/update```.
 
 ##### Config
 
@@ -75,8 +77,9 @@ by dividing the number of entities to be simulated through the batchsize.
 #### Single value updates for entities with active subscriptions.
 > see [code](src/test/scala/simulations/nosec/ld/EntityUpdateWithSubscriptionSimulation.scala)
 
-A number of  entities will be created, then update 2 attributes with a delay between each of the updates.  Each entity will have an active individual 
-subscription, that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications.
+A number of entities(see [store-entity](doc/store-entity.md) for structure of the entities) will be created, then update 2 attributes(temprature and humidity)
+via ```POST /entities/<ID>/attrs``` with a delay between each of the updates.  Each entity will have an active individual 
+subscription(see [subscription](doc/subscription.md)), that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications.
 We can recommend the  [labstack echo-server](https://registry.hub.docker.com/r/labstack/echo-web) that is also used in the test [helm-charts](helm/orion-loadtest).
 
 ##### Config
@@ -92,7 +95,7 @@ We can recommend the  [labstack echo-server](https://registry.hub.docker.com/r/l
 #### Single entity get.
 > see [code](src/test/scala/simulations/nosec/ld/GetSingleEntitiesSimulation.scala)
 
-A number of  entities will be created, then they will be retrieved via GET /entities/<ID> in parallel.
+A number of  entities(see [store-entity](doc/store-entity.md) for structure of the entities) will be created, then they will be retrieved via GET /entities/<ID> in parallel.
 
 ##### Config
 
@@ -105,7 +108,8 @@ A number of  entities will be created, then they will be retrieved via GET /enti
 #### Query entities by an attribute.
 > see [code](src/test/scala/simulations/nosec/ld/QueryEntitiesByAttributeSimulation.scala)
 
-A number of  entities will be created, then a subset of them will be retrieved via a query matching to a specific attribute.
+A number of  entities will be created(see [query entities](doc/query-entities.md) for there structure), then a subset of them will be retrieved via a query matching to a specific attribute(`producer`).
+The queries are done via ```GET /entities?q=("producer"=="<PRODUCER_NAME>") ```
 
 ##### Config
 
@@ -119,7 +123,8 @@ A number of  entities will be created, then a subset of them will be retrieved v
 > see [code](src/test/scala/simulations/nosec/ld/QueryEntitiesByTypeSimulation.scala)
 
 
-A number of entities will be created, then a subset of them will be retrieved via a query matching to a specific type.
+A number of entities will be created(see [query entities](doc/query-entities.md) for there structure), then a subset of them will be retrieved via a query matching to a specific type(`owner`).
+The queries are done via ```GET /entities?type=https://uri.fiware.org/ns/data-models%23owner) ```
 
 ##### Config
 
@@ -132,7 +137,8 @@ A number of entities will be created, then a subset of them will be retrieved vi
 #### Query entities by type and attribute.
 > see [code](src/test/scala/simulations/nosec/ld/ComplexQueryEntitiesByAttributeSimulation.scala)
 
-A number of entities will be created, then a subset of them will be retrieved via a query matching to some attributes and types.
+A number of entities will be created(see [query entities](doc/query-entities.md) for there structure), then a subset of them will be retrieved via a query matching to some attributes and types.
+The query is: ``` GET /entities?type="store"&q=(("open"=="<RANDOM_BOOLEAN>")|("owner"=="<RANDOM_OWNER"))&options=keyValues" ```
 
 ##### Config
 
