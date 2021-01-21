@@ -7,7 +7,7 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
     * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
