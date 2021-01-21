@@ -5,7 +5,7 @@ or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_g
 
 ## Reports
 
-Reports of executed tests and the used config can be found in the [testReports-folder](./testReports). You can find all the information about how to
+Reports of executed tests and the used config can be found in the [testReports-folder](./testReports/orion). You can find all the information about how to
 setup the tested instances  and how to rerun those tests there.
 
 ## How to run
