@@ -5,7 +5,7 @@ or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_g
 
 ## Reports
 
-Reports of executed tests and the used config can be found in the [testReports-folder](./testReports). You can find all the information about how to
+Reports of executed tests and the used config can be found in the [testReports-folder](./testReports/orion). You can find all the information about how to
 setup the tested instances  and how to rerun those tests there.
 
 ## How to run
@@ -65,7 +65,8 @@ by dividing the number of entities to be simulated through the batchsize.
 > see [code](src/test/scala/simulations/nosec/ld/EntityUpdateWithSubscriptionSimulation.scala)
 
 A number of  entities will be created, then update 2 attributes with a delay between each of the updates.  Each entity will have an active individual 
-subscription, that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications. 
+subscription, that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications.
+We can recommend the  [labstack echo-server](https://registry.hub.docker.com/r/labstack/echo-web) that is also used in the test [helm-charts](helm/orion-loadtest).
 
 ##### Config
 
