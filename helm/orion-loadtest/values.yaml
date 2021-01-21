@@ -70,7 +70,7 @@ test:
     # -- number of entities to be updated in each batch
     batchSize: 100
     # -- url of the notification server.
-    notificationServer: http://orion-ldt-echo-server
+    notificationServer: http://orion-ldt-orion-loadtest-echo
     # -- number of entities that each job instance should create
     prefillPerInstance: 0
 
@@ -84,3 +84,38 @@ aggregation:
     tag: latest
     # -- specification of the image pull policy
     pullPolicy: Always
+
+## configuration for the echo server
+echo:
+  # -- should the echo server be deployed?
+  enabled: false
+  # -- additional labels for the deployment, if required
+  additionalLabels: { }
+  # -- additional annotations for the deployment, if required
+  additionalAnnotations: { }
+  # -- port to access the echoserver at
+  port: 8080
+  ## echoserver resource requests and limits, we leave the default empty to make that a concious choice by the user.
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 300m
+      memory: 256Mi
+  # -- image to be used for echoserver
+  image:
+    # -- collector image name
+    repository: labstack/echo-web
+    # -- collector image tag
+    tag: latest
+    # -- specification of the image pull policy
+    pullPolicy: IfNotPresent
+  # -- configuration for the k8s service to access the result collector
+  service:
+    # -- service type
+    type: ClusterIP
+    # -- port to be used by the service
+    port: 8080
+    # -- addtional annotations, if required
+    annotations: {}

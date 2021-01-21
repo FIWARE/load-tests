@@ -52,9 +52,9 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 2000
+    entitiesPerInstance: 1500
     # -- number of entities to simulate
-    numberOfEntities: 2000
+    numberOfEntities: 1500
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- url of the orion instance to test
@@ -62,7 +62,7 @@ test:
     # -- delay between calls in seconds(only in context of one instance)
     updateDelay: 1
     # -- number of entities to be updated in each batch
-    batchSize: 100
+    batchSize: 250
     # -- url of the notification server.
     notificationServer: http://orion-ldt-echo-server
     # -- number of entities that each job instance should create

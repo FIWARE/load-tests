@@ -1,26 +1,29 @@
 broker:
   envPrefix: ORIONLD_
   mutexPolicy: none
+  maxConnections: 20000
   logging:
     level: FATAL
 
-  reqPoolSize: 4
+  reqPoolSize: 8
   db:
     hosts:
       - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
       - mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local
+      - mongo-mongodb-2.mongo-mongodb-headless.fiware.svc.cluster.local
+      - mongo-mongodb-3.mongo-mongodb-headless.fiware.svc.cluster.local
     replicaSet: rs0
     writeConcern: 0
-    poolSize: 100
+    poolSize: 128
 deployment:
   replicaCount: 1
   image:
     repository: fiware/orion-ld
-    tag: 0.6-PRE-18
+    tag: 0.6-PRE-31
   resources:
     limits:
       cpu: 1
-      memory: 2048Mi
+      memory: 6144Mi
     requests:
       cpu: 1
-      memory: 2048Mi
+      memory: 6144Mi
