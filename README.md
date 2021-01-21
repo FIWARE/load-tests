@@ -5,13 +5,8 @@ or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_g
 
 ## Reports
 
-Reports of executed tests and the used config can be found in the [testReports-folder](./testReports).
-
-## General guidelines
-
-* all scenarios should describe the involved components
-* if a scenario requires components that are not part of the FIWARE system(f.e. an echo server), they should at least link to a deployment 
-   documentation.
+Reports of executed tests and the used config can be found in the [testReports-folder](./testReports). You can find all the information about how to
+setup the tested instances  and how to rerun those tests there.
 
 ## How to run
 
@@ -19,22 +14,24 @@ Reports of executed tests and the used config can be found in the [testReports-f
 1. configure your test run inside the ``src/test/resources/test.conf `` 
 2. run all scenarios using ``mvn install gatling:test `` or single scenarios via ``mvn install gatling:test -Dgatling.simulationClass=<CLASSNAME>``
 (f.e. ``CLASSNAME=simulations.nosec.v2.BatchUpdateSimulation ``)
-## Scenarios
 
 ## Testresults
 
 Testresults are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
 ``target/gatling/results``
 
+## Scenarios
+
 ### Orion without security
 
-The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefor the involved 
+The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefore the involved 
 components are:
-* [Orion](https://github.com/telefonicaid/FIWARE-orion)
+* [Orion](https://github.com/FIWARE/context.Orion-LD)
 * [MongoDB](https://www.mongodb.com/)
-* optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or Loadbalancer in front of orion
+* optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or load balancer in front of orion
 
 #### Single value updates for entities
+> see [code](src/test/scala/simulations/nosec/ld/EntityUpdateSimulation.scala)
 
 A number of  entities will be created, then update 2 attributes with a delay between each of the updates. 
 Configuration parameters:
@@ -49,6 +46,7 @@ Configuration parameters:
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 
 #### Batch updates for entities
+> see [code](src/test/scala/simulations/nosec/ld/BatchUpdateSimulation.scala)
 
 A number of entites will be created in batches, then update 2 attibutes also in batches. The number of parallel calls can be calculated
 by dividing the number of entities to be simulated through the batchsize.
@@ -64,15 +62,10 @@ by dividing the number of entities to be simulated through the batchsize.
 | batchSize | Number of entities to be updated in each batch | 10 | 
 
 #### Single value updates for entities with active subscriptions.
+> see [code](src/test/scala/simulations/nosec/ld/EntityUpdateWithSubscriptionSimulation.scala)
 
 A number of  entities will be created, then update 2 attributes with a delay between each of the updates.  Each entity will have an active individual 
 subscription, that notifies a configurable http endpoint. To run this test, you need to provide an endpoint, that responds with 2xx to the notifications. 
-
-##### Echo Server preparation
-
-If running Orion on Kubernetes, an easy solution would be to install an [echo server](https://ealenn.github.io/Echo-Server/) into the cluster. That 
-solutions takes out the network as a bottleneck to the notification endpoint.
-Use ``helm install echo-server ealenn/echo-server``  to provide an endpoint cluster internal at the address ``http://echo-server``.
 
 ##### Config
 
@@ -83,6 +76,60 @@ Use ``helm install echo-server ealenn/echo-server``  to provide an endpoint clus
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 | notificationServerUrl | URL to be notified by orion | http://echo-server | 
+
+#### Single entity get.
+> see [code](src/test/scala/simulations/nosec/ld/GetSingleEntitiesSimulation.scala)
+
+A number of  entities will be created, then they will be retrieved via GET /entities/<ID> in parallel.
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of orion                                                | http://localhost  |                            
+| numEntities | Number of entities to be simulated.        |  100                  |
+| numGets| How many gets should be executed. | 100  |
+
+#### Query entities by an attribute.
+> see [code](src/test/scala/simulations/nosec/ld/QueryEntitiesByAttributeSimulation.scala)
+
+A number of  entities will be created, then a subset of them will be retrieved via a query matching to a specific attribute.
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of orion                                                | http://localhost  |                            
+| numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
+| numQueries| How often should the queries be repeated. | 100  |
+
+#### Query entities by type.
+> see [code](src/test/scala/simulations/nosec/ld/QueryEntitiesByTypeSimulation.scala)
+
+
+A number of entities will be created, then a subset of them will be retrieved via a query matching to a specific type.
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of orion                                                | http://localhost  |                            
+| numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
+| numQueries| How often should the queries be repeated. | 100  |
+
+#### Query entities by type and attribute.
+> see [code](src/test/scala/simulations/nosec/ld/ComplexQueryEntitiesByAttributeSimulation.scala)
+
+A number of entities will be created, then a subset of them will be retrieved via a query matching to some attributes and types.
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of orion                                                | http://localhost  |                            
+| numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
+| numQueries| How often should the queries be repeated. | 100  |
+
 
 ### Helm 
 

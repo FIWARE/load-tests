@@ -1,19 +1,33 @@
 # Setup
 
 The described setup will work stable for setups with:
-- around 250-280 single value updates/s and peaks between 350-400 updates/s for the ngsi-ld endpoint 
-- around 600 single value updates/s for the v2 endpoint
-- getting single entities ~40-50 req/s, might shrink over time with the size of the database
-- in case of a more batch centric approach, it's recommended to not set a request poolSize(e.g. broker.reqPoolSize)
+- around 1300-1500 updates/s for the ngsi-ld endpoint 
+- around 1900-2000 single value updates/s for the v2 endpoint
+- getting single entities ~70 req/s, might shrink over time with the size of the database
 
-Detailed reports can be found at the [reports-folder](./reports). See the renderd reports at [report-page](https://wistefan.github.io/orion-loadtest/testReports/index.html)
+Detailed reports can be found here:
+* LD-endpoint:
+    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
+    * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+* v2-endpoint:
+    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    
 
 ## Environment
 
 - [OpenShift 4.6](https://docs.openshift.com/container-platform/4.6/welcome/index.html) on [Google Compute Engine](https://cloud.google.com/compute)
 - 3 master - 4 worker, each of type [n1-standard-4](https://cloud.google.com/compute/docs/machine-types)
-- orion uses 1 CPUs and 2GiB, mongo uses 4 CPUs and 8GiB
 - test where run inside the same cluster
+- all components are deployed using the following helm-charts:
+    - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
+    - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
+- detailed information(and ready to use values files) can be found in the [config-folder](config)
 
 ## Installation
 
@@ -36,7 +50,7 @@ To improve performance, you should set an index on the mongodb as following:
     kubectl run --namespace fiware mongo-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.2-debian-10-r0 --command -- bash
     mongo admin --host "mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local:27017,mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local:27017"
     > use orion
-    > db.entities.createIndex({"id.servicePath": 1,"_id.id": 1, "_id.type": 1});
+    > db.entities.createIndex({"_id.id": 1});
 ```
 
 Run test:
