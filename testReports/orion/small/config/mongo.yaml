@@ -229,7 +229,7 @@ labels: {}
 ## Number of MongoDB replicas to deploy.
 ## Ignored when mongodb.architecture=standalone
 ##
-replicaCount: 2
+replicaCount: 4
 
 ## StrategyType for MongoDB statefulset
 ## It can be set to RollingUpdate or Recreate by default.

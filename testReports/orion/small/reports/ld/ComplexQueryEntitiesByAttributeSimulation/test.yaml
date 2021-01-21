@@ -62,7 +62,7 @@ test:
     # -- number of queries to be executed(in sequence)
     numberOfQueries: 100
     # -- number of queries to be executed in parallel
-    numberOfParallelQueries: 60
+    numberOfParallelQueries: 100
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
@@ -72,7 +72,7 @@ test:
     # -- url of the notification server.
     notificationServer: http://orion-ldt-echo-server
     # -- number of entities that each job instance should create
-    prefillPerInstance: 10000
+    prefillPerInstance: 0
 
 # -- configuration for the post-test report aggregation
 aggregation:
