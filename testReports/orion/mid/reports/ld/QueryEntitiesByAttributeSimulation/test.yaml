@@ -60,9 +60,9 @@ test:
     # -- number of gets that should be executed for every session
     numberOfGets: 20
     # -- number of queries to be executed(in sequence)
-    numberOfQueries: 100
+    numberOfQueries: 300
     # -- number of queries to be executed in parallel
-    numberOfParallelQueries: 100
+    numberOfParallelQueries: 300
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)

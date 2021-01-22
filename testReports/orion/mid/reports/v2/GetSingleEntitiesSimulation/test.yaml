@@ -48,19 +48,19 @@ test:
     # -- specification of the image pull policy
     pullPolicy: Always
   # -- class of the concrete test to run
-  simulationClass: simulations.nosec.ld.GetSingleEntitiesSimulation
+  simulationClass: simulations.nosec.v2.GetSingleEntitiesSimulation
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 300
+    entitiesPerInstance: 5000
     # -- number of entities to simulate
-    numberOfEntities:  300
+    numberOfEntities:  5000
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- number of gets that should be executed for every session
-    numberOfGets: 20
+    numberOfGets: 40
     # -- url of the orion instance to test
-    orionUrl: http://orion-test:1026/ngsi-ld/v1/
+    orionUrl: http://orion-test:1026/v2/
     # -- delay between calls in seconds(only in context of one instance)
     updateDelay: 1
     # -- number of entities to be updated in each batch
