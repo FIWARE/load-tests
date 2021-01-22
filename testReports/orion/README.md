@@ -5,6 +5,7 @@ configuration inside the /config folder and the tests with their reports inside 
 
 Environments:
 * [Small](small)
+* [Mid](mid)
 
 # Storage
 
