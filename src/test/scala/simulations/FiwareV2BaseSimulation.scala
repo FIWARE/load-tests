@@ -73,8 +73,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   */
   def singleEntityGetAction(): ActionBuilder = {
     http(" get a single entity")
-      .get((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
-      .header("Content-Type", "application/json")
+      .get((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
   }
 
   /*
