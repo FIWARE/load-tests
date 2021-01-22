@@ -68,6 +68,15 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .delete((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
   }
 
+  /**
+  * Get a single entity. Id is expected as a session attribute
+  */
+  def singleEntityGetAction(): ActionBuilder = {
+    http(" get a single entity")
+      .get((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
+      .header("Content-Type", "application/json")
+  }
+
   /*
    * Create multiple entities as a batch. The number of the current batch should be feed as a session attribute
    */
