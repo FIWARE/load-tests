@@ -13,7 +13,7 @@ Detailed reports can be found here:
     * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-reports.html) 
     * [Query entities by type](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
     * [Complex queries](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
