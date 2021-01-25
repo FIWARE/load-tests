@@ -35,7 +35,7 @@ Detailed reports can be found here:
 
 ## Installation
 
-> :warning: Be aware that mongo uses a node-affinity configuration in that config. Due to the resource requirements of the single instances, we 
+> :warning: Be aware that mongo uses a node-affinity configuration in this config. Due to the resource requirements of the single instances, we 
 > select the nodes by the label "workload=mongo". You can set node labels via `kubectl label nodes <NODE_NAME> workload=mongo` on k8s or 
 >`oc label node <NODE_NAME> workload=mongo` in an openshift environment.
 
