@@ -3,7 +3,9 @@
 The described setup will work stable for setups with:
 - around 2700-2800 updates/s for the ngsi-ld endpoint 
 - around 3800-3900 single value updates/s for the v2 endpoint
-- TODO: update when bug is fixed
+- up to 6000 req/s for single entity GET requests for the ngsi-ld endpoint
+- depending on the type of query, between 3500 and 5000 req/s for querys on the ngsi-ld endpoint
+- ~6000 req/s for single entity GET requests for the ngsi-ld endpoint
 
 Detailed reports can be found here:
 * LD-endpoint:
@@ -17,6 +19,7 @@ Detailed reports can be found here:
 * v2-endpoint:
     * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/v2/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
     
 
 ## Environment
@@ -31,6 +34,10 @@ Detailed reports can be found here:
 - regional ssd storage for mongo(see [storage-class](config/storage-class.yaml))
 
 ## Installation
+
+> :warning: Be aware that mongo uses a node-affinity configuration in that config. Due to the resource requirements of the single instances, we 
+> select the nodes by the label "workload=mongo". You can set node labels via `kubectl label nodes <NODE_NAME> workload=mongo` on k8s or 
+>`oc label node <NODE_NAME> workload=mongo` in an openshift environment.
 
 Add helm repos:
 ```

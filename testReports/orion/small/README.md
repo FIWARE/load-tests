@@ -3,7 +3,9 @@
 The described setup will work stable for setups with:
 - around 1300-1500 updates/s for the ngsi-ld endpoint 
 - around 1900-2000 single value updates/s for the v2 endpoint
-- getting single entities ~70 req/s, might shrink over time with the size of the database
+- getting and querying entities ~1800-2000 req/s for the ngsi-ld endpoint
+- getting and querying entities ~2800-3000 req/s for the v2 endpoint
+
 
 Detailed reports can be found here:
 * LD-endpoint:
@@ -17,6 +19,7 @@ Detailed reports can be found here:
 * v2-endpoint:
     * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
     
 
 ## Environment
