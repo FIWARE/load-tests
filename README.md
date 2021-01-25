@@ -1,5 +1,8 @@
 # Loadtest for FIWARE Orion
 
+![FIWARE Core](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)
+[![License: MIT](https://img.shields.io/github/license/FIWARE/orion-loadtest.svg)](https://opensource.org/licenses/MIT)
+
 [Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
 or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) api.
 
@@ -12,15 +15,25 @@ setup the tested instances  and how to rerun those tests there.
 
 ### Maven
 1. configure your test run inside the ``src/test/resources/test.conf `` 
-2. run all scenarios using ``mvn install gatling:test `` or single scenarios via ``mvn install gatling:test -Dgatling.simulationClass=<CLASSNAME>``
-(f.e. ``CLASSNAME=simulations.nosec.v2.BatchUpdateSimulation ``)
+2. run all scenarios using 
+```console
+mvn install gatling:test
+``` 
+
+or single scenarios via 
+
+```console
+mvn install gatling:test -Dgatling.simulationClass=<CLASSNAME>
+```
+
+(e.g. ``CLASSNAME=simulations.nosec.v2.BatchUpdateSimulation ``)
 
 ### Helm 
 
 In scenarios with a large number of entities, multiple machines should be used. For such cases, the [helm chart](helm/orion-loadtest) can be used. The chart will run the tests as kubernetes jobs an distribute them through the cluster according to your configuration. Every job will upload its result to a central ftp server.
 The uploaded results will be aggregated by the ftp's sidecar container. You can view them in a browser via:
 
-```
+```console
 kubectl proxy --port <YOUR_PREFERD_LOCAL_PORT>
 http://localhost:<YOUR_PREFERD_LOCAL_PORT>/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "orion-loadtest.fullname" . }}:8080/proxy/
 ```
@@ -149,3 +162,8 @@ The query is: ``` GET /entities?type="store"&q=(("open"=="<RANDOM_BOOLEAN>")|("o
 | numQueries| How often should the queries be repeated. | 100  |
 
 
+---
+
+## License
+
+[MIT](./LICENSE). © 2020-21 FIWARE Foundation e.V.
