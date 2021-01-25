@@ -52,9 +52,9 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 100
+    entitiesPerInstance: 2500
     # -- number of entities to simulate
-    numberOfEntities: 100
+    numberOfEntities: 2500
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- number of gets that should be executed for every session

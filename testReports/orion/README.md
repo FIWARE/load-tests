@@ -5,3 +5,11 @@ configuration inside the /config folder and the tests with their reports inside 
 
 Environments:
 * [Small](small)
+* [Mid](mid)
+
+# Storage
+
+In order to get the required performance form mongo-db, we would recommend the usage of ssd's for storage. Since the tests where run on 
+a [GCP-enviornment](https://cloud.google.com), we need to create such a storage class first. The kubernetes-manifest for that can be found in the [config](mid/config/storage-class.yaml).
+It can be applied to the cluster via:
+```kubectl apply -f <CONFIG_SIZE>/config/storage.yaml ```
