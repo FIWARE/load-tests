@@ -58,7 +58,7 @@ To improve performance, you should set an index on the mongodb as following:
     kubectl run --namespace fiware mongo-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.2-debian-10-r0 --command -- bash
     mongo admin --host "mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local:27017,mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local:27017"
     > use orion
-    > db.entities.createIndex({"_id.id": 1});
+    > db.entities.createIndex({"_id.servicePath": 1, "_id.id": 1, "_id.type: 1"});
 ```
 
 Run test:
