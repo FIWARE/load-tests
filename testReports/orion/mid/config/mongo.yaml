@@ -323,11 +323,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 4000m
-    memory: 8192Mi
+    cpu: 15
+    memory: 32768Mi
   requests:
-    cpu: 4000m
-    memory: 8192Mi
+    cpu: 15
+    memory: 32768Mi
 
 ## MongoDB pods' liveness and readiness probes. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes

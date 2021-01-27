@@ -54,7 +54,7 @@ test:
     # -- how many entities should one test instance simulate
     entitiesPerInstance: 5000
     # -- number of entities to simulate
-    numberOfEntities:  10000
+    numberOfEntities:  25000
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- number of gets that should be executed for every session

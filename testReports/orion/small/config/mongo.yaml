@@ -259,19 +259,17 @@ podAntiAffinityPreset: soft
 nodeAffinityPreset:
   ## Node affinity type
   ## Allowed values: soft, hard
-  type: ""
+  type: "hard"
   ## Node label key to match
   ## E.g.
   ## key: "kubernetes.io/e2e-az-name"
   ##
-  key: ""
+  key: "workload"
   ## Node label values to match
   ## E.g.
-  ## values:
-  ##   - e2e-az1
-  ##   - e2e-az2
-  ##
-  values: []
+  values:
+   - mongo
+
 
 ## Affinity for pod assignment. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -325,11 +323,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 2000m
-    memory: 4096Mi
+    cpu: 4000m
+    memory: 8192Mi
   requests:
-    cpu: 2000m
-    memory: 4096Mi
+    cpu: 4000m
+    memory: 8192Mi
 
 ## MongoDB pods' liveness and readiness probes. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
@@ -422,7 +420,7 @@ persistence:
   ## If undefined (the default) or set to null, no storageClassName spec is
   ## set, choosing the default provisioner.
   ##
-  storageClass: "fast"
+  storageClass: "fast-b"
   ## PV Access Mode
   ##
   accessModes:
@@ -441,6 +439,8 @@ persistence:
   ## and one PV for multiple services.
   ##
   subPath: ""
+  volumeClaimTemplates:
+    selector:
 
 ## Service parameters
 ##
