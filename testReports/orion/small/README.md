@@ -9,17 +9,17 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
-    * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
-    * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
-    * [Complex queries](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
-    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
-    * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
     
 
 ## Environment
