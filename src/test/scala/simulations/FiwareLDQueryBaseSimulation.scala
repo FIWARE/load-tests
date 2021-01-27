@@ -75,7 +75,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
   def postEntity(entity: String) = {
     val response = Http(baseUrl + "entities").header("Content-Type", "application/ld+json").postData(entity).timeout(1000, 6000).asString
     if (response.code > 299 || response.code < 200) {
-      throw new RuntimeException("Was not able to setup the datastructure. Response: " + response + ", Entity:  " + entity)
+      println("Was not able to setup the datastructure. Response: " + response + ", Entity:  " + entity)
     }
   }
 
