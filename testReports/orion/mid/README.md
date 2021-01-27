@@ -31,6 +31,7 @@ Detailed reports can be found here:
 - all components are deployed using the following helm-charts:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
+- the setup uses 8 CPU / 48 GB RAM for Orion-LD, 60 CPU / 128 GB RAM for Mongo-DB
 - detailed information(and ready to use values files) can be found in the [config-folder](config)
 - regional ssd storage for mongo(see [storage-class](config/storage-class.yaml))
 
