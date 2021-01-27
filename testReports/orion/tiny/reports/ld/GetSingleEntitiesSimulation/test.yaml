@@ -1,0 +1,82 @@
+## configuration for the result collector
+collector:
+  # -- additional labels for the deployment, if required
+  additionalLabels: { }
+  # -- additional annotations for the deployment, if required
+  additionalAnnotations: { }
+  # -- port to access the collector at
+  port: 21
+  # -- username to authenticate with
+  username: loadtest
+  # -- password to authenticate with
+  password: mypassword
+  # -- folder to put results at
+  resultFolder: /results
+  ## collector resource requests and limits, we leave the default empty to make that a concious choice by the user.
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Mi
+    requests:
+      cpu: 300m
+      memory: 256Mi
+  # -- image to be used for result collection
+  image:
+    # -- collector image name
+    repository: delfer/alpine-ftp-server
+    # -- collector image tag
+    tag: latest
+    # -- specification of the image pull policy
+    pullPolicy: IfNotPresent
+  # -- configuration for the k8s service to access the result collector
+  service:
+    # -- service type
+    type: ClusterIP
+    # -- port to be used by the service
+    port: 21
+    # -- addtional annotations, if required
+    annotations: {}
+
+## configuration of the actual load tests
+test:
+  # -- image to be used for result collection
+  image:
+    # -- test image name
+    repository: wistefan/orion-loadtest
+    # -- test image tag
+    tag: latest
+    # -- specification of the image pull policy
+    pullPolicy: Always
+  # -- class of the concrete test to run
+  simulationClass: simulations.nosec.ld.GetSingleEntitiesSimulation
+  # -- test specific configuration
+  conf:
+    # -- how many entities should one test instance simulate
+    entitiesPerInstance: 2500
+    # -- number of entities to simulate
+    numberOfEntities: 2500
+    # -- number of updates every entity should send
+    numberOfUpdates: 20
+    # -- number of gets that should be executed for every session
+    numberOfGets: 20
+    # -- url of the orion instance to test
+    orionUrl: http://orion-test:1026/ngsi-ld/v1/
+    # -- delay between calls in seconds(only in context of one instance)
+    updateDelay: 1
+    # -- number of entities to be updated in each batch
+    batchSize: 100
+    # -- url of the notification server.
+    notificationServer: http://orion-ldt-echo-server
+    # -- number of entities that each job instance should create
+    prefillPerInstance: 0
+
+# -- configuration for the post-test report aggregation
+aggregation:
+  # -- image to be used for result aggregation
+  image:
+    # -- test image name
+    repository: wistefan/loadtest-aggregation
+    # -- test image tag
+    tag: latest
+    # -- specification of the image pull policy
+    pullPolicy: Always

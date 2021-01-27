@@ -52,9 +52,9 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 2000
+    entitiesPerInstance: 6000
     # -- number of entities to simulate
-    numberOfEntities: 2000
+    numberOfEntities: 6000
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- url of the orion instance to test

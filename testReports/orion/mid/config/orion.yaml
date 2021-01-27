@@ -5,7 +5,7 @@ broker:
   logging:
     level: FATAL
 
-  reqPoolSize: 8
+  reqPoolSize: 16
   db:
     hosts:
       - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
@@ -16,14 +16,14 @@ broker:
     writeConcern: 0
     poolSize: 128
 deployment:
-  replicaCount: 2
+  replicaCount: 4
   image:
     repository: fiware/orion-ld
-    tag: 0.6-PRE-37
+    tag: 0.6.0
   resources:
     limits:
-      cpu: 1
-      memory: 6144Mi
+      cpu: 2
+      memory: 12288Mi
     requests:
-      cpu: 1
-      memory: 6144Mi
+      cpu: 2
+      memory: 12288Mi

@@ -15,11 +15,11 @@ collector:
   ## collector resource requests and limits, we leave the default empty to make that a concious choice by the user.
   resources:
     limits:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 350m
+      memory: 256Mi
     requests:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 350m
+      memory: 256Mi
   # -- image to be used for result collection
   image:
     # -- collector image name
@@ -52,11 +52,11 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 2000
+    entitiesPerInstance: 2500
     # -- number of entities to simulate
-    numberOfEntities: 4000
+    numberOfEntities: 15000
     # -- number of updates every entity should send
-    numberOfUpdates: 10
+    numberOfUpdates: 20
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
