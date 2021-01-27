@@ -52,11 +52,11 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 1500
+    entitiesPerInstance: 2000
     # -- number of entities to simulate
-    numberOfEntities: 3000
+    numberOfEntities: 8000
     # -- number of updates every entity should send
-    numberOfUpdates: 20
+    numberOfUpdates: 10
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
