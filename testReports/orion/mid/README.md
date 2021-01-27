@@ -10,7 +10,7 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
+    * [Entity Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://wistefan.github.io/orion-loadtest/testReports/orion/mid/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
@@ -35,6 +35,10 @@ Detailed reports can be found here:
 - regional ssd storage for mongo(see [storage-class](config/storage-class.yaml))
 
 ## Installation
+
+> :warning: Be aware that mongo uses a node-affinity configuration in this config. Due to the resource requirements of the single instances, we 
+> select the nodes by the label "workload=mongo". You can set node labels via `kubectl label nodes <NODE_NAME> workload=mongo` on k8s or 
+>`oc label node <NODE_NAME> workload=mongo` in an openshift environment.
 
 Add helm repos:
 ```
