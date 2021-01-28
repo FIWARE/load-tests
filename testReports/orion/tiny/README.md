@@ -15,7 +15,7 @@ Detailed reports can be found here:
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
     * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
     * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
@@ -31,7 +31,7 @@ Detailed reports can be found here:
 
 - [OpenShift 4.6](https://docs.openshift.com/container-platform/4.6/welcome/index.html) on [Google Compute Engine](https://cloud.google.com/compute)
 - 3 master - 4 worker, each of type [n1-standard-4](https://cloud.google.com/compute/docs/machine-types)
-- test where run inside the same cluster
+- tests were run inside the same cluster
 - all components are deployed using the following helm-charts:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)

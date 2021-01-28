@@ -9,12 +9,12 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
     * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
     * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
@@ -26,7 +26,7 @@ Detailed reports can be found here:
 
 - [OpenShift 4.6](https://docs.openshift.com/container-platform/4.6/welcome/index.html) on [Google Compute Engine](https://cloud.google.com/compute)
 - 3 master - 4 worker, each of type [n1-standard-8](https://cloud.google.com/compute/docs/machine-types)
-- test where run inside the same cluster
+- tests were run inside the same cluster
 - all components are deployed using the following helm-charts:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)

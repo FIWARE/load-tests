@@ -41,8 +41,10 @@ See the chart docu for all configuration options.
 
 ## Testresults
 
-Testresults are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
+After running your tests locally, the results are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
 ``target/gatling/results``
+
+If you are looking for reports of already executed tests see [testReports](./testReports/orion).
 
 ## Scenarios
 
