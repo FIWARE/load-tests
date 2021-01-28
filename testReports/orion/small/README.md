@@ -5,7 +5,8 @@ The described setup will work stable for setups with:
 - around 3800-3900 single value updates/s for the v2 endpoint
 - up to 6000 req/s for single entity retrieval requests for the ngsi-ld endpoint
 - depending on the type of query, between 3500 and 5000 req/s for queries on the ngsi-ld endpoint
-- ~6000 req/s for single entity retrieval requests for the ngsi-ld endpoint
+- ~6400 req/s for single entity retrieval requests for the v2 endpoint
+- depending on the type of query, between 1800 and 2200 req/s for queries on the v2 endpoint
 
 Detailed reports can be found here:
 * LD-endpoint:
@@ -19,7 +20,11 @@ Detailed reports can be found here:
 * v2-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
     
 
 ## Environment
