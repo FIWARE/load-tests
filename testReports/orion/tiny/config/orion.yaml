@@ -4,7 +4,6 @@ broker:
   maxConnections: 20000
   logging:
     level: FATAL
-
   reqPoolSize: 8
   db:
     hosts:

@@ -3,13 +3,14 @@
 The described setup will work stable for setups with:
 - around 1300-1500 updates/s for the ngsi-ld endpoint 
 - around 1900-2000 single value updates/s for the v2 endpoint
-- getting and querying entities ~1800-2000 req/s for the ngsi-ld endpoint
-- getting and querying entities ~2800-3000 req/s for the v2 endpoint
+- retrieval and querying entities ~1800-2000 req/s for the ngsi-ld endpoint
+- retrieval of entities ~2800-3000 req/s for the v2 endpoint
+- querying entities 1300-1400 req/s for the v2 endpoint
 
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
@@ -19,7 +20,11 @@ Detailed reports can be found here:
 * v2-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
     
 
 ## Environment
