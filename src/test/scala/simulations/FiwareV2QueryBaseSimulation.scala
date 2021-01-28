@@ -94,7 +94,7 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
    * Get all entities with the given attribute
    */
   def queryByOneAttribute(attribute: String, valueString: String): ActionBuilder = {
-    val queryString = "/entities?q=(" + attribute + "==\"" + valueString + "\")"
+    val queryString = "/entities?q=" + attribute + "==" + valueString
     http(" Get entities")
       .get(queryString)
   }
@@ -103,7 +103,7 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
    * Get all entities that fulfill the query in the simplified format
    */
   def queryComplexByAttributesAndType(attribute: String, attributeValue: String, relationship: String, relationshipValue: String, entityType: String): ActionBuilder = {
-    val queryString = "/entities?type=" + entityType + "&q=((" + attribute + "==\"" + attributeValue + "\")|(" + relationship + "==" + "\"" + relationshipValue + "\"))&options=keyValues"
+    val queryString = "/entities?type=" + entityType + "&q=((" + attribute + "==" + attributeValue + ")|(" + relationship + "==" + "" + relationshipValue + "))&options=keyValues"
     http(" Get entities")
       .get(queryString)
   }
