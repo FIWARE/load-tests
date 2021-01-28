@@ -5,7 +5,8 @@ The described setup will work stable for setups with:
 - around 3800-3900 single value updates/s for the v2 endpoint
 - up to 6000 req/s for single entity retrieval requests for the ngsi-ld endpoint
 - depending on the type of query, between 3500 and 5000 req/s for queries on the ngsi-ld endpoint
-- ~6000 req/s for single entity retrieval requests for the ngsi-ld endpoint
+- ~6400 req/s for single entity retrieval requests for the v2 endpoint
+- depending on the type of query, between 1800 and 2200 req/s for queries on the v2 endpoint
 
 Detailed reports can be found here:
 * LD-endpoint:
