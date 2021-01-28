@@ -5,7 +5,7 @@ The described setup will work stable for setups with:
 - around 11 000 single value updates/s for the v2 endpoint
 - up to 20 000 req/s for single entity GET requests for the ngsi-ld endpoint
 - depending on the type of query, between 15 000 and 20 000 req/s for queries on the ngsi-ld endpoint
-- ~15 000 req/s for single entity GET requests for the ngsi-ld endpoint
+- ~15 000 req/s for single entity GET requests for the v2 endpoint
 
 
 Detailed reports can be found here:
