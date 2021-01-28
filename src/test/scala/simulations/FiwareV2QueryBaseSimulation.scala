@@ -79,7 +79,7 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
   }
 
   def deleteEntity(entityId: String) = {
-    Http(baseUrl + "entities/" + entityId).header("Content-Type", "application/json").method("DELETE").timeout(1000, 6000).asString
+    Http(baseUrl + "entities/" + entityId).method("DELETE").timeout(1000, 6000).asString
   }
 
   /**
@@ -88,7 +88,6 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
   def queryByEntityType(entityType: String): ActionBuilder = {
     http(" Get entities")
       .get("/entities?type=" + entityType)
-      .header("Content-Type", "application/json")
   }
 
   /**
@@ -98,7 +97,6 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
     val queryString = "/entities?q=(" + attribute + "==\"" + valueString + "\")"
     http(" Get entities")
       .get(queryString)
-      .header("Content-Type", "application/json")
   }
 
   /**
@@ -108,7 +106,6 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
     val queryString = "/entities?type=" + entityType + "&q=((" + attribute + "==\"" + attributeValue + "\")|(" + relationship + "==" + "\"" + relationshipValue + "\"))&options=keyValues"
     http(" Get entities")
       .get(queryString)
-      .header("Content-Type", "application/json")
   }
 
   def createOwnerEntity(ownerName: String): String = {
@@ -131,13 +128,12 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
     val id = "urn:ngsi-ld:store:" + name;
     """
        {
-         "@context": "https://fiware.github.io/data-models/context.jsonld",
         "id": """" + id +
       """",
         "type": "store",
         "owner": {
           "type": "Relationship",
-          "object": "urn:ngsi-ld:owner:""" + ownerName +
+          "value": "urn:ngsi-ld:owner:""" + ownerName +
       """"
         },
         "open": {
@@ -173,18 +169,18 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
       """",
         "type": "inventory",
         "available": {
-           "type": "Property",
+          "type": "Property",
           "value": """" + (Math.random() > 0.5).toString +
       """"
          },
         "store": {
           "type": "Relationship",
-          "object": "urn:ngsi-ld:store:""" + storeName +
+          "value": "urn:ngsi-ld:store:""" + storeName +
       """"
         },
         "product": {
           "type": "Relationship",
-          "object": "urn:ngsi-ld:product:""" + productName +
+          "value": "urn:ngsi-ld:product:""" + productName +
       """"
         }
       }
