@@ -9,7 +9,7 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-reports.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
