@@ -96,6 +96,16 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   }
 
   /*
+  * creates a single entity with a timestamp, id needs to be fed via session-attribute 'entityId'
+  */
+  def createTimedEntityAction(): ActionBuilder = {
+    http("create entity")
+      .post("/entities")
+      .body(StringBody((s: Session) => getNotficationTestEntity(s("entityId").as[String])))
+      .header("Content-Type", "application/ld+json")
+  }
+
+  /*
    * updates an attribute of a single entity, id needs to be fed via session-attribute 'entityId'
    */
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
@@ -106,12 +116,31 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   }
 
   /*
+   * updates an attribute of a single entity, id needs to be fed via session-attribute 'entityId'
+   */
+  def updateTimedEntityAction(): ActionBuilder = {
+    http("update humidity")
+      .post((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String] + "/attrs")
+      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .header("Content-Type", "application/ld+json")
+  }
+
+  /*
    * deletes a single entity, id needs to be fed via session-attribute 'entityId'
    */
   def deleteEntityAction(): ActionBuilder = {
     http("delete entity")
       .delete((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
   }
+
+  /*
+   * deletes a single entity, id needs to be fed via session-attribute 'entityId'
+   */
+  def deleteTimedEntityAction(): ActionBuilder = {
+    http("delete entity")
+      .delete((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String])
+  }
+
 
   /*
    * Create multiple entities as a batch. The number of the current batch should be feed as a session attribute
@@ -177,6 +206,22 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        }"""
   }
 
+  def getNotficationTestEntity(entityId: String): String = {
+    """{"type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:""" + entityId +
+      """",
+       "sent-time": {
+          "type": "Property",
+          "value": """ + System.currentTimeMillis() +"""
+          },
+       "humidity": {
+          "type": "Property",
+          "value": """ + Random.nextFloat() +
+      """
+        },
+       "@context": "https://fiware.github.io/data-models/context.jsonld"
+       }"""
+  }
+
   def getDeleteBody(startPos: Int, endPos: Int, idList: List[UUID]): String = {
     val idIterator: Iterator[UUID] = idList.slice(startPos, endPos).iterator
     val deleteBodyBuilder: StringBuilder = StringBuilder.newBuilder
@@ -207,6 +252,25 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     updateBodyBuilder.append("]").toString()
   }
 
+  def getTypeSubscriptionAction(serverUrl: String, entitiyType: String): String = {
+    """{
+             "type": "Subscription",
+             "@context": "https://fiware.github.io/data-models/context.jsonld",
+             "entities": [
+               {
+              "type": """" + entitiyType + """"
+           }
+        ],
+       "watchedAttributes": [ "humidity" ],
+       "q": "humidity>0",
+       "notification": {
+         "endpoint": {
+            "uri": """" + serverUrl +
+      """"
+          }
+       }
+      }"""
+  }
   /*
    * Create a subscription. The id of the entity to  subscribe to needs to be fed as a session attribute.
    */
