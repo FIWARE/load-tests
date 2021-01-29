@@ -17,6 +17,10 @@ class EntityUpdateWithTypeSubscriptionSimulation extends EntityUpdateSimulation 
     }
   }
 
+  override def afterScenario(): Unit = {
+    Http(baseUrl + "subscriptions/urn:ngsi-ld:Subscription:timed-entity").header("Content-Type", "application/ld+json").method("DELETE").timeout(1000, 6000).asString
+  }
+
   override def getScenario(): ScenarioBuilder = {
     val notificationServerUrl = testConfig.notificationServerUrl
     scenario("Parallel entity updates with subscription")
