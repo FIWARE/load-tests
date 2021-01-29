@@ -254,7 +254,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
 
   def getTypeSubscriptionAction(serverUrl: String, entitiyType: String): String = {
     """{
-             "id" : "urn:ngsi-ld:Subscription:"""" + entitiyType + """",
+             "id" : "urn:ngsi-ld:Subscription:""" + entitiyType + """",
              "type": "Subscription",
              "@context": "https://fiware.github.io/data-models/context.jsonld",
              "entities": [
