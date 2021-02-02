@@ -2,3 +2,6 @@ Aggregated results will be available after the jobs finished via:
 
 $ kubectl proxy --port 8002
 http://localhost:8002/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ template "orion-loadtest.fullname" . }}:8080/proxy/
+
+In case you are running tests on notification latency, see the grafana dashboard at:
+http://localhost:8002/api/v1/namespaces/{{ .Release.Namespace }}/services/{{ .Release.Name }}-grafana:80/proxy/d/3vb8BaYMk/latency-overview?orgId=1

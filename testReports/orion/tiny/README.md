@@ -72,4 +72,8 @@ Get the results:
 ```
     kubectl proxy --port 8002
 ```
-> see [Report](http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-orion-loadtest:8080/proxy/)
+> see [Gatling-Report](http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-orion-loadtest:8080/proxy/)
+
+Get latency report(only available when notification latency was measured):
+
+> see [Grafana-Dashboard](http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-grafana:80/proxy/d/3vb8BaYMk/latency-overview?orgId=1)

@@ -6,6 +6,28 @@
 [Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
 or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) api.
 
+##Table of contents
+* [Reports](#reports)
+* [How to run](#how-to-run)
+    * [Maven](#maven)
+    * [Helm](#helm)
+    * [Testresults](#testresults)
+* [Scenarios](#scenarios)
+    * [Broker without security](#broker-without-security)
+        * [Single value updates for entities](#single-value-updates-for-entities)
+        * [Batch updates for entities](#batch-updates-for-entities)
+        * [Single value updates for entities with active subscriptions.](#single-value-updates-for-entities-with-active-subscriptions)
+        * [Single entity get.](#single-entity-get)
+        * [Query entities by an attribute.](#query-entities-by-an-attribute)
+        * [Query entities by type.](#query-entities-by-type)
+        * [Query entities by type and attribute.](#query-entities-by-type-and-attribute)
+    * [Notification latency](#notification-latency)
+        * [Test setup](#test-setup)
+        * [Notifications for everything](#notifications-for-everything)
+        *[Notifications for entities of a certain type](#notifications-for-entitiesof-a-certain-type)
+* [License](#license)
+
+
 ## Reports
 
 Reports of executed tests and the used config can be found in the [testReports-folder](./testReports/orion). You can find all the information about how to
@@ -39,7 +61,7 @@ http://localhost:<YOUR_PREFERD_LOCAL_PORT>/api/v1/namespaces/{{ .Release.Namespa
 ```
 See the chart docu for all configuration options.
 
-## Testresults
+### Testresults
 
 After running your tests locally, the results are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
 ``target/gatling/results``
@@ -48,13 +70,13 @@ If you are looking for reports of already executed tests see [testReports](./tes
 
 ## Scenarios
 
-### Orion without security
+### Broker without security
 
-The following scenarios will test orion without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefore the involved 
+The following scenarios will test the broker without any security components installed(e.g. no api-umbrella, no keyrock etc.).  Therefore the involved 
 components are:
-* [Orion](https://github.com/FIWARE/context.Orion-LD)
+* [Orion-LD](https://github.com/FIWARE/context.Orion-LD)
 * [MongoDB](https://www.mongodb.com/)
-* optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or load balancer in front of orion
+* optionally: an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) or load balancer in front of the broker.
 
 #### Single value updates for entities
 > see [code](src/test/scala/simulations/nosec/ld/EntityUpdateSimulation.scala)
@@ -66,7 +88,7 @@ via ```POST /entities/<ID>/attrs``` with a delay between each of the updates.
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       | http://localhost  |                            
 | numEntities | Number of entities to be simulated.        |  100                  |
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
@@ -83,7 +105,7 @@ The creation is done via ```POST /entityOperations/create```, the updates via ``
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       | http://localhost  |                            
 | numEntities | Number of entities to be simulated.        |  100                  |
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
@@ -101,11 +123,11 @@ We can recommend the  [labstack echo-server](https://registry.hub.docker.com/r/l
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
 | numEntities | Number of entities to be simulated.        |  100                  |
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
-| notificationServerUrl | URL to be notified by orion | http://echo-server | 
+| notificationServerUrl | URL to be notified by the broker | http://echo-server | 
 
 #### Single entity get.
 > see [code](src/test/scala/simulations/nosec/ld/GetSingleEntitiesSimulation.scala)
@@ -116,7 +138,7 @@ A number of  entities(see [store-entity](doc/store-entity.md) for structure of t
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
 | numEntities | Number of entities to be simulated.        |  100                  |
 | numGets| How many gets should be executed. | 100  |
 
@@ -130,7 +152,7 @@ The queries are done via ```GET /entities?q=("producer"=="<PRODUCER_NAME>") ```
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
 | numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
 | numQueries| How often should the queries be repeated. | 100  |
 
@@ -145,7 +167,7 @@ The queries are done via ```GET /entities?type=https://uri.fiware.org/ns/data-mo
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
 | numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
 | numQueries| How often should the queries be repeated. | 100  |
 
@@ -159,11 +181,87 @@ The query is: ``` GET /entities?type="store"&q=(("open"=="<RANDOM_BOOLEAN>")|("o
 
 |  Parameter | Description | Example |
 | ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of orion                                                | http://localhost  |                            
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
 | numParallelQueries | Number of queries to be executed in parallel.        |  100                  |
 | numQueries| How often should the queries be repeated. | 100  |
 
+### Notification latency
 
+In order to measure the latency of a notification, a dedicated set of tests is available. 
+We define the latency of a notification as following:
+
+```
+tCreated :  timestamp the value was sent to NGSI-API by the client 
+tReceived : timestamp the notification was received by the subscriber
+
+latency = tReceived - tCreated
+```
+In order to measure that latency with as few dependencies to the subscriber, we are deploying a setup that overcommits resources on the 
+subscriber. For real world scenarios, the subscriber(f.e. [QuantumLeap](https://quantumleap.readthedocs.io/en/latest/)) needs to be setup in a way 
+that it is able to handle the amount of notifications it should receive.
+
+> :warning: Its recommended to use the [Helm-Chart](#helm) for those tests, since the setup is a little more complicated. All components will be 
+> setup as required, if the value ```notification-latency.enabled: true``` is set.
+
+#### Test setup
+
+To get creation time of the update, we use an entity attribute to hold the timestamp. The entity for testing the latency looks as following:
+```json
+{
+    "type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:<ID>",
+    "sent-time": {
+        "type": "Property",
+        "value":  System.currentTimeMillis()
+    },
+    "humidity": {
+        "type": "Property",
+        "value": <RANDOM_FLOAT>
+    },
+    "@context": "https://fiware.github.io/data-models/context.jsonld"
+ }
+```
+As a subscriber [Telegraf](https://github.com/influxdata/telegraf) is deployed to the setup. Telegraf is built to handle high amounts of metrics and 
+has the ability to transform and persist incoming metrics to [InfluxDB](https://github.com/influxdata/influxdb). In addition it provides a plugin to set
+timestamps on received messages. With that setup, all data required for calculating the latency is present inside InfluxDB and can easily be queried, 
+visualized and analyzed with [Grafana](https://github.com/grafana/grafana). A dashboard for analyzing the results is provided by the chart. By using Telegraf we also introduce a decoupling-layer between the 
+database(InfluxDB) and the broker to avoid the need for scaling InfluxDB in the same order as we scale the broker.
+
+The following diagram depicts the setup:
+![test-setup](doc/diagram.svg)
+
+#### Notifications for everything
+> see [code](src/test/scala/simulations/nosec/ld/EntityUpdateEverythingSubscriptionSimulation.scala)
+
+A subscription  to receive notifications for all changes on entities is created. That subscription is similar to those are used by 
+timeseries backends like [QuantumLeap](https://quantumleap.readthedocs.io/en/latest/) or [Cygnus](https://github.com/telefonicaid/fiware-cygnus) .
+A number of entities will be created, then 2 attributes(timestamp and humidity) will be updated via ```POST /entities/<ID>/attrs``` with a delay 
+between each of the updates. 
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
+| numEntities | Number of entities to be simulated.        |  100                  |
+| numUpdates| How many updates should be executed for each attribute. | 100  |
+| updateDelay| Delay between attribute updates in seconds. | 1 |
+|notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
+
+#### Notifications for entities of a certain type
+> see [code](src/test/scala/simulations/nosec/ld/EntityUpdateWithTypeSubscriptionSimulation.scala)
+
+A subscription  to receive notifications for all changes on entities of a certain type is created. A number of such entities will be created, then 
+2 attributes(timestamp and humidity) will be updated via ```POST /entities/<ID>/attrs``` with a delay between each of the updates. 
+
+##### Config
+
+|  Parameter | Description | Example |
+| ----------------- | ----------------------------------------------- | ------------------------ |
+| baseUrl        | Url of the broker                                       |  http://localhost  |                            
+| numEntities | Number of entities to be simulated.        |  100                  |
+| numUpdates| How many updates should be executed for each attribute. | 100  |
+| updateDelay| Delay between attribute updates in seconds. | 1 |
+|notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
 ---
 
 ## License
