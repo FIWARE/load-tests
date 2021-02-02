@@ -317,13 +317,13 @@ abstract class FiwareLDBaseSimulation extends Simulation {
            "notification": {
              "attributes": [
                 "temperature",
-                "humidity"
+                "humidity",
+                "sent-time"
              ],
              "endpoint": {
                 "uri": """" + serverUrl +
-          """",
-                "accept": "application/ld+json"
-              }
+          """"
+             }
            },
            "throttling" : 1
           }"""))
