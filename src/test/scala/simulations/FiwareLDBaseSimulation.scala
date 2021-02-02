@@ -194,6 +194,10 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
         },
+        "sent-time": {
+          "type": "Property",
+          "value": """ +System.currentTimeMillis() """
+          },
        "open": {
          "type": "Property",
          "value": "true"
