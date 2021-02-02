@@ -111,7 +111,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -196,7 +196,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         },
         "sent-time": {
           "type": "Property",
-          "value": """ +System.currentTimeMillis() """
+          "value": """ +System.currentTimeMillis() + """
           },
        "open": {
          "type": "Property",
