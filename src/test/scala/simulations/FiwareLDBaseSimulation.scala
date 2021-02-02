@@ -101,7 +101,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def createTimedEntityAction(): ActionBuilder = {
     http("create entity")
       .post("/entities")
-      .body(StringBody((s: Session) => getNotficationTestEntity(s("entityId").as[String])))
+      .body(StringBody((s: Session) => getNotificationTestEntity(s("entityId").as[String])))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -206,7 +206,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        }"""
   }
 
-  def getNotficationTestEntity(entityId: String): String = {
+  def getNotificationTestEntity(entityId: String): String = {
     """{"type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:""" + entityId +
       """",
        "sent-time": {
@@ -264,6 +264,25 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         ],
        "watchedAttributes": [ "humidity" ],
        "q": "humidity>0",
+       "notification": {
+         "endpoint": {
+            "uri": """" + serverUrl +
+      """"
+          }
+       }
+      }"""
+  }
+
+  def getEverythingSubscriptionAction(serverUrl: String): String = {
+    """{
+             "id" : "urn:ngsi-ld:Subscription:everything",
+             "type": "Subscription",
+             "@context": "https://fiware.github.io/data-models/context.jsonld",
+             "entities": [
+               {
+              "idPattern": ".*"
+           }
+        ],
        "notification": {
          "endpoint": {
             "uri": """" + serverUrl +
