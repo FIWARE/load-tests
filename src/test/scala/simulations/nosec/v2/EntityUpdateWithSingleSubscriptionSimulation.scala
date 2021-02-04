@@ -7,7 +7,7 @@ import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import scalaj.http.Http
 
-class EntityUpdateWithTypeSubscriptionSimulation extends EntityUpdateSimulation {
+class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulation {
 
   override def beforeScenario(): Unit = {
     val subscription = getAllEntitiesSubscriptionAction(testConfig.notificationServerUrl)
