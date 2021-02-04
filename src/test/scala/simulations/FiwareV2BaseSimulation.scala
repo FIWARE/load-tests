@@ -24,11 +24,19 @@ abstract class FiwareV2BaseSimulation extends Simulation {
 
   val httpConf = http.baseUrl(baseUrl)
 
+  before {
+    beforeScenario();
+  }
+
   val scn = getScenario()
 
 
   // simulation will simulate lifecycle of one entity, at once will care about running them in parallel
   setUp(scn.inject(atOnceUsers(getParallelRuns()))).protocols(httpConf)
+
+  after {
+    afterScenario();
+  }
 
   /*
    * must be implemented by the subclasses and should contain the actual scenario
@@ -39,6 +47,16 @@ abstract class FiwareV2BaseSimulation extends Simulation {
    * must be implemented by the subclasses and should retrieve the actual  number of parallel connections
    */
   def getParallelRuns(): Int
+
+  /**
+   * Method to override if something specific should be done before the scenario
+   */
+  def beforeScenario() = {};
+
+  /**
+   * Method to override if something specific should be done after the scenario
+   */
+  def afterScenario() = {};
 
   /*
    * creates a single entity, id needs to be fed via session-attribute 'entityId'
@@ -56,7 +74,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"value":""" + Random.nextFloat() * 10 + """}}"""))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"value":""" + Random.nextFloat() * 10 + """}, "sent-time":{"value":""" + System.currentTimeMillis() + """}}"""))
       .asJson
   }
 
@@ -69,8 +87,8 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   }
 
   /**
-  * Get a single entity. Id is expected as a session attribute
-  */
+   * Get a single entity. Id is expected as a session attribute
+   */
   def singleEntityGetAction(): ActionBuilder = {
     http(" get a single entity")
       .get((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String])
@@ -107,7 +125,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   }
 
   def getEntityString(entityId: String): String = {
-    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """}, "humidity":{"value":""" + Random.nextFloat() + """}} """
+    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """},"sent-time": {"value": """ + System.currentTimeMillis() + """}, "humidity":{"value":""".stripMargin + Random.nextFloat() + """}} """
   }
 
   def getUpdateBody(actionType: String, startPos: Int, endPos: Int, idList: List[UUID]): String = {
@@ -163,11 +181,37 @@ abstract class FiwareV2BaseSimulation extends Simulation {
              },
              "attrs": [
                 "temperature",
-                "humidity"
+                "humidity",
+                "sent-time"
              ]
            },
            "throttling" : 1
           }"""))
       .asJson
+  }
+
+  def getAllEntitiesSubscriptionAction(serverUrl: String): String = {
+    """{
+            "id": "urn:ngsi-ld:Subscription:all",
+            "subject":  {
+              "entities": [
+                {
+                    "idPattern": ".*"
+                 }
+              ],
+           },
+           "notification": {
+             "http": {
+                "url": """" + serverUrl +
+      """"
+             },
+             "attrs": [
+                "temperature",
+                "humidity",
+                "sent-time"
+             ]
+           },
+           "throttling" : 1
+          }"""
   }
 }
