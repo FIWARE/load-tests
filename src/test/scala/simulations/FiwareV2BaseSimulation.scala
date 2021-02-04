@@ -184,8 +184,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
                 "humidity",
                 "sent-time"
              ]
-           },
-           "throttling" : 1
+           }
           }"""))
       .asJson
   }
@@ -210,8 +209,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
                 "humidity",
                 "sent-time"
              ]
-           },
-           "throttling" : 1
+           }
           }"""
   }
 }

@@ -324,8 +324,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
                 "uri": """" + serverUrl +
           """"
              }
-           },
-           "throttling" : 1
+           }
           }"""))
       .header("Content-Type", "application/ld+json")
   }
