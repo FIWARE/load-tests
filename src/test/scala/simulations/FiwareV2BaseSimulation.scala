@@ -198,7 +198,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
                 {
                     "idPattern": ".*"
                  }
-              ],
+              ]
            },
            "notification": {
              "http": {
