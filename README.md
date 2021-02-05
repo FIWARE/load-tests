@@ -230,13 +230,17 @@ The following diagram depicts the setup:
 ![test-setup](doc/diagram.svg)
 
 #### Notifications for everything
-> see [code](src/test/scala/simulations/nosec/ld/EntityUpdateEverythingSubscriptionSimulation.scala)
+> see [code](src/test/scala/simulations/nosec/v2/EntityUpdateEverythingSubscriptionSimulation.scala)
+
+> :warning: This is only available on NGSI-V2, since in NGSI-LD the 'type'-property is mandatory for 'entityInfo'. 
+> See [NGSI-LD API 5.2.8](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
 
 A subscription  to receive notifications for all changes on entities is created. That subscription is similar to those are used by 
 timeseries backends like [QuantumLeap](https://quantumleap.readthedocs.io/en/latest/) or [Cygnus](https://github.com/telefonicaid/fiware-cygnus) .
 A number of entities will be created, then 2 attributes(timestamp and humidity) will be updated via ```POST /entities/<ID>/attrs``` with a delay 
 between each of the updates. 
 
+
 ##### Config
 
 |  Parameter | Description | Example |
@@ -247,11 +251,13 @@ between each of the updates.
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 |notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
 
-#### Notifications for entities of a certain type
+#### Notifications for entities of a certain type(only LD)
 > see [code](src/test/scala/simulations/nosec/ld/EntityUpdateWithTypeSubscriptionSimulation.scala)
 
-A subscription  to receive notifications for all changes on entities of a certain type is created. A number of such entities will be created, then 
-2 attributes(timestamp and humidity) will be updated via ```POST /entities/<ID>/attrs``` with a delay between each of the updates. 
+A subscription  to receive notifications for all changes on entities of a certain type is created. In NGSI-LD, this is similar to those are use by That 
+subscription is similar to those are used by timeseries backends like [QuantumLeap](https://quantumleap.readthedocs.io/en/latest/) or 
+[Cygnus](https://github.com/telefonicaid/fiware-cygnus). A number of such entities will be created, then 2 attributes(timestamp and humidity) will 
+be updated via ```POST /entities/<ID>/attrs``` with a delay between each of the updates. 
 
 ##### Config
 
@@ -262,6 +268,7 @@ A subscription  to receive notifications for all changes on entities of a certai
 | numUpdates| How many updates should be executed for each attribute. | 100  |
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 |notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
+
 ---
 
 ## License

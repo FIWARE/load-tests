@@ -119,3 +119,428 @@ echo:
     port: 8080
     # -- addtional annotations, if required
     annotations: {}
+
+## configuration for measuring the notification latency
+notification-latency:
+  # -- should the latency of a notification be measured
+  enabled: false
+
+## influxdb subchart config to be used for notification latency
+## see: https://github.com/influxdata/helm-charts/tree/master/charts/influxdb
+influxdb:
+  config:
+    http:
+      auth-enabled: false
+  initScripts:
+    enabled: true
+
+## telegraf subchart config to be used for notification latency
+## see: https://github.com/influxdata/helm-charts/tree/master/charts/telegraf
+telegraf:
+  image:
+    tag:  "1.17.2"
+  config:
+    outputs:
+      - influxdb:
+          urls:
+            - "http://orion-ldt-influxdb:8086"
+          database: "telegraf"
+          skip_database_creation: true
+    inputs:
+      - http_listener_v2:
+          service_address: ":8080"
+          data_format: "json"
+    processors:
+      - date:
+          field_key: "telegraf-ts"
+          date_format: "unix_ms"
+  resources:
+    requests:
+      memory: 2048Mi
+      cpu: 2
+    limits:
+      memory: 2048Mi
+      cpu: 2
+  replicaCount: 3
+  ## not so nice workaround, ensures that telegraf is able to write to influx, since it does not reconnect by itself
+  hooks:
+    postStart: ["bin/bash", "-c", "if curl --fail -X POST http://orion-ldt-influxdb:8086/write?db=telegraf; then echo 'Influx available'; else kill 1; fi;"]
+
+## grafana subchart config to be used for notification latency
+## see: https://github.com/grafana/helm-charts
+grafana:
+  grafana.ini:
+    users:
+      viewers_can_edit: true
+    auth:
+      disable_login_form: true
+      disable_signout_menu: true
+    auth.anonymous:
+      enabled: true
+      org_role: Admin
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - type: influxdb
+          name: telegraf
+          access: proxy
+          database: telegraf
+          url: http://orion-ldt-influxdb:8086
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+  dashboards:
+    default:
+      latency:
+        json: |
+          {
+            "annotations": {
+              "list": [
+                {
+                  "builtIn": 1,
+                  "datasource": "-- Grafana --",
+                  "enable": true,
+                  "hide": true,
+                  "iconColor": "rgba(0, 211, 255, 1)",
+                  "name": "Annotations & Alerts",
+                  "type": "dashboard"
+                }
+              ]
+            },
+            "editable": true,
+            "gnetId": null,
+            "graphTooltip": 0,
+            "id": 1,
+            "links": [],
+            "panels": [
+              {
+                "datasource": "telegraf",
+                "description": "Mean latency of a notification in ms",
+                "fieldConfig": {
+                  "defaults": {
+                    "custom": {},
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "ms"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 6,
+                  "y": 0
+                },
+                "id": 2,
+                "options": {
+                  "colorMode": "value",
+                  "graphMode": "none",
+                  "justifyMode": "center",
+                  "orientation": "auto",
+                  "reduceOptions": {
+                    "calcs": [
+                      "mean"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "textMode": "value"
+                },
+                "pluginVersion": "7.3.5",
+                "targets": [
+                  {
+                    "groupBy": [
+                      {
+                        "params": [
+                          "$__interval"
+                        ],
+                        "type": "time"
+                      },
+                      {
+                        "params": [
+                          "null"
+                        ],
+                        "type": "fill"
+                      }
+                    ],
+                    "measurement": "http_listener_v2",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"telegraf-ts\"-\"data_0_sent-time_value\" FROM \"http_listener_v2\" WHERE $timeFilter",
+                    "queryType": "randomWalk",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                      [
+                        {
+                          "params": [
+                            "data_0_sent-time_value"
+                          ],
+                          "type": "field"
+                        },
+                        {
+                          "params": [],
+                          "type": "mean"
+                        }
+                      ]
+                    ],
+                    "tags": []
+                  }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Mean latency",
+                "transparent": true,
+                "type": "stat"
+              },
+              {
+                "aliasColors": {
+                  "detailed latency": "light-green",
+                  "mean latency": "dark-red",
+                  "median latency": "dark-purple"
+                },
+                "bars": false,
+                "dashLength": 10,
+                "dashes": false,
+                "datasource": "telegraf",
+                "fieldConfig": {
+                  "defaults": {
+                    "custom": {}
+                  },
+                  "overrides": []
+                },
+                "fill": 1,
+                "fillGradient": 0,
+                "gridPos": {
+                  "h": 13,
+                  "w": 24,
+                  "x": 0,
+                  "y": 5
+                },
+                "hiddenSeries": false,
+                "id": 4,
+                "legend": {
+                  "avg": false,
+                  "current": false,
+                  "max": false,
+                  "min": false,
+                  "show": true,
+                  "total": false,
+                  "values": false
+                },
+                "lines": true,
+                "linewidth": 1,
+                "nullPointMode": "null",
+                "options": {
+                  "alertThreshold": true
+                },
+                "percentage": false,
+                "pluginVersion": "7.3.5",
+                "pointradius": 2,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "spaceLength": 10,
+                "stack": false,
+                "steppedLine": false,
+                "targets": [
+                  {
+                    "alias": "detailed latency",
+                    "groupBy": [
+                      {
+                        "params": [
+                          "$__interval"
+                        ],
+                        "type": "time"
+                      },
+                      {
+                        "params": [
+                          "null"
+                        ],
+                        "type": "fill"
+                      }
+                    ],
+                    "hide": false,
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"telegraf-ts\"-\"data_0_sent-time_value\" FROM \"http_listener_v2\" WHERE $timeFilter",
+                    "rawQuery": true,
+                    "refId": "B",
+                    "resultFormat": "time_series",
+                    "select": [
+                      [
+                        {
+                          "params": [
+                            "value"
+                          ],
+                          "type": "field"
+                        },
+                        {
+                          "params": [],
+                          "type": "mean"
+                        }
+                      ]
+                    ],
+                    "tags": []
+                  },
+                  {
+                    "alias": "mean latency",
+                    "groupBy": [
+                      {
+                        "params": [
+                          "$__interval"
+                        ],
+                        "type": "time"
+                      },
+                      {
+                        "params": [
+                          "null"
+                        ],
+                        "type": "fill"
+                      }
+                    ],
+                    "hide": false,
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(diff) FROM (SELECT \"telegraf-ts\"-\"data_0_sent-time_value\" as diff FROM \"http_listener_v2\" WHERE $timeFilter) GROUP BY time(5s)",
+                    "queryType": "randomWalk",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                      [
+                        {
+                          "params": [
+                            "value"
+                          ],
+                          "type": "field"
+                        },
+                        {
+                          "params": [],
+                          "type": "mean"
+                        }
+                      ]
+                    ],
+                    "tags": []
+                  },
+                  {
+                    "alias": "median latency",
+                    "groupBy": [
+                      {
+                        "params": [
+                          "$__interval"
+                        ],
+                        "type": "time"
+                      },
+                      {
+                        "params": [
+                          "null"
+                        ],
+                        "type": "fill"
+                      }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT median(diff) FROM (SELECT \"telegraf-ts\"-\"data_0_sent-time_value\" as diff FROM \"http_listener_v2\" WHERE $timeFilter) GROUP BY time(5s)",
+                    "rawQuery": true,
+                    "refId": "C",
+                    "resultFormat": "time_series",
+                    "select": [
+                      [
+                        {
+                          "params": [
+                            "value"
+                          ],
+                          "type": "field"
+                        },
+                        {
+                          "params": [],
+                          "type": "mean"
+                        }
+                      ]
+                    ],
+                    "tags": []
+                  }
+                ],
+                "thresholds": [],
+                "timeFrom": null,
+                "timeRegions": [],
+                "timeShift": null,
+                "title": "Latency detailed",
+                "tooltip": {
+                  "shared": true,
+                  "sort": 0,
+                  "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                  "buckets": null,
+                  "mode": "time",
+                  "name": null,
+                  "show": true,
+                  "values": []
+                },
+                "yaxes": [
+                  {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                  },
+                  {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                  }
+                ],
+                "yaxis": {
+                  "align": false,
+                  "alignLevel": null
+                }
+              }
+            ],
+            "refresh": false,
+            "schemaVersion": 26,
+            "style": "dark",
+            "tags": [],
+            "templating": {
+              "list": []
+            },
+            "time": {
+              "from": "now-5m",
+              "to": "now"
+            },
+            "timepicker": {},
+            "timezone": "",
+            "title": "latency-overview",
+            "uid": "3vb8BaYMk",
+            "version": 6
+          }

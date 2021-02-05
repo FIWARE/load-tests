@@ -4,7 +4,11 @@ broker:
   maxConnections: 20000
   logging:
     level: FATAL
-
+  # use this config for EntityUpdateWithTypeSubscriptionSimulation
+#  notificationMode: persistent
+  # use this config for EntityUpdateWithSubscriptionSimulation
+  # second number should be around the expected clients at one instance, first is a multiple of second
+  notificationMode: threadpool:10000:1000
   reqPoolSize: 8
   db:
     hosts:
@@ -23,7 +27,7 @@ deployment:
   resources:
     limits:
       cpu: 1
-      memory: 6144Mi
+      memory: 10240Mi
     requests:
       cpu: 1
-      memory: 6144Mi
+      memory: 10240Mi

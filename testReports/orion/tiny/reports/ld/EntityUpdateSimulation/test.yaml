@@ -15,11 +15,11 @@ collector:
   ## collector resource requests and limits, we leave the default empty to make that a concious choice by the user.
   resources:
     limits:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 300m
+      memory: 256Mi
     requests:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 300m
+      memory: 256Mi
   # -- image to be used for result collection
   image:
     # -- collector image name
@@ -78,3 +78,7 @@ aggregation:
     tag: latest
     # -- specification of the image pull policy
     pullPolicy: Always
+
+echo:
+  # -- should the echo server be deployed?
+  enabled: true

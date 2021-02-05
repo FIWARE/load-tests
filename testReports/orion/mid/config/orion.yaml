@@ -4,6 +4,7 @@ broker:
   maxConnections: 20000
   logging:
     level: FATAL
+  notificationMode: threadpool:10000:1000
 
   reqPoolSize: 16
   db:

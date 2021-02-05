@@ -15,11 +15,11 @@ collector:
   ## collector resource requests and limits, we leave the default empty to make that a concious choice by the user.
   resources:
     limits:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 300m
+      memory: 256Mi
     requests:
-      cpu: 1
-      memory: 1024Mi
+      cpu: 300m
+      memory: 256Mi
   # -- image to be used for result collection
   image:
     # -- collector image name
@@ -64,7 +64,7 @@ test:
     # -- number of entities to be updated in each batch
     batchSize: 100
     # -- url of the notification server.
-    notificationServer: http://orion-ldt-orion-loadtest-echo
+    notificationServer: http://orion-ldt-telegraf:8080/telegraf
     # -- number of entities that each job instance should create
     prefillPerInstance: 0
 
@@ -79,6 +79,6 @@ aggregation:
     # -- specification of the image pull policy
     pullPolicy: Always
 
-echo:
-  # -- should the echo server be deployed?
+notification-latency:
+  # -- should the notification latency be measured?
   enabled: true
