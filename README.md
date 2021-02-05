@@ -269,24 +269,6 @@ be updated via ```POST /entities/<ID>/attrs``` with a delay between each of the 
 | updateDelay| Delay between attribute updates in seconds. | 1 |
 |notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
 
-#### Notifications for all entities (only V2)
-> see [code](src/test/scala/simulations/nosec/v2/EntityUpdateWithSingleSubscriptionSimulation.scala)
-
-A subscription  to receive notifications for all changes of all entities that fit the idPattern ".*" (e.g. every). In NGSI-V2, this is similar to those are use by That 
-subscription is similar to those are used by timeseries backends like [QuantumLeap](https://quantumleap.readthedocs.io/en/latest/) or 
-[Cygnus](https://github.com/telefonicaid/fiware-cygnus). A number of such entities will be created, then 2 attributes(timestamp and humidity) will 
-be updated via ```POST /entities/<ID>/attrs``` with a delay between each of the updates. 
-
-##### Config
-
-|  Parameter | Description | Example |
-| ----------------- | ----------------------------------------------- | ------------------------ |
-| baseUrl        | Url of the broker                                       |  http://localhost  |                            
-| numEntities | Number of entities to be simulated.        |  100                  |
-| numUpdates| How many updates should be executed for each attribute. | 100  |
-| updateDelay| Delay between attribute updates in seconds. | 1 |
-|notificationServerUrl| URL to be notified by the broker | http://telegraf:8080/telegraf | 
-
 ---
 
 ## License
