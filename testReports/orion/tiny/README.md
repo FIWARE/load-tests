@@ -12,7 +12,8 @@ Detailed reports can be found here:
 * LD-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
     * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
     * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
@@ -20,12 +21,14 @@ Detailed reports can be found here:
 * v2-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
     * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
     * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
     * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
     * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
     
+
 
 ## Environment
 
