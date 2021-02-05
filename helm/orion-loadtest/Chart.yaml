@@ -11,6 +11,20 @@ keywords:
 - loadtests
 sources:
 - https://github.com/wistefan/orion-loadtest
+dependencies:
+  - name: grafana
+    version: "6.2.1"
+    repository: "https://grafana.github.io/helm-charts"
+    condition: notification-latency.enabled
+  - name: telegraf
+    version: "1.7.34"
+    repository: "https://helm.influxdata.com/"
+    condition: notification-latency.enabled
+  - name: influxdb
+    version: "4.8.10"
+    repository: "https://helm.influxdata.com/"
+    condition: notification-latency.enabled
+
 maintainers:
 - name: wistefan
   email: stefan.wiedemann@fiware.org
