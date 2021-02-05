@@ -227,6 +227,7 @@ visualized and analyzed with [Grafana](https://github.com/grafana/grafana). A da
 database(InfluxDB) and the broker to avoid the need for scaling InfluxDB in the same order as we scale the broker.
 
 The following diagram depicts the setup:
+
 ![test-setup](doc/diagram.svg)
 
 #### Notifications for everything
