@@ -5,6 +5,11 @@ broker:
   logging:
     level: FATAL
   reqPoolSize: 8
+  # use this config for EntityUpdateWithTypeSubscriptionSimulation
+  notificationMode: persistent
+  # use this config for EntityUpdateWithSubscriptionSimulation
+  # second number should be around the expected clients at one instance, first is a multiple of second
+  # notificationMode: threadpool:10000:1000
   db:
     hosts:
       - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
@@ -22,7 +27,7 @@ deployment:
   resources:
     limits:
       cpu: 1
-      memory: 6144Mi
+      memory: 10240Mi
     requests:
       cpu: 1
-      memory: 6144Mi
+      memory: 10240Mi

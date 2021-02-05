@@ -48,15 +48,15 @@ test:
     # -- specification of the image pull policy
     pullPolicy: Always
   # -- class of the concrete test to run
-  simulationClass: simulations.nosec.ld.EntityUpdateWithSubscriptionSimulation
+  simulationClass: simulations.nosec.ld.EntityUpdateWithTypeSubscriptionSimulation
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 2000
+    entitiesPerInstance: 1000
     # -- number of entities to simulate
-    numberOfEntities: 4000
+    numberOfEntities: 1000
     # -- number of updates every entity should send
-    numberOfUpdates: 10
+    numberOfUpdates: 100
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
@@ -64,7 +64,7 @@ test:
     # -- number of entities to be updated in each batch
     batchSize: 100
     # -- url of the notification server.
-    notificationServer:  http://orion-ldt-telegraf:8080/telegraf
+    notificationServer: http://orion-ldt-telegraf:8080/telegraf
     # -- number of entities that each job instance should create
     prefillPerInstance: 0
 
