@@ -24,7 +24,7 @@ or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_g
     * [Notification latency](#notification-latency)
         * [Test setup](#test-setup)
         * [Notifications for everything](#notifications-for-everything)
-        *[Notifications for entities of a certain type](#notifications-for-entitiesof-a-certain-type)
+        * [Notifications for entities of a certain type](#notifications-for-entitiesof-a-certain-type)
 * [License](#license)
 
 
