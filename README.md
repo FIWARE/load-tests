@@ -1,6 +1,6 @@
 # Loadtest for FIWARE Orion
 
-![FIWARE Core](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)
+[![FIWARE Core](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)
 [![License: MIT](https://img.shields.io/github/license/FIWARE/orion-loadtest.svg)](https://opensource.org/licenses/MIT)
 
 [Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
