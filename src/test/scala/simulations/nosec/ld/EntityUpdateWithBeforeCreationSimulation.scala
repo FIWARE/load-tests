@@ -10,7 +10,7 @@ import simulations.FiwareLDBaseSimulation
 
 class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
 
-  final val  entityIdPrefix:String = UUID.randomUUID().toString;
+  final val entityIdPrefix: String = UUID.randomUUID().toString;
   final val entityIdList: List[UUID] = Stream.fill(testConfig.numEntities)(UUID.randomUUID()).toList
 
   override def getParallelRuns(): Int = {
@@ -19,14 +19,12 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
 
   override def beforeScenario(): Unit = {
 
-    for (a <- 0 to testConfig.numEntities - 1) {
+    val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(0, testConfig.numEntities - 1, entityIdList)).timeout(10000, 60000).asString
 
-      val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, entityIdList)).timeout(10000, 60000).asString
-
-      if (response.code != 201) {
-        throw new RuntimeException("Was not able to setup the scenario. Response: " + response)
-      }
+    if (response.code != 201) {
+      throw new RuntimeException("Was not able to setup the scenario. Response: " + response)
     }
+
   }
 
   override def getScenario(): ScenarioBuilder = {
