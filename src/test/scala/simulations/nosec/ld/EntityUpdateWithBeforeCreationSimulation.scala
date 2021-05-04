@@ -18,7 +18,7 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
   }
 
   override def beforeScenario(): Unit = {
-    val batches: Int = (entitiesToPrefill / 100).ceil.toInt
+    val batches: Int = (testConfig.numEntities / 100).ceil.toInt
 
     println("Will create " + batches + " batches.")
     for (a <- 0 to batches - 1) {
