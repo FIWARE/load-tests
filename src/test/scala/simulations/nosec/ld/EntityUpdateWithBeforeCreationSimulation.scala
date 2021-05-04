@@ -32,7 +32,7 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
     val idFeeder = Iterator.tabulate(testConfig.numEntities)(n => Map("entityId" -> entityIdList(n)))
     scenario("Parallel entity updates")
       .feed(idFeeder)
-      .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
+      .pause("30", TimeUnit.SECONDS)
       .repeat(testConfig.numUpdates) {
         exec(
           updateEntityAction("temperature")
