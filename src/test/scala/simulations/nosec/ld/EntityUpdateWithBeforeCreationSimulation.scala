@@ -18,11 +18,11 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
   }
 
   override def beforeScenario(): Unit = {
-
-    val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(0, testConfig.numEntities , entityIdList)).timeout(10000, 60000).asString
+    val body = getUpdateBody(0, testConfig.numEntities , entityIdList)
+    val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
 
     if (response.code != 201) {
-      throw new RuntimeException("Was not able to setup the scenario. Response: " + response)
+      throw new RuntimeException("Was not able to setup the scenario. Response: " + response + ", body: " + body)
     }
 
   }
