@@ -194,9 +194,6 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
         },
-        "shard": {
-          "type": "Property",
-          "value": """ + getRandomShardKey() + """},
         "sent-time": {
           "type": "Property",
           "value": """ +System.currentTimeMillis() + """
