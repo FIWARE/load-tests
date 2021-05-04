@@ -10,8 +10,8 @@ import simulations.FiwareLDBaseSimulation
 
 class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
 
-  final val entityIdPrefix: String = UUID.randomUUID().toString;
-  final val entityIdList: List[UUID] = Stream.fill(testConfig.numEntities)(UUID.randomUUID()).toList
+  final val entityIdPrefix: String = UUID.randomUUID().toString.substring(6);
+  final val entityIdList: List[String] = Stream.tabulate(testConfig.numEntities)(n => n + "-" + entityIdPrefix).toList
 
   override def getParallelRuns(): Int = {
     testConfig.numEntities
@@ -23,7 +23,7 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
     println("Will create " + batches + " batches.")
     for (a <- 0 to batches - 1) {
 
-      val body = getUpdateBody(a * 100, (a + 1) * 100,  entityIdList)
+      val body = getUpdateBodyFromStringList(a * 100, (a + 1) * 100,  entityIdList)
       println("Create batch from " + a * 100 + " to " + (a + 1) * 100)
 
       val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
