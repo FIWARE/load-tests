@@ -23,8 +23,8 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
 
       val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, entityIdList)).timeout(10000, 60000).asString
 
-      if (response.code != 200) {
-        throw new RuntimeException("Was not able to prefill the database. Response: " + response)
+      if (response.code != 201) {
+        throw new RuntimeException("Was not able to setup the scenario. Response: " + response)
       }
     }
   }
@@ -34,9 +34,6 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
     val idFeeder = Iterator.tabulate(testConfig.numEntities)(n => Map("entityId" -> entityIdList(n)))
     scenario("Parallel entity updates")
       .feed(idFeeder)
-      .exec(
-        createEntityAction()
-      )
       .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       .repeat(testConfig.numUpdates) {
         exec(
