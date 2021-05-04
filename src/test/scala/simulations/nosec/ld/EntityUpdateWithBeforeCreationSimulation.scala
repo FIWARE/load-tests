@@ -10,8 +10,8 @@ import simulations.FiwareLDBaseSimulation
 
 class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
 
-  final val entityIdPrefix: String = UUID.randomUUID().toString.substring(6);
-  final val entityIdList: List[String] = Stream.tabulate(testConfig.numEntities)(n => n + "-" + entityIdPrefix).toList
+  final val entityIdPostfix: String = UUID.randomUUID().toString;
+  final val entityIdList: List[String] = Stream.tabulate(testConfig.numEntities)(n => "%05d".format(n) + ":" + entityIdPostfix).toList
 
   override def getParallelRuns(): Int = {
     testConfig.numEntities
