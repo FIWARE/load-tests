@@ -18,13 +18,21 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
   }
 
   override def beforeScenario(): Unit = {
-    val body = getUpdateBody(0, testConfig.numEntities , entityIdList)
-    val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
+    val batches: Int = (entitiesToPrefill / 100).ceil.toInt
 
-    if (response.code != 201) {
-      throw new RuntimeException("Was not able to setup the scenario. Response: " + response + ", body: " + body)
+    println("Will create " + batches + " batches.")
+    for (a <- 0 to batches - 1) {
+
+      val body = getUpdateBody(a * 100, (a + 1) * 100,  entityIdList)
+      println("Create batch from " + a * 100 + " to " + (a + 1) * 100)
+
+      val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
+
+      if (response.code != 201) {
+        throw new RuntimeException("Was not able to setup the scenario. Response: " + response + ", body: " + body)
+      }
+
     }
-
   }
 
   override def getScenario(): ScenarioBuilder = {
