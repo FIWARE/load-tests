@@ -194,6 +194,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
         },
+        "shard": {
+          "type": "Property",
+          "value": """ + getRandomShardKey() + """},
         "sent-time": {
           "type": "Property",
           "value": """ +System.currentTimeMillis() + """
@@ -208,6 +211,10 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        },
        "@context": "https://fiware.github.io/data-models/context.jsonld"
        }"""
+  }
+
+  def getRandomShardKey(): String = {
+    Random.nextInt(2).toString
   }
 
   def getNotificationTestEntity(entityId: String): String = {
