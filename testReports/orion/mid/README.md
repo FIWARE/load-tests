@@ -6,7 +6,7 @@ The described setup will work stable for setups with:
 - up to 20 000 req/s for single entity retrieval requests for the ngsi-ld endpoint
 - depending on the type of query, between 15 000 and 20 000 req/s for queries on the ngsi-ld endpoint
 - ~15 000 req/s for single entity retrieval requests for the v2 endpoint
-- depending on the type of query, between 6000 and 7000 req/s for queries on the ngsi-ld endpoint
+- depending on the type of query, between 6000 and 7000 req/s for queries on the v2 endpoint
 
 
 Detailed reports can be found here:
