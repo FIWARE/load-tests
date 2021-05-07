@@ -1,0 +1,46 @@
+name: Docker-Preview
+
+on:
+  push:
+
+env:
+  IMAGE_NAME_TEST: wistefan/orion-loadtest
+  IMAGE_NAME_AGGREGATION: wistefan/loadtest-aggregation
+
+jobs:
+  
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push-test:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build -t  $IMAGE_NAME_TEST:preview -f docker/test/Dockerfile .
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push image
+        run: docker push $IMAGE_NAME_TEST:preview
+          
+  push-aggregation:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build -t $IMAGE_NAME_AGGREGATION:preview -f docker/aggregation/Dockerfile .
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push image
+        run: docker push $IMAGE_NAME_AGGREGATION:preview

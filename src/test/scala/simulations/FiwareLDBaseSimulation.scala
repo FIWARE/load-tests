@@ -153,6 +153,17 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   }
 
   /*
+ * Create multiple entities as a batch. The number of the current batch should be feed as a session attribute
+ */
+  def batchCreateEntitiesActionFromStringList(batchSize: Int, idList: List[String]): ActionBuilder = {
+    http("create batch of entities")
+      .post("/entityOperations/create")
+      .body(StringBody((s: Session) => getUpdateBodyFromStringList(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
+      .header("Content-Type", "application/ld+json")
+  }
+
+
+  /*
    * Update multiple entities as a batch. The number of the current batch should be feed as a session attribute
    */
   def batchUpdateEntitiesAction(batchSize: Int, idList: List[UUID]): ActionBuilder = {
@@ -210,6 +221,10 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        }"""
   }
 
+  def getRandomShardKey(): String = {
+    Random.nextInt(2).toString
+  }
+
   def getNotificationTestEntity(entityId: String): String = {
     """{"type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:""" + entityId +
       """",
@@ -236,6 +251,24 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     }
 
     deleteBodyBuilder.append("]").toString()
+  }
+
+  def getUpdateBodyFromStringList(startPos: Int, endPos: Int, idList: List[String]): String = {
+    val idIterator: Iterator[String] = idList.slice(startPos, endPos).iterator
+    val updateBodyBuilder: StringBuilder = StringBuilder.newBuilder
+
+    updateBodyBuilder.append(
+      """
+      [
+      """)
+
+    updateBodyBuilder.append(getEntityString(idIterator.next()))
+
+    while (idIterator.hasNext) {
+      updateBodyBuilder.append("," + getEntityString(idIterator.next()))
+    }
+
+    updateBodyBuilder.append("]").toString()
   }
 
   def getUpdateBody(startPos: Int, endPos: Int, idList: List[UUID]): String = {

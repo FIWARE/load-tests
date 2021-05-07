@@ -33,9 +33,5 @@ class EntityUpdateSimulation extends FiwareLDBaseSimulation {
           // wait for the new values to be available
           .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       }
-      // cleanup
-      .exec(
-        deleteEntityAction()
-      )
   }
 }
