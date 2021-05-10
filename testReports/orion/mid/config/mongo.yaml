@@ -229,7 +229,7 @@ labels: {}
 ## Number of MongoDB replicas to deploy.
 ## Ignored when mongodb.architecture=standalone
 ##
-replicaCount: 4
+replicaCount: 2
 
 ## StrategyType for MongoDB statefulset
 ## It can be set to RollingUpdate or Recreate by default.
@@ -268,7 +268,7 @@ nodeAffinityPreset:
   ## Node label values to match
   ## E.g.
   values:
-   - mongo
+    - mongo
 
 
 ## Affinity for pod assignment. Evaluated as a template.
@@ -323,11 +323,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 15
-    memory: 32768Mi
+    cpu: 30
+    memory: 65536Mi
   requests:
-    cpu: 15
-    memory: 32768Mi
+    cpu: 30
+    memory: 65536Mi
 
 ## MongoDB pods' liveness and readiness probes. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
