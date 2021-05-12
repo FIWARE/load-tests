@@ -11,8 +11,6 @@ broker:
     hosts:
       - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
       - mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local
-      - mongo-mongodb-2.mongo-mongodb-headless.fiware.svc.cluster.local
-      - mongo-mongodb-3.mongo-mongodb-headless.fiware.svc.cluster.local
     replicaSet: rs0
     writeConcern: 0
     poolSize: 128
@@ -20,7 +18,7 @@ deployment:
   replicaCount: 4
   image:
     repository: fiware/orion-ld
-    tag: 0.6.0
+    tag: 0.8-PRE-153
   resources:
     limits:
       cpu: 2

@@ -1,12 +1,13 @@
 # Setup
 
 The described setup will work stable for setups with:
-- around 10 000 updates/s for the ngsi-ld endpoint 
-- around 11 000 single value updates/s for the v2 endpoint
-- up to 20 000 req/s for single entity retrieval requests for the ngsi-ld endpoint
-- depending on the type of query, between 15 000 and 20 000 req/s for queries on the ngsi-ld endpoint
-- ~15 000 req/s for single entity retrieval requests for the v2 endpoint
+- around 9 500 updates/s for the ngsi-ld endpoint 
+- around 10 500 single value updates/s for the v2 endpoint
+- up to 27 000 req/s for single entity retrieval requests for the ngsi-ld endpoint
+- depending on the type of query, between 13 000 and 17 000 req/s for queries on the ngsi-ld endpoint
+- ~17 000 req/s for single entity retrieval requests for the v2 endpoint
 - depending on the type of query, between 6000 and 7000 req/s for queries on the v2 endpoint
+
 
 
 Detailed reports can be found here:
@@ -39,7 +40,7 @@ Detailed reports can be found here:
 - all components are deployed using the following helm-charts:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
-- the setup uses 8 CPU / 48 GB RAM for Orion-LD, 60 CPU / 128 GB RAM for Mongo-DB
+- the setup uses 8 CPU / 48 GB RAM for Orion-LD, 30 CPU / 48 GB RAM for Mongo-DB
 - detailed information(and ready to use values files) can be found in the [config-folder](config)
 - regional ssd storage for mongo(see [storage-class](config/storage-class.yaml))
 
