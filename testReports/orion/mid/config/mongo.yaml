@@ -268,7 +268,7 @@ nodeAffinityPreset:
   ## Node label values to match
   ## E.g.
   values:
-   - mongo
+    - mongo
 
 
 ## Affinity for pod assignment. Evaluated as a template.

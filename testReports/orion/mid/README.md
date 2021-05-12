@@ -6,12 +6,14 @@ The described setup will work stable for setups with:
 - up to 27 000 req/s for single entity retrieval requests for the ngsi-ld endpoint
 - depending on the type of query, between 13 000 and 17 000 req/s for queries on the ngsi-ld endpoint
 - ~17 000 req/s for single entity retrieval requests for the v2 endpoint
-- depending on the type of query, between 6000 and 7000 req/s for queries on the ngsi-ld endpoint
+- depending on the type of query, between 6000 and 7000 req/s for queries on the v2 endpoint
+
 
 
 Detailed reports can be found here:
 * LD-endpoint:
     * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Entity Updates-Long](https://fiware.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateSimulationLong/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/mid/reports/ld/BatchUpdateSimulation/gatling-report.html)
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
     * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/mid/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
