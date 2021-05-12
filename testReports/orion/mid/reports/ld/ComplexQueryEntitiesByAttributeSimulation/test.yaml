@@ -54,7 +54,7 @@ test:
     # -- how many entities should one test instance simulate
     entitiesPerInstance: 10
     # -- number of entities to simulate
-    numberOfEntities: 50
+    numberOfEntities: 40
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- number of gets that should be executed for every session
@@ -62,7 +62,7 @@ test:
     # -- number of queries to be executed(in sequence)
     numberOfQueries: 100
     # -- number of queries to be executed in parallel
-    numberOfParallelQueries: 4000
+    numberOfParallelQueries: 5000
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)

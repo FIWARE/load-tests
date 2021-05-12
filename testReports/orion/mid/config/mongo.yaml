@@ -229,7 +229,7 @@ labels: {}
 ## Number of MongoDB replicas to deploy.
 ## Ignored when mongodb.architecture=standalone
 ##
-replicaCount: 4
+replicaCount: 2
 
 ## StrategyType for MongoDB statefulset
 ## It can be set to RollingUpdate or Recreate by default.
@@ -324,10 +324,10 @@ resources:
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
     cpu: 15
-    memory: 32768Mi
+    memory: 24576Mi
   requests:
     cpu: 15
-    memory: 32768Mi
+    memory: 24576Mi
 
 ## MongoDB pods' liveness and readiness probes. Evaluated as a template.
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
