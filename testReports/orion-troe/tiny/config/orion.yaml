@@ -1,0 +1,37 @@
+broker:
+  envPrefix: ORIONLD_
+  mutexPolicy: none
+  maxConnections: 20000
+  troe:
+    enabled: true
+    dbHost: timescale
+    dbUser: postgres
+    dbPort: 5432
+    dbPassword: Srb3EEAyTwIiJqESDiis0VyNkvjWK7NI
+  logging:
+    level: FATAL
+  reqPoolSize: 8
+  # use this config for EntityUpdateWithTypeSubscriptionSimulation
+  notificationMode: persistent
+  # use this config for EntityUpdateWithSubscriptionSimulation
+  # second number should be around the expected clients at one instance, first is a multiple of second
+  # notificationMode: threadpool:10000:1000
+  db:
+    hosts:
+      - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
+      - mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local
+    replicaSet: rs0
+    writeConcern: 0
+    poolSize: 128
+deployment:
+  replicaCount: 1
+  image:
+    repository: fiware/orion-ld
+    tag: 0.8-PRE-175
+  resources:
+    limits:
+      cpu: 1
+      memory: 10240Mi
+    requests:
+      cpu: 1
+      memory: 10240Mi
