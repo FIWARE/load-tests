@@ -11,8 +11,8 @@ spec:
   completions: {{ div .Values.test.conf.numberOfEntities .Values.test.conf.entitiesPerInstance }}
   template:
     spec:
-      serviceAccountName: api-umbrella
-      serviceAccount: api-umbrella
+      serviceAccountName: fiware-root-runner
+      serviceAccount: fiware-root-runner
       securityContext:
         runAsUser: 0
       containers:

@@ -56,7 +56,7 @@ test:
     # -- number of entities to simulate
     numberOfEntities: 8000
     # -- number of updates every entity should send
-    numberOfUpdates: 100
+    numberOfUpdates: 20
     # -- url of the orion instance to test
     orionUrl: http://orion-test:1026/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
