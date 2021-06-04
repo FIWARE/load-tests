@@ -1,7 +1,7 @@
 # Setup
 
 The described setup will work stable for setups with:
-- around 1300 updates/s for the ngsi-ld endpoint 
+- around 1400 updates/s for the ngsi-ld endpoint 
 - around 2000 single value updates/s for the v2 endpoint
 
 

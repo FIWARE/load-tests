@@ -11,6 +11,6 @@ The table below will give an indication on the differences in terms of update pe
 
 |  Environment | Orion | Orion-TRoE |
 | ----------------- | ---------------------- | ------------------------ |
-| ```tiny``` |  ~1800 req/s | ~1300 req/s |
+| ```tiny``` |  ~1800 req/s | ~1400 req/s |
 | ```small``` |  ~3500 req/s | ~2800 req/s |
 | ```mid``` |  ~12 000 req/s | ~9900 req/s |
