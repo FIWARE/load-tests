@@ -26,7 +26,7 @@ spec:
           {{- end }}
       {{- end }}
     spec:
-      serviceAccountName: api-umbrella
+      serviceAccountName: fiware-root-runner
       containers:
         - name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.echo.image.pullPolicy }}

@@ -24,7 +24,7 @@ broker:
     writeConcern: 0
     poolSize: 128
 deployment:
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: fiware/orion-ld
     tag: 0.8-PRE-185

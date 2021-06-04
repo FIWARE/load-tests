@@ -5,7 +5,12 @@ broker:
   logging:
     level: FATAL
   notificationMode: threadpool:10000:1000
-
+  troe:
+    enabled: false
+    dbHost: timescale
+    dbUser: postgres
+    dbPort: 5432
+    dbPassword: Srb3EEAyTwIiJqESDiis0VyNkvjWK7NI
   reqPoolSize: 16
   db:
     hosts:

@@ -24,8 +24,8 @@ spec:
         {{- end }}
       {{- end }}
     spec:
-      serviceAccountName: api-umbrella
-      serviceAccount: api-umbrella
+      serviceAccountName: fiware-root-runner
+      serviceAccount: fiware-root-runner
       securityContext:
         runAsUser: 0
       volumes:

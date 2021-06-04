@@ -1,13 +1,13 @@
 # Setup
 
 The described setup will work stable for setups with:
-- around 1200-1300 updates/s for the ngsi-ld endpoint 
-- around 1900-2000 single value updates/s for the v2 endpoint
+- around 1300 updates/s for the ngsi-ld endpoint 
+- around 2000 single value updates/s for the v2 endpoint
 
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troetiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
     * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
     * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-troe/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
     * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-troe/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
@@ -26,6 +26,7 @@ Detailed reports can be found here:
 - all components are deployed using the following helm-charts:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
+    - [timescale-db](https://github.com/timescale/timescaledb-kubernetes/tree/master/charts/timescaledb-single)
 - the setup uses 1 CPU / 6 GB RAM for Orion-LD, 8 CPU / 16 GB RAM for Mongo-DB
 - detailed information(and ready to use values files) can be found in the [config-folder](config)
 - regional ssd storage for mongo and timescale (see [storage-class](config/storage-class.yaml))
@@ -36,7 +37,7 @@ Add helm repos:
 ```
   helm repo add fiware https://fiware.github.io/helm-charts/repo/
   helm repo add bitnami https://charts.bitnami.com/bitnami
-  helm repo add timescale 'https://charts.timescale.com'
+  helm repo add timescale https://charts.timescale.com
   helm repo update
 ```
 
