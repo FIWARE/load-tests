@@ -1,8 +1,8 @@
 # Test reports
 
-The reports in this folder where conducted with the [temporal-representation funcitonality](https://github.com/FIWARE/context.Orion-LD/blob/develop/doc/manuals-ld/troe.md) 
+The reports in this folder where conducted with the [temporal-representation functionality](https://github.com/FIWARE/context.Orion-LD/blob/develop/doc/manuals-ld/troe.md) 
 of Orion-LD enabled. Only update tests where conducted, since retrieval is not impacted by this feature.
-Configuration information can be found in the config-folders and include the used configuration for [timescale-db](https://www.timescale.com/).
+Configuration information can be found in the config-folders and include the used configuration for [Timescale-DB](https://www.timescale.com/).
 
 Environments:
 * [Tiny](tiny) - 1 CPU / 6 GB RAM Orion-LD, 8 CPU / 16 GB RAM Mongo-DB, 4 CPU / 16 GB RAM Timescale-DB

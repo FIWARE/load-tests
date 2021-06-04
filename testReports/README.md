@@ -4,8 +4,8 @@ This folder contains the results of tests executed by FIWARE and all necessary i
 
 It currently contains two different setups:
 
-* [Orion](orion) - Installation only containing [orion-ld](https://github.com/FIWARE/context.Orion-LD) and [mongo-db](https://www.mongodb.com/)
-* [Orion-TRoE](orion-troe) - Installation of [orion-ld](https://github.com/FIWARE/context.Orion-LD) with [Temporal Representation](https://github.com/FIWARE/context.Orion-LD/blob/develop/doc/manuals-ld/troe.md) activated
+* [Orion](orion) - Installation only containing [Orion-LD](https://github.com/FIWARE/context.Orion-LD) and [Mongo-DB](https://www.mongodb.com/)
+* [Orion-TRoE](orion-troe) - Installation of [Orion-LD](https://github.com/FIWARE/context.Orion-LD) with [Temporal Representation](https://github.com/FIWARE/context.Orion-LD/blob/develop/doc/manuals-ld/troe.md) activated
 
 The table below will give an indication on the differences in terms of update performance for the 2 setups, see the sub-folders for detailed results.
 
