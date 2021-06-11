@@ -17,7 +17,6 @@ class BaselineGetSimulation extends Simulation {
       exec(
         http("get version")
           .get("version")
-          .header("Connection", "close")
       )
     }
 
