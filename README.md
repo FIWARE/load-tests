@@ -1,10 +1,11 @@
-# Loadtest for FIWARE Orion
+# Loadtest for FIWARE Components
 
 ![FIWARE Core](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)
 [![License: MIT](https://img.shields.io/github/license/FIWARE/orion-loadtest.svg)](https://opensource.org/licenses/MIT)
 
-[Gatling](https://github.com/gatling/gatling) load tests to run against the [FIWARE Orion-LD Broker](https://github.com/FIWARE/context.Orion-LD)
-or any other implementation of the [ngsi-ld](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) api.
+[Gatling](https://github.com/gatling/gatling) load tests to run against [FIWARE Components](https://github.com/FIWARE/catalogue)
+that implement the [NGSI-LD Api](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf). Includes [test-results](testReports) 
+for various setups of different [FIWARE Components](https://github.com/FIWARE/catalogue).
 
 ## Table of contents
 * [Reports](#reports)
@@ -66,7 +67,7 @@ See the chart docu for all configuration options.
 After running your tests locally, the results are published in the standard [Gatling Report format](https://gatling.io/docs/current/general/reports/) and can be found under 
 ``target/gatling/results``
 
-If you are looking for reports of already executed tests see [testReports](./testReports/orion).
+If you are looking for reports of already executed tests see [testReports](testReports/orion-ld).
 
 ## Scenarios
 
