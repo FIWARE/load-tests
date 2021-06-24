@@ -1,22 +1,22 @@
 # Setup
 
 The described setup will work stable for setups with:
-- around 23 000 updates/s for the ngsi-ld endpoint 
-- around 19 000 single value updates/s for the v2 endpoint
+- around 9900 updates/s for the ngsi-ld endpoint 
+- around 12 500 single value updates/s for the v2 endpoint
 
 
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/ld/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/ld/BatchUpdateSimulation/gatling-report.html)
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/ld/BatchUpdateSimulation/gatling-report.html)
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
  * v2-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/v2/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/v2/BatchUpdateSimulation/gatling-report.html)
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-troe/large/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/v2/BatchUpdateSimulation/gatling-report.html)
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/mid/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
       
 
 ## Environment
@@ -28,7 +28,7 @@ Detailed reports can be found here:
     - [orion-ld](https://github.com/FIWARE/helm-charts/tree/main/charts/orion)
     - [mongo-db](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
     - [timescale-db](https://github.com/timescale/timescaledb-kubernetes/tree/master/charts/timescaledb-single)
-- the setup uses 16 CPU / 96 GB RAM for Orion-LD, 60 CPU / 96 GB RAM for Mongo-DB, 32 CPU / 128 GB Ram Timescale-DB 
+- the setup uses 8 CPU / 48 GB RAM for Orion-LD, 30 CPU / 48 GB RAM for Mongo-DB
 - detailed information(and ready to use values files) can be found in the [config-folder](config)
 - regional ssd storage for mongo(see [storage-class](config/storage-class.yaml))
 
@@ -64,7 +64,7 @@ To improve performance, you should set an index on the mongodb as following:
 
 Run test:
 ```
-     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion/large/reports/<ENDPOINT>/<SCENARIO>/test.yaml
+     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion/mid/reports/<ENDPOINT>/<SCENARIO>/test.yaml
 ```
 
 Get the results:

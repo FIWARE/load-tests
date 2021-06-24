@@ -11,23 +11,23 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
-    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
-    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/QueryEntitiesByTypeSimulation/gatling-reports.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
-    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
-    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/tiny/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion-ld/tiny/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
     
 
 
@@ -62,7 +62,7 @@ Install charts:
 
 Run test:
 ```
-     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion/tiny/reports/<ENDPOINT>/<SCENARIO>/test.yaml
+     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion-ld/tiny/reports/<ENDPOINT>/<SCENARIO>/test.yaml
 ```
 
 Get the results:
@@ -95,13 +95,13 @@ made:
 #### SingleSubscriber-case
 In order to efficently handle notifications, orion should run in notification-mode 'persistent'. The mode can be set in the helm charts 
 via `broker.notificationMode: persistent`. The configuration is set in the config, provided for this environment. 
-See [Orion-Documentation on notifications](https://github.com/telefonicaid/fiware-orion/blob/master/doc/manuals/admin/perf_tuning.md#notification-modes-and-performance)
+See [Orion-Documentation on notifications](https://github.com/telefonicaid/fiware-orion-ld/blob/master/doc/manuals/admin/perf_tuning.md#notification-modes-and-performance)
 for detailed information.
 
 #### ManySubscriber-case
 This case requires some careful fine-tuning of the connection pool. In lower load scenarios, the `broker.notificationMode: transient`(e.g. the default) 
 can be used. For high load scenarios, the threadpool configuration should be used with specifically tuned pool and queue configuration.
-See [Orion-Documentation on notifications](https://github.com/telefonicaid/fiware-orion/blob/master/doc/manuals/admin/perf_tuning.md#notification-modes-and-performance)
+See [Orion-Documentation on notifications](https://github.com/telefonicaid/fiware-orion-ld/blob/master/doc/manuals/admin/perf_tuning.md#notification-modes-and-performance)
 for detailed information.
 
 
