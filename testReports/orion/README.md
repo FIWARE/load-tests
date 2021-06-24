@@ -7,6 +7,7 @@ Environments:
 * [Tiny](tiny) - 1 CPU / 6 GB RAM Orion-LD, 8 CPU / 16 GB RAM Mongo-DB
 * [Small](small) - 2 CPU / 12 GB RAM Orion-LD, 16 CPU / 32 GB RAM Mongo-DB
 * [Mid](mid) - 8 CPU / 48 GB RAM Orion-LD, 30 CPU / 48 GB RAM Mongo-DB
+* [Large](large) - 16 CPU / 96 GB RAM Orion-LD, 60 CPU / 96 GB RAM Mongo-DB
 
 # Storage
 

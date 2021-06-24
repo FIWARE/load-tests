@@ -27,7 +27,7 @@ deployment:
   replicaCount: 2
   image:
     repository: fiware/orion-ld
-    tag: 0.8-PRE-185
+    tag: v0.8.1
   resources:
     limits:
       cpu: 1
