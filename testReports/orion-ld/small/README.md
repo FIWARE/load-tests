@@ -10,23 +10,23 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
-    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
-    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/ld/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
 * v2-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html)  - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
-    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
-    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
-    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
-    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion/small/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html)  - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
+    * [Get entities](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/GetSingleEntitiesSimulation/gatling-report.html) 
+    * [Query entities by attribute](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/QueryEntitiesByAttributeSimulation/gatling-report.html) 
+    * [Query entities by type](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/QueryEntitiesByTypeSimulation/gatling-report.html) 
+    * [Complex queries](https://fiware.github.io/orion-loadtest/testReports/orion-ld/small/reports/v2/ComplexQueryEntitiesByAttributeSimulation/gatling-report.html) 
     
 
 ## Environment
@@ -71,7 +71,7 @@ To improve performance, you should set an index on the mongodb as following:
 
 Run test:
 ```
-     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion/small/reports/<ENDPOINT>/<SCENARIO>/test.yaml
+     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion-ld/small/reports/<ENDPOINT>/<SCENARIO>/test.yaml
 ```
 
 Get the results:
