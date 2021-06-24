@@ -16,7 +16,8 @@ class BaselineGetSimulation extends Simulation {
     .repeat(testConfig.numUpdates) {
       exec(
         http("get version")
-          .get("version"))
+          .get("version")
+      )
     }
 
   setUp(scn.inject(atOnceUsers(entitiesToSimulate))).protocols(httpConf)

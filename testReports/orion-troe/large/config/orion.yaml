@@ -1,0 +1,33 @@
+broker:
+  envPrefix: ORIONLD_
+  mutexPolicy: none
+  maxConnections: 20000
+  logging:
+    level: FATAL
+  notificationMode: persistent
+  troe:
+    enabled: false
+    dbHost: timescale
+    dbUser: postgres
+    dbPort: 5432
+    dbPassword: Srb3EEAyTwIiJqESDiis0VyNkvjWK7NI
+  reqPoolSize: 128
+  db:
+    hosts:
+      - mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local
+      - mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local
+    replicaSet: rs0
+    writeConcern: 0
+    poolSize: 128
+deployment:
+  replicaCount: 4
+  image:
+    repository: fiware/orion-ld
+    tag: v0.8.1
+  resources:
+    limits:
+      cpu: 4
+      memory: 24Gi
+    requests:
+      cpu: 4
+      memory: 24Gi
