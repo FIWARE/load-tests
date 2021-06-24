@@ -4,8 +4,7 @@
 [![License: MIT](https://img.shields.io/github/license/FIWARE/orion-loadtest.svg)](https://opensource.org/licenses/MIT)
 
 [Gatling](https://github.com/gatling/gatling) load tests to run against [FIWARE Components](https://github.com/FIWARE/catalogue)
-that implement the [NGSI-LD Api](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf). Includes [test-results](testReports) 
-for various setups of different [FIWARE Components](https://github.com/FIWARE/catalogue).
+that implement the [NGSI-LD Api](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf). The repository also includes [test-reports](testReports) for various setups of different [FIWARE Components](https://github.com/FIWARE/catalogue).
 
 ## Table of contents
 * [Reports](#reports)
