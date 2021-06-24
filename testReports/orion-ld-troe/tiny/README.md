@@ -7,15 +7,15 @@ The described setup will work stable for setups with:
 
 Detailed reports can be found here:
 * LD-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with Type-Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/ld/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with Type-Subscription](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/ld/EntityUpdateWithTypeSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/ld/EntityUpdateWithTypeSubscriptionSimulation/grafana-report.png)
 * v2-endpoint:
-    * [Entity Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
-    * [Batch Updates](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
-    * [Entity Updates with Subscriptions](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
-    * [Entity Updates with a single Subscription](https://fiware.github.io/orion-loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateSimulation/gatling-report.html) 
+    * [Batch Updates](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/v2/BatchUpdateSimulation/gatling-report.html) 
+    * [Entity Updates with Subscriptions](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateWithSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSubscriptionSimulation/grafana-report.png)
+    * [Entity Updates with a single Subscription](https://fiware.github.io/loadtest/testReports/orion-ld-troe/tiny/reports/v2/EntityUpdateWithSingleSubscriptionSimulation/gatling-report.html) - [Notification latency](reports/v2/EntityUpdateWithSingleSubscriptionSimulation/grafana-report.png)
 
 
 ## Environment
