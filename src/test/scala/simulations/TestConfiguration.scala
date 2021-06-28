@@ -18,6 +18,6 @@ case class TestConfiguration() {
   var notificationServerUrl = config.getString("notificationServerUrl")
 
   var securityEnabled = config.getBoolean("securityEnabled")
-  var orionUrl = config.getString("orionUrl")
+  var orionUrl = config.getString("orionServiceUrl")
   var umbrellaUrl = config.getString("umbrellaUrl")
 }
