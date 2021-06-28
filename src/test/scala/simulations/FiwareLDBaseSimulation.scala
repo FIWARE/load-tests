@@ -45,6 +45,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         }
       }
     }
+    println("+++++++++++++++++ Create sec")
+    println(testConfig.securityEnabled)
     if(testConfig.securityEnabled) {
       createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl);
   }
