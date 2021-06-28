@@ -19,6 +19,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
 
   val entitiesToSimulate = testConfig.numEntities
   val baseUrl = testConfig.baseUrl
+  val umbrellaBaseUrl = testConfig.umbrellaBaseUrl
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
@@ -59,7 +60,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       println("Delete " + entitiesToPrefill + " prefilled entities.")
       val batches: Int = (entitiesToPrefill / 100).ceil.toInt
       for (a <- 0 to batches - 1) {
-        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
+        println("Status: " + Http(umbrellaBaseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
       }
     }
   }

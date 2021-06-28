@@ -20,4 +20,5 @@ case class TestConfiguration() {
   var securityEnabled = config.getBoolean("securityEnabled")
   var orionUrl = config.getString("orionServiceUrl")
   var umbrellaUrl = config.getString("umbrellaUrl")
+  var umbrellaBaseUrl = config.getString("umbrellaBaseUrl")
 }
