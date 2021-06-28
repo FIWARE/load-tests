@@ -16,4 +16,8 @@ case class TestConfiguration() {
   var updateDelay = config.getInt("updateDelay")
   var batchSize = config.getInt("batchSize")
   var notificationServerUrl = config.getString("notificationServerUrl")
+
+  var securityEnabled = config.getBoolean("securityEnabled")
+  var orionUrl = config.getString("orionUrl")
+  var umbrellaUrl = config.getString("umbrellaUrl")
 }

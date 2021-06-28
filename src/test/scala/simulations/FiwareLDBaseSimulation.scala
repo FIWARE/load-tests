@@ -45,6 +45,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         }
       }
     }
+    if(testConfig.securityEnabled) {
+      createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl);
   }
 
   after {
@@ -360,5 +362,43 @@ abstract class FiwareLDBaseSimulation extends Simulation {
            }
           }"""))
       .header("Content-Type", "application/ld+json")
+  }
+
+  def createApiBackend(orionUrl: String, umbrellaUrl: String): Unit = {
+    val response = Http(baseUrl + "api-umbrella/v1/apis.json")
+      .header("Content-Type", "application/json")
+      .header("X-Api-Key", "myKey")
+      .header("X-Admin-Auth-Token", "myToken")
+      .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString
+    println(response.body)
+  }
+
+  def getApiBackendConfig(orionUrl: String, umbrellaUrl: String): String = {
+    """{
+      "api": {
+        "backend_host": """" + orionUrl +
+        """",
+        "backend_protocol": "http",
+        "balance_algorithm": "least_conn",
+        "frontend_host": """" + umbrellaUrl +
+        """",
+        "name": "orion-test",
+        "servers": [{
+        "host": """" + orionUrl +
+        """",
+        "port": 1026
+      }],
+        "settings": {
+        "rate_limit_mode": "unlimited",
+        "disable_api_key": true
+      },
+        "sort_order": 0,
+        "url_matches": [{
+        "backend_prefix": "/",
+        "frontend_prefix": "/orion/"
+      }],
+        "frontend_prefixes": "/orion/"
+      }
+    }"""
   }
 }
