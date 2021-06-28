@@ -47,8 +47,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     }
     println("+++++++++++++++++ Create sec")
     println(testConfig.securityEnabled)
-    if(testConfig.securityEnabled) {
+    if (testConfig.securityEnabled) {
       createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl);
+    }
   }
 
   after {
@@ -115,7 +116,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -125,7 +126,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateTimedEntityAction(): ActionBuilder = {
     http("update humidity")
       .post((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -211,7 +212,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         },
         "sent-time": {
           "type": "Property",
-          "value": """ +System.currentTimeMillis() + """
+          "value": """ + System.currentTimeMillis() +
+      """
           },
        "open": {
          "type": "Property",
@@ -234,7 +236,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       """",
        "sent-time": {
           "type": "Property",
-          "value": """ + System.currentTimeMillis() +"""
+          "value": """ + System.currentTimeMillis() +
+      """
           },
        "humidity": {
           "type": "Property",
@@ -295,12 +298,14 @@ abstract class FiwareLDBaseSimulation extends Simulation {
 
   def getTypeSubscriptionAction(serverUrl: String, entitiyType: String): String = {
     """{
-             "id" : "urn:ngsi-ld:Subscription:""" + entitiyType + """",
+             "id" : "urn:ngsi-ld:Subscription:""" + entitiyType +
+      """",
              "type": "Subscription",
              "@context": "https://fiware.github.io/data-models/context.jsonld",
              "entities": [
                {
-              "type": """" + entitiyType + """"
+              "type": """" + entitiyType +
+      """"
            }
         ],
        "watchedAttributes": [ "humidity" ],
@@ -332,6 +337,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        }
       }"""
   }
+
   /*
    * Create a subscription. The id of the entity to  subscribe to needs to be fed as a session attribute.
    */
@@ -379,15 +385,15 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     """{
       "api": {
         "backend_host": """" + orionUrl +
-        """",
+      """",
         "backend_protocol": "http",
         "balance_algorithm": "least_conn",
         "frontend_host": """" + umbrellaUrl +
-        """",
+      """",
         "name": "orion-test",
         "servers": [{
         "host": """" + orionUrl +
-        """",
+      """",
         "port": 1026
       }],
         "settings": {
