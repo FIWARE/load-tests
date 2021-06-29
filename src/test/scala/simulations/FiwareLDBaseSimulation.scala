@@ -26,7 +26,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
 
-  var apiBackendId: String
+  var apiBackendId: String = "init"
 
   val httpConf = http.baseUrl(baseUrl)
 
