@@ -21,4 +21,5 @@ case class TestConfiguration() {
   var orionUrl = config.getString("orionServiceUrl")
   var umbrellaUrl = config.getString("umbrellaUrl")
   var umbrellaBaseUrl = config.getString("umbrellaBaseUrl")
+  var backendConfiguration = config.getString("backendConfiguration")
 }
