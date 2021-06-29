@@ -50,7 +50,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       }
     }
     if (testConfig.umbrellaEnabled) {
-      createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl);
+       apiBackendId = createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl);
     }
   }
 
@@ -63,6 +63,9 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       for (a <- 0 to batches - 1) {
         println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
       }
+    }
+    if (testConfig.umbrellaEnabled) {
+      deleteApiBackend(apiBackendId)
     }
   }
 
@@ -374,14 +377,14 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/ld+json")
   }
 
-  def createApiBackend(orionUrl: String, umbrellaUrl: String): Unit = {
+  def createApiBackend(orionUrl: String, umbrellaUrl: String): String = {
     val response = Http(umbrellaBaseUrl + "api-umbrella/v1/apis.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
       .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString.body
     val jsValue = Json.parse(response)
-    apiBackendId = (jsValue \ "api" \\ "id").toString()
+    val apiBackendId = (jsValue \ "api" \\ "id").toString()
 
     println("+++++++++++ Publish")
     println(Http(umbrellaBaseUrl + "api-umbrella/v1/config/publish.json")
@@ -389,10 +392,11 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
       .postData(getApiBackendPublishConfig(apiBackendId)).timeout(10000, 20000).asString.body)
+    return apiBackendId
   }
 
-  def deleteApiBackend(): Unit = {
-    println("+++++++++: " + Http(umbrellaBaseUrl + "api-umbrella/v1/config/" + apiBackendId + ".json")
+  def deleteApiBackend(id: String): Unit = {
+    println("+++++++++: " + Http(umbrellaBaseUrl + "api-umbrella/v1/config/" + id + ".json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
