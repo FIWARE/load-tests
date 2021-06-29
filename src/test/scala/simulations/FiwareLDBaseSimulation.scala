@@ -385,6 +385,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     val jsValue = Json.parse(response)
     val apiBackendId = (jsValue \ "api" \\ "id").toString()
     println("+++++++++++ Create")
+    println(jsValue)
+    println( (jsValue \ "api" \\ "id"))
     println(response)
     println("+++++++++++ Publish")
     println(getApiBackendPublishConfig(apiBackendId))
