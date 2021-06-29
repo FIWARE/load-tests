@@ -410,8 +410,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     """{
       "config": {
         "apis": {
-          """" + id +
-      """": {
+          """ + id +
+      """: {
             "publish": "1"
           }
         }
