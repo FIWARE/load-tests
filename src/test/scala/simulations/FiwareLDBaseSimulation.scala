@@ -391,7 +391,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
-      .postData(getApiBackendPublishConfig(apiBackendId)).timeout(10000, 20000).asString.body)
+      .postData(getApiBackendPublishConfig(apiBackendId)).timeout(10000, 20000).asString.body
     println(publishResponse)
     return apiBackendId
   }
