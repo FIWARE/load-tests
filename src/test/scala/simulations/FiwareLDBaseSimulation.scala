@@ -24,7 +24,8 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
-  val backendConfig = testConfig.backendConfiguration
+  val disableApiKey = testConfig.disableApiKey
+  val apiKeyVerificationLevel = testConfig.apiKeyVerificationLevel
 
   var apiBackendId: String = "init"
 
