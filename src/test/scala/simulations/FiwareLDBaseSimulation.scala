@@ -383,7 +383,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("X-Admin-Auth-Token", "myToken")
       .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString.body
     val jsValue = Json.parse(response)
-    val apiBackendId = (jsValue \ "api" \\ "id").toString()
+    val apiBackendId = (jsValue \ "api" \ "id").toString()
     println("+++++++++++ Create")
     println(jsValue)
     println( (jsValue \ "api" \ "id"))
