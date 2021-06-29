@@ -7,6 +7,8 @@ import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
 import scalaj.http.Http
+import play.api.libs.json
+import play.api.libs.json.Json
 
 import scala.util.Random
 
@@ -378,8 +380,27 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
-      .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString
-    println(response.body)
+      .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString.body
+    val jsValue = Json.parse(response)
+    val maybeId = (jsValue \ "api" \\ "id")
+
+    println(Http(umbrellaBaseUrl + "api-umbrella/v1/config/publish.json")
+      .header("Content-Type", "application/json")
+      .header("X-Api-Key", "myKey")
+      .header("X-Admin-Auth-Token", "myToken")
+      .postData(getApiBackendPublishConfig(maybeId.toString())).timeout(10000, 20000).asString.body)
+  }
+
+  def getApiBackendPublishConfig(id: String): String = {
+    """{
+      "config": {
+        "apis": {
+          """" + id + """": {
+            "publish": "1"
+          }
+        }
+        }
+    }"""
   }
 
   def getApiBackendConfig(orionUrl: String, umbrellaUrl: String): String = {
