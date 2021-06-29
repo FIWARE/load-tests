@@ -26,6 +26,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
 
+  var apiBackendId: String
 
   val httpConf = http.baseUrl(baseUrl)
 
@@ -380,20 +381,32 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("X-Admin-Auth-Token", "myToken")
       .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString.body
     val jsValue = Json.parse(response)
-    val maybeId = (jsValue \ "api" \\ "id")
+    apiBackendId = (jsValue \ "api" \\ "id").toString()
 
+    println("+++++++++++ Publish")
     println(Http(umbrellaBaseUrl + "api-umbrella/v1/config/publish.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
-      .postData(getApiBackendPublishConfig(maybeId.toString())).timeout(10000, 20000).asString.body)
+      .postData(getApiBackendPublishConfig(apiBackendId)).timeout(10000, 20000).asString.body)
+  }
+
+  def deleteApiBackend(): Unit = {
+    println("+++++++++: " + Http(umbrellaBaseUrl + "api-umbrella/v1/config/" + apiBackendId + ".json")
+      .header("Content-Type", "application/json")
+      .header("X-Api-Key", "myKey")
+      .header("X-Admin-Auth-Token", "myToken")
+      .postData("")
+      .method("DELETE")
+      .asString.body)
   }
 
   def getApiBackendPublishConfig(id: String): String = {
     """{
       "config": {
         "apis": {
-          """" + id + """": {
+          """" + id +
+      """": {
             "publish": "1"
           }
         }
