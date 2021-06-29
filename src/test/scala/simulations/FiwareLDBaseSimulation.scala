@@ -387,6 +387,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     println("+++++++++++ Create")
     println(response)
     println("+++++++++++ Publish")
+    println(getApiBackendPublishConfig(apiBackendId))
     val publishResponse = Http(umbrellaBaseUrl + "api-umbrella/v1/config/publish.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
