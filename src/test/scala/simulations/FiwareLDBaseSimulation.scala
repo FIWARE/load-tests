@@ -437,10 +437,10 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         "port": 1026
       }],
         "settings": {
-          "disable_api_key": """ + disableApiKey +
+          "disable_api_key": """ + disableApiKey.toString +
       """,
-          "api_key_verification_level": """ + apiKeyVerificationLevel +
-      """,
+          "api_key_verification_level": """" + apiKeyVerificationLevel +
+      """",
           "rate_limit_mode": "unlimited"
          },
         "sort_order": 0,
