@@ -384,10 +384,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .postData(getApiBackendConfig(orionUrl, umbrellaUrl)).timeout(10000, 20000).asString.body
     val jsValue = Json.parse(response)
     val apiBackendId = (jsValue \ "api" \ "id").toString()
-    println("+++++++++++ Create")
-    println(jsValue)
-    println( (jsValue \ "api" \ "id"))
-    println(response)
+    println("+++++++++++ Create" + apiBackendId + " ")
     println("+++++++++++ Publish")
     println(getApiBackendPublishConfig(apiBackendId))
     val publishResponse = Http(umbrellaBaseUrl + "api-umbrella/v1/config/publish.json")
