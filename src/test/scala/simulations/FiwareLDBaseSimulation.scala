@@ -24,7 +24,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
-  val backendConfig =testConfig.backendConfiguration
+  val backendConfig = testConfig.backendConfiguration
 
   var apiBackendId: String = "init"
 
@@ -50,7 +50,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       }
     }
     if (testConfig.umbrellaEnabled) {
-       apiBackendId = createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl, backendConfig);
+      apiBackendId = createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl, disableApiKey, apiKeyVerificationLevel);
     }
   }
 
@@ -377,12 +377,12 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/ld+json")
   }
 
-  def createApiBackend(orionUrl: String, umbrellaUrl: String, backendConfig: String): String = {
+  def createApiBackend(orionUrl: String, umbrellaUrl: String, disableApiKey: Boolean, apiKeyVerificationLevel: String): String = {
     val response = Http(umbrellaBaseUrl + "api-umbrella/v1/apis.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
-      .postData(getApiBackendConfig(orionUrl, umbrellaUrl, backendConfig)).timeout(10000, 20000).asString.body
+      .postData(getApiBackendConfig(orionUrl, umbrellaUrl, disableApiKey, apiKeyVerificationLevel)).timeout(10000, 20000).asString.body
     val jsValue = Json.parse(response)
     val apiBackendId = (jsValue \ "api" \ "id").get.toString()
     println("+++++++++++ Create" + apiBackendId + " ")
@@ -420,7 +420,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     }"""
   }
 
-  def getApiBackendConfig(orionUrl: String, umbrellaUrl: String, backendConfig: String): String = {
+  def getApiBackendConfig(orionUrl: String, umbrellaUrl: String, disableApiKey: Boolean, apiKeyVerificationLevel: String): String = {
     """{
       "api": {
         "backend_host": """" + orionUrl +
@@ -435,9 +435,13 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       """",
         "port": 1026
       }],
-        "settings": {""" +
-        backendConfig +
-      """},
+        "settings": {
+          "disable_api_key": """ + disableApiKey +
+      """,
+          "api_key_verification_level": """ + apiKeyVerificationLevel +
+      """,
+          "rate_limit_mode": "unlimited"
+         },
         "sort_order": 0,
         "url_matches": [{
         "backend_prefix": "/",
