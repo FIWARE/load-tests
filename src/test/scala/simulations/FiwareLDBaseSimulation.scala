@@ -413,7 +413,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   }
 
   def createApiKey(umbrellaBaseUrl: String): String = {
-    val keyResponse = Http(umbrellaBaseUrl + "api-umbrella/v1/user.json")
+    val keyResponse = Http(umbrellaBaseUrl + "api-umbrella/v1/users.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
       .header("X-Admin-Auth-Token", "myToken")
