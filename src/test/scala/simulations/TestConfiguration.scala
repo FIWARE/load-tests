@@ -21,6 +21,6 @@ case class TestConfiguration() {
   var orionUrl = config.getString("orionServiceUrl")
   var umbrellaUrl = config.getString("umbrellaUrl")
   var umbrellaBaseUrl = config.getString("umbrellaBaseUrl")
-  var disableApiKey = config.getBoolean("disableApiKey")
+  var disableApiKey = config.getString("disableApiKey")
   var apiKeyVerificationLevel = config.getString("apiKeyVerificationLevel")
 }

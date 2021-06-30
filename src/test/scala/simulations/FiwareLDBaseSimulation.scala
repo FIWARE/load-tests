@@ -378,7 +378,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .header("Content-Type", "application/ld+json")
   }
 
-  def createApiBackend(orionUrl: String, umbrellaUrl: String, disableApiKey: Boolean, apiKeyVerificationLevel: String): String = {
+  def createApiBackend(orionUrl: String, umbrellaUrl: String, disableApiKey: String, apiKeyVerificationLevel: String): String = {
     val response = Http(umbrellaBaseUrl + "api-umbrella/v1/apis.json")
       .header("Content-Type", "application/json")
       .header("X-Api-Key", "myKey")
@@ -421,7 +421,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     }"""
   }
 
-  def getApiBackendConfig(orionUrl: String, umbrellaUrl: String, disableApiKey: Boolean, apiKeyVerificationLevel: String): String = {
+  def getApiBackendConfig(orionUrl: String, umbrellaUrl: String, disableApiKey: String, apiKeyVerificationLevel: String): String = {
     """{
       "api": {
         "backend_host": """" + orionUrl +
@@ -437,7 +437,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         "port": 1026
       }],
         "settings": {
-          "disable_api_key": """ + disableApiKey.toString +
+          "disable_api_key": """ + disableApiKey +
       """,
           "api_key_verification_level": """" + apiKeyVerificationLevel +
       """",
