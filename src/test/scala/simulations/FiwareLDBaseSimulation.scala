@@ -28,6 +28,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val apiKeyVerificationLevel = testConfig.apiKeyVerificationLevel
 
   var apiBackendId: String = "init"
+  var apiKey: String = "theKey"
 
   val httpConf = http.baseUrl(baseUrl)
 
@@ -52,6 +53,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     }
     if (testConfig.umbrellaEnabled) {
       apiBackendId = createApiBackend(testConfig.orionUrl, testConfig.umbrellaUrl, disableApiKey, apiKeyVerificationLevel);
+      apiKey = createApiKey(umbrellaBaseUrl)
     }
   }
 
@@ -104,6 +106,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entities")
       .body(StringBody((s: Session) => getEntityString(s("entityId").as[String])))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -114,6 +117,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entities")
       .body(StringBody((s: Session) => getNotificationTestEntity(s("entityId").as[String])))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -124,6 +128,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
       .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -134,6 +139,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String] + "/attrs")
       .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() + """}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -142,6 +148,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def deleteEntityAction(): ActionBuilder = {
     http("delete entity")
       .delete((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -150,6 +157,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def deleteTimedEntityAction(): ActionBuilder = {
     http("delete entity")
       .delete((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String])
+      .header("X-Api-Key", apiKey)
   }
 
 
@@ -161,6 +169,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entityOperations/create")
       .body(StringBody((s: Session) => getUpdateBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -171,6 +180,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entityOperations/create")
       .body(StringBody((s: Session) => getUpdateBodyFromStringList(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
 
@@ -182,6 +192,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entityOperations/update")
       .body(StringBody((s: Session) => getUpdateBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /*
@@ -192,6 +203,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .post("/entityOperations/delete")
       .body(StringBody((s: Session) => getDeleteBody(s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   /**
@@ -201,6 +213,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     http(" get a single entity")
       .get((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String])
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   def getEntityString(entityId: String): String = {
@@ -376,6 +389,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
            }
           }"""))
       .header("Content-Type", "application/ld+json")
+      .header("X-Api-Key", apiKey)
   }
 
   def createApiBackend(orionUrl: String, umbrellaUrl: String, disableApiKey: String, apiKeyVerificationLevel: String): String = {
@@ -398,6 +412,17 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     return apiBackendId
   }
 
+  def createApiKey(umbrellaBaseUrl: String): String = {
+    val keyResponse = Http(umbrellaBaseUrl + "api-umbrella/v1/user.json")
+      .header("Content-Type", "application/json")
+      .header("X-Api-Key", "myKey")
+      .header("X-Admin-Auth-Token", "myToken")
+      .postData(getApiKeyRegistration())
+      .asString.body
+    val jsValue = Json.parse(keyResponse)
+    (jsValue \ "user" \ "api_key").get.toString()
+  }
+
   def deleteApiBackend(id: String): Unit = {
     println("+++++++++: " + Http(umbrellaBaseUrl + "api-umbrella/v1/config/" + id + ".json")
       .header("Content-Type", "application/json")
@@ -406,6 +431,20 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .postData("")
       .method("DELETE")
       .asString.body)
+  }
+
+  def getApiKeyRegistration(): String = {
+    """{
+      "user": {
+        "first_name": "Orion",
+        "last_name": "Test",
+        "email": "orion@test.org",
+        "throttle_by_ip": false,
+        "enabled": "true",
+        "terms_and_conditions": "1",
+        "email_verified": true
+      }
+    }"""
   }
 
   def getApiBackendPublishConfig(id: String): String = {
