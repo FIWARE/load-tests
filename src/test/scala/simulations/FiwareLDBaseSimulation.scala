@@ -310,6 +310,35 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       }"""
   }
 
+  def getMqttTypeSubscriptionAction(serverUrl: String, entitiyType: String): String = {
+    """{
+             "id" : "urn:ngsi-ld:Subscription:""" + entitiyType + """",
+             "type": "Subscription",
+             "@context": "https://fiware.github.io/data-models/context.jsonld",
+             "entities": [
+               {
+              "type": """" + entitiyType + """"
+           }
+        ],
+       "watchedAttributes": [ "humidity" ],
+       "q": "humidity>0",
+       "notification": {
+         "endpoint": {
+            "accept": "application/json",
+            "notifierInfo": [
+              {
+                "key": "MQTT-Version",
+                "value": "mqtt5.0"
+              }
+            ],
+            "uri": """" + serverUrl +
+              """"
+          }
+       }
+      }"""
+  }
+
+
   def getEverythingSubscriptionAction(serverUrl: String): String = {
     """{
              "id" : "urn:ngsi-ld:Subscription:everything",
@@ -328,6 +357,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
        }
       }"""
   }
+
   /*
    * Create a subscription. The id of the entity to  subscribe to needs to be fed as a session attribute.
    */
@@ -361,4 +391,6 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           }"""))
       .header("Content-Type", "application/ld+json")
   }
+
+
 }
