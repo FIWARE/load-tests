@@ -16,6 +16,12 @@ data:
     batchSize={{ .Values.test.conf.batchSize }}
     notificationServerUrl="{{ .Values.test.conf.notificationServer }}"
     numPrefillEntities={{ .Values.test.conf.prefillPerInstance }}
+    umbrellaEnabled={{ .Values.test.conf.umbrellaEnabled }}
+    orionServiceUrl="{{ .Values.test.conf.orionServiceUrl }}"
+    umbrellaUrl="{{ .Values.test.conf.umbrellaUrl }}"
+    umbrellaBaseUrl="{{ .Values.test.conf.umbrellaBaseUrl }}"
+    disableApiKey={{ .Values.test.conf.disableApiKey }}
+    apiKeyVerificationLevel="{{ .Values.test.conf.apiKeyVerificationLevel }}"
   settings.xml: |-
     <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">

@@ -44,29 +44,40 @@ test:
     # -- test image name
     repository: wistefan/orion-loadtest
     # -- test image tag
-    tag: latest
+    tag: preview
     # -- specification of the image pull policy
     pullPolicy: Always
   # -- class of the concrete test to run
-  simulationClass: simulations.nosec.ld.BatchUpdateSimulation
+  simulationClass: simulations.nosec.ld.EntityUpdateSimulation
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 2500
+    entitiesPerInstance: 500
     # -- number of entities to simulate
-    numberOfEntities: 2500
+    numberOfEntities: 500
     # -- number of updates every entity should send
     numberOfUpdates: 20
     # -- url of the orion instance to test
-    orionUrl: http://orion-test:1026/ngsi-ld/v1/
+    orionUrl: http://umbrella-api-umbrella.fiware.svc.cluster.local/orion/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
     updateDelay: 1
     # -- number of entities to be updated in each batch
-    batchSize: 250
+    batchSize: 100
     # -- url of the notification server.
     notificationServer: http://orion-ldt-echo-server
     # -- number of entities that each job instance should create
     prefillPerInstance: 0
+    # -- is umbrella installed in the system
+    umbrellaEnabled: true
+    # -- service url of orion
+    orionServiceUrl: orion-test.fiware.svc.cluster.local
+    # -- url of api-umbrella service
+    umbrellaUrl: umbrella-api-umbrella.fiware.svc.cluster.local
+    # -- base url to contact umbrella at
+    umbrellaBaseUrl: http://umbrella-api-umbrella.fiware.svc.cluster.local/
+
+    apiKeyVerificationLevel: none
+    disableApiKey: false
 
 # -- configuration for the post-test report aggregation
 aggregation:
@@ -78,3 +89,7 @@ aggregation:
     tag: latest
     # -- specification of the image pull policy
     pullPolicy: Always
+
+echo:
+  # -- should the echo server be deployed?
+  enabled: true

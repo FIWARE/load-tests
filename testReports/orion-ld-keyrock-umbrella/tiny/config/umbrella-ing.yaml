@@ -1,0 +1,70 @@
+deployment:
+  replicaCount: 1
+  image:
+    repository: fiware/api-umbrella
+    tag: 0.15.5
+  resources:
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 4
+      memory: 8Gi
+serviceAccount:
+  name: fiware-root-runner
+
+ingress:
+  # -- should there be an ingress to connect orion with the public internet
+  enabled: true
+  # -- annotations to be added to the ingress
+  annotations: {}
+    # kubernetes.io/ingress.class: "ambassador"
+    ## example annotations, allowing cert-manager to automatically create tls-certs and forcing everything to use ssl.
+    # kubernetes.io/tls-acme: "true"
+  # ingress.kubernetes.io/ssl-redirect: "true"
+  # -- all hosts to be provided
+  hosts:
+  ## provide a hosts and the paths that should be available
+   - host: umbrella.test.fiware.io
+     paths:
+     - /
+  ## configure the ingress' tls
+  tls:
+    - secretName: orion-tls
+      hosts:
+        - umbrella.test.fiware.io
+
+umbrella:
+  webHost: umbrella.test.fiware.io
+  mongodb:
+    host: "mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local"
+    port: "27017"
+    username: "umbrella"
+    password: "umbrella"
+    name: "api_umbrella"
+
+  services:
+    - router
+    - web
+
+  config:
+#    override_public_http_port: 443
+#    override_public_http_proto: https
+    gatekeeper:
+      api_key_cache: true
+      api_key_methods:
+        - fiware-oauth2
+        - header
+        - getParam
+      idp_providers:
+        - fiware-oauth2
+      default_idp:
+        backend_name: fiware-oauth2
+        host: http://keyrock.fiware.svc.cluster.local
+        realm: pep_proxy_88659eca-4b58-400d-b544-57ec8a4831ca
+        key: pep_proxy_864d40fa-66dc-4a34-b2f1-8d74c5af94ff
+        jwt_enabled: false
+    router:
+      web_app_host: umbrella.test.fiware.io
+    elasticsearch:
+      hosts: []

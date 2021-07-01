@@ -3,7 +3,7 @@ broker:
   mutexPolicy: none
   maxConnections: 20000
   logging:
-    level: DEBUG
+    level: FATAL
   reqPoolSize: 32
   # use this config for EntityUpdateWithTypeSubscriptionSimulation
   notificationMode: persistent
@@ -21,8 +21,7 @@ deployment:
   replicaCount: 1
   image:
     repository: fiware/orion-ld
-    tag: 0.9-PRE-233
-    pullPolicy: Always
+    tag: 0.8-PRE-202
   resources:
     limits:
       cpu: 1

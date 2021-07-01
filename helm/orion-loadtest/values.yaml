@@ -73,6 +73,18 @@ test:
     notificationServer: http://orion-ldt-orion-loadtest-echo
     # -- number of entities that each job instance should create
     prefillPerInstance: 0
+    # -- is umbrella installed in the system
+    umbrellaEnabled: false
+    # -- service url of orion
+    orionServiceUrl: orion-test.fiware.svc.cluster.local
+    # -- url of api-umbrella service
+    umbrellaUrl: umbrella-api-umbrella.fiware.svc.cluster.local
+    # -- base url to contact umbrella at
+    umbrellaBaseUrl: http://umbrella-api-umbrella.fiware.svc.cluster.local/
+    # -- what should be the verification level for api-keys on umbrella
+    apiKeyVerificationLevel: none
+    # -- should an api-key be required
+    disableApiKey: true
 
 # -- configuration for the post-test report aggregation
 aggregation:
