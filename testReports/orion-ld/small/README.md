@@ -48,21 +48,24 @@ Detailed reports can be found here:
 >`oc label node <NODE_NAME> workload=mongo` in an openshift environment.
 
 Add helm repos:
-```
+
+```console
   helm repo add fiware https://fiware.github.io/helm-charts/repo/
   helm repo add bitnami https://charts.bitnami.com/bitnami
   helm repo update
 ```
 
 Install charts:
-```
+
+```console
   helm install mongo bitnami/mongodb -f config/mongo.yaml --namespace fiware
   helm install orion-test fiware/orion -f config/orion.yaml --namespace fiware
 ```
 
 Optimizations:
 To improve performance, you should set an index on the mongodb as following:
-```
+
+```console
     kubectl run --namespace fiware mongo-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.2-debian-10-r0 --command -- bash
     mongo admin --host "mongo-mongodb-0.mongo-mongodb-headless.fiware.svc.cluster.local:27017,mongo-mongodb-1.mongo-mongodb-headless.fiware.svc.cluster.local:27017"
     > use orion
@@ -70,12 +73,16 @@ To improve performance, you should set an index on the mongodb as following:
 ```
 
 Run test:
-```
+
+```console
      helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion-ld/small/reports/<ENDPOINT>/<SCENARIO>/test.yaml
 ```
 
 Get the results:
-```
+
+```console
     kubectl proxy --port 8002
 ```
-> see [Report](http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-orion-loadtest:8080/proxy/)
+
+> to see a local report  go to `http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-orion-loadtest:8080/proxy/`
+> or click this [report link](http://localhost:8002/api/v1/namespaces/fiware/services/orion-ldt-orion-loadtest:8080/proxy/) when running locally
