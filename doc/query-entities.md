@@ -1,5 +1,6 @@
 #### Store
-```
+
+```json
 {
    "type":"store", "id":"urn:ngsi-ld:store:<UUID>",
    "temperature": {
@@ -8,7 +9,7 @@
       },
    "humidity": {
       "type": "Property",
-      "value": <RANDOM_NUMBER> 
+      "value": <RANDOM_NUMBER>
     },
    "open": {
      "type": "Property",
@@ -23,33 +24,36 @@
 ```
 
 ### Owner
-```
+
+```json
 {
-     "@context": "https://fiware.github.io/data-models/context.jsonld",
-    "id":"<ID>",
+    "@context": "https://fiware.github.io/data-models/context.jsonld",
+    "id": "<ID>",
     "type": "owner",
     "name": {
-      "type": "Property",
-      "value": "<OWNER_NAME>"
+        "type": "Property",
+        "value": "<OWNER_NAME>"
     }
 }
 ```
 
 ### Product
-```
+
+```json
 {
     "@context": "https://fiware.github.io/data-models/context.jsonld",
     "id": "<ID>",
     "type": "product",
     "producer": {
-      "type": "Property",
-      "value": "<PRODUCER_NAME>"
-     }
+        "type": "Property",
+        "value": "<PRODUCER_NAME>"
+    }
 }
 ```
 
 ### Inventory
-```
+
+```json
 {
      "@context": "https://fiware.github.io/data-models/context.jsonld",
     "id": "<ID>",
@@ -68,4 +72,3 @@
     }
 }
 ```
- 

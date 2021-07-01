@@ -1,4 +1,4 @@
-```
+```json
 {
     "type": "Subscription",
     "@context": "https://fiware.github.io/data-models/context.jsonld",

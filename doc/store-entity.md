@@ -1,4 +1,4 @@
-```
+```json
 {
    "type":"store", "id":"urn:ngsi-ld:store:<UUID>",
    "temperature": {
@@ -7,7 +7,7 @@
       },
    "humidity": {
       "type": "Property",
-      "value": <RANDOM_NUMBER> 
+      "value": <RANDOM_NUMBER>
     },
    "open": {
      "type": "Property",
@@ -20,3 +20,4 @@
    "@context": "https://fiware.github.io/data-models/context.jsonld"
 }
 ``
+```
