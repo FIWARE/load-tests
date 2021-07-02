@@ -52,11 +52,11 @@ test:
   # -- test specific configuration
   conf:
     # -- how many entities should one test instance simulate
-    entitiesPerInstance: 500
+    entitiesPerInstance: 1000
     # -- number of entities to simulate
-    numberOfEntities: 500
+    numberOfEntities: 2000
     # -- number of updates every entity should send
-    numberOfUpdates: 20
+    numberOfUpdates: 30
     # -- url of the orion instance to test
     orionUrl: http://umbrella-api-umbrella.fiware.svc.cluster.local/orion/ngsi-ld/v1/
     # -- delay between calls in seconds(only in context of one instance)
@@ -77,7 +77,7 @@ test:
     umbrellaBaseUrl: http://umbrella-api-umbrella.fiware.svc.cluster.local/
 
     apiKeyVerificationLevel: none
-    disableApiKey: false
+    disableApiKey: true
 
 # -- configuration for the post-test report aggregation
 aggregation:

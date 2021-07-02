@@ -29,23 +29,14 @@ Install charts:
   helm install keyrock-mariadb bitnami/mariadb --version 7.10.4  -f config/mariadb.yaml --namespace fiware
   helm install elasticsearch elastic/elasticsearch -f config/elasticsearch.yaml --namespace fiware
   helm install keyrock fiware/keyrock -f config/keyrock.yaml --namespace fiware
-
-```
-
-
-Kong:
-```
-helm repo add kong https://charts.konghq.com
-helm repo update
-
-helm install kong kong/kong -n fiware -f ../../testReports/ 
+  helm install umbrella fiware/api-umbrella -f config/umbrella.yaml --namespace fiware
 ```
 
 :warning: Apply [optimizations](#optimizations)
 
 Run test:
 ```
-     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion-ld/tiny/reports/<ENDPOINT>/<SCENARIO>/test.yaml
+     helm install orion-ldt ../../helm/orion-loadtest/ -n fiware -f ./testReports/orion-ld-keyrock-umbrella/tiny/reports/<ENDPOINT>/<SCENARIO>/test.yaml
 ```
 
 Get the results:
