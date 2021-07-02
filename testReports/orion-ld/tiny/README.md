@@ -52,7 +52,7 @@ Detailed reports can be found here:
 Add helm repos:
 
 ```console
-helm repo add fiware https://fiware.github.io/helm-charts/repo/
+helm repo add fiware https://fiware.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 ```
