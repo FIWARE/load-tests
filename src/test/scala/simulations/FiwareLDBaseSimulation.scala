@@ -28,7 +28,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val apiKeyVerificationLevel = testConfig.apiKeyVerificationLevel
 
   var apiBackendId: String = "init"
-  var apiKey: String = "theKey"
+  var apiKey: String = "myKey"
 
   val httpConf = http.baseUrl(baseUrl)
 
