@@ -212,4 +212,29 @@ abstract class FiwareV2BaseSimulation extends Simulation {
            }
           }"""
   }
+
+  def getAllEntitiesMqttSubscriptionAction(serverUrl: String): String = {
+    """{
+            "id": "urn:ngsi-ld:Subscription:all",
+            "subject":  {
+              "entities": [
+                {
+                    "idPattern": ".*"
+                 }
+              ]
+           },
+           "notification": {
+             "mqtt": {
+                "topic": "orion"
+                "url": """" + serverUrl +
+      """"
+             },
+             "attrs": [
+                "temperature",
+                "humidity",
+                "sent-time"
+             ]
+           }
+          }"""
+  }
 }
