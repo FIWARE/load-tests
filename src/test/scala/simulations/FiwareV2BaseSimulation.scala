@@ -225,7 +225,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
            },
            "notification": {
              "mqtt": {
-                "topic": "orion"
+                "topic": "orion",
                 "url": """" + serverUrl +
       """"
              },
