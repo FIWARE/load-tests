@@ -18,7 +18,7 @@ class EntityUpdateWithSingleMqttSubscriptionSimulation extends EntityUpdateSimul
   }
 
   override def afterScenario(): Unit = {
-    Http(baseUrl + "subscriptions/urn:ngsi-ld:Subscription:all").header("Content-Type", "application/json").method("DELETE").timeout(1000, 6000).asString
+    //Http(baseUrl + "subscriptions/urn:ngsi-ld:Subscription:all").header("Content-Type", "application/json").method("DELETE").timeout(1000, 6000).asString
   }
 
   override def getScenario(): ScenarioBuilder = {
