@@ -2,8 +2,8 @@
 # Please see the included NOTICE for copyright information and LICENSE for a copy of the license.
 
 image:
-  repository: timescale/timescaledb-postgis
-  tag: 1.7.5-pg12
+  repository: timescale/timescaledb-ha
+  tag: pg12.5-ts1.7.4-p3
   pullPolicy: Always
   
 # High Throughput requires a good throughput on the I/O layer, for most cloud providers,
