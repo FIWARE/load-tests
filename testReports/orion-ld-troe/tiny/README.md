@@ -51,7 +51,7 @@ Install charts:
 
 ```console
 helm install mongo bitnami/mongodb -f config/mongo.yaml --namespace fiware
-helm install timescale timescale/timescaledb-single -f config/timescale.yaml --namespace fiware
+helm install timescale timescale/timescaledb-single -f config/timescale.yaml --version v0.7.1 --namespace fiware
 helm install orion-test fiware/orion -f config/orion.yaml --namespace fiware
 ```
 
