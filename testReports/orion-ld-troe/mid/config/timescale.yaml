@@ -1,6 +1,11 @@
 # This file and its contents are licensed under the Apache License 2.0.
 # Please see the included NOTICE for copyright information and LICENSE for a copy of the license.
 
+image:
+  repository: timescale/timescaledb-postgis
+  tag: 1.7.5-pg12
+  pullPolicy: Always
+
 # High Throughput requires a good throughput on the I/O layer, for most cloud providers,
 # IOPS are related to disk size, therefore setting up a decent sized WAL volume is benificial
 # for getting good troughput.
