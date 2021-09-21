@@ -49,14 +49,14 @@ abstract class FiwareLDBaseSimulation extends Simulation {
 
   after {
     afterScenario();
-    if (entitiesToPrefill > 0) {
-      println("++++++++++++++++++++++++++++++++++++ EXECUTE AFTER +++++++++++++++++++++++++++++++++++")
-      println("Delete " + entitiesToPrefill + " prefilled entities.")
-      val batches: Int = (entitiesToPrefill / 100).ceil.toInt
-      for (a <- 0 to batches - 1) {
-        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
-      }
-    }
+//    if (entitiesToPrefill > 0) {
+//      println("++++++++++++++++++++++++++++++++++++ EXECUTE AFTER +++++++++++++++++++++++++++++++++++")
+//      println("Delete " + entitiesToPrefill + " prefilled entities.")
+//      val batches: Int = (entitiesToPrefill / 100).ceil.toInt
+//      for (a <- 0 to batches - 1) {
+//        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
+//      }
+//    }
   }
 
   val scn = getScenario()
