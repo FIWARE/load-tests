@@ -42,7 +42,7 @@ The available scenarios can be found in the [scala-sources](./src/test/scala/sim
     mvn clean gatling:test -Dgatling.simulationClass=simulations.nosec.ld.EntityUpdateSimulation 
 ```
 
-3. Analyze the results, you will find them after the run in: ./target/gatling/results/index.html - view them in the browser:
+3. Analyze the results, you will find them after the run in: ./target/gatling/results/<TEST_NAME>/index.html - view them in the browser:
 
 ![Report-Example](./doc/gatling-report.png)
 
