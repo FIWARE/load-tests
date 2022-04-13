@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.nosec.ld.EntityUpdateSimulation",
+  "simulationId": "entityupdatesimulation",
+  "start": 1649839360057,
+  "description": "",
+  "scenarios": ["Parallel entity updates"],
+  "assertions": [
+
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.nosec.ld.BatchUpdateSimulation",
+  "simulationId": "batchupdatesimulation",
+  "start": 1649842135996,
+  "description": "",
+  "scenarios": ["Parallel batch updates"],
+  "assertions": [
+
+  ]
+}

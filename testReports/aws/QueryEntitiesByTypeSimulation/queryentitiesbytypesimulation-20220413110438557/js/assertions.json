@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.nosec.ld.QueryEntitiesByTypeSimulation",
+  "simulationId": "queryentitiesbytypesimulation",
+  "start": 1649847878557,
+  "description": "",
+  "scenarios": ["Query for entities"],
+  "assertions": [
+
+  ]
+}

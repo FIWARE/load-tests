@@ -1,0 +1,317 @@
+{
+  "type": "GROUP",
+"name": "Global Information",
+"path": "",
+"pathFormatted": "group_missing-name-b06d1",
+"stats": {
+    "name": "Global Information",
+    "numberOfRequests": {
+        "total": 32000,
+        "ok": 32000,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 40,
+        "ok": 40,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 8588,
+        "ok": 8588,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 297,
+        "ok": 297,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 635,
+        "ok": 635,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 54,
+        "ok": 54,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 253,
+        "ok": 253,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 1333,
+        "ok": 1333,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 3197,
+        "ok": 3197,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 28930,
+    "percentage": 90
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 1293,
+    "percentage": 4
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 1777,
+    "percentage": 6
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 666.6666666666666,
+        "ok": 666.6666666666666,
+        "ko": 0
+    }
+},
+"contents": {
+"req_create-entity-a3620": {
+        "type": "REQUEST",
+        "name": "create entity",
+"path": "create entity",
+"pathFormatted": "req_create-entity-a3620",
+"stats": {
+    "name": "create entity",
+    "numberOfRequests": {
+        "total": 1000,
+        "ok": 1000,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 1268,
+        "ok": 1268,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 8588,
+        "ok": 8588,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 2932,
+        "ok": 2932,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 1314,
+        "ok": 1314,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 2690,
+        "ok": 2690,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 3340,
+        "ok": 3340,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 4362,
+        "ok": 4362,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 8107,
+        "ok": 8107,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 1000,
+    "percentage": 100
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 20.833333333333332,
+        "ok": 20.833333333333332,
+        "ko": 0
+    }
+}
+    },"req_get-a-single-en-dff59": {
+        "type": "REQUEST",
+        "name": " get a single entity",
+"path": " get a single entity",
+"pathFormatted": "req_get-a-single-en-dff59",
+"stats": {
+    "name": " get a single entity",
+    "numberOfRequests": {
+        "total": 30000,
+        "ok": 30000,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 40,
+        "ok": 40,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 2607,
+        "ok": 2607,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 179,
+        "ok": 179,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 265,
+        "ok": 265,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 52,
+        "ok": 52,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 153,
+        "ok": 153,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 789,
+        "ok": 789,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 1199,
+        "ok": 1199,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 28554,
+    "percentage": 95
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 1149,
+    "percentage": 4
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 297,
+    "percentage": 1
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 625.0,
+        "ok": 625.0,
+        "ko": 0
+    }
+}
+    },"req_delete-entity-20892": {
+        "type": "REQUEST",
+        "name": "delete entity",
+"path": "delete entity",
+"pathFormatted": "req_delete-entity-20892",
+"stats": {
+    "name": "delete entity",
+    "numberOfRequests": {
+        "total": 1000,
+        "ok": 1000,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 50,
+        "ok": 50,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 3962,
+        "ok": 3962,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 1211,
+        "ok": 1211,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 943,
+        "ok": 943,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 1152,
+        "ok": 1152,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 1856,
+        "ok": 1856,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 2966,
+        "ok": 2966,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 3508,
+        "ok": 3508,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 376,
+    "percentage": 38
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 144,
+    "percentage": 14
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 480,
+    "percentage": 48
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 20.833333333333332,
+        "ok": 20.833333333333332,
+        "ko": 0
+    }
+}
+    }
+}
+
+}
