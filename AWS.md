@@ -54,9 +54,6 @@ The available scenarios can be found in the [scala-sources](./src/test/scala/sim
 An intial set of tests and reports can be found at [testReports/aws](./testReports/aws)
 
 ### Open points
-#### Default Context
-There seems to be an additional default context beside the [core-context](https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld) in the implementation. The context expands f.e. "open" to "https://uri.fiware.org/ns/data-models#open" on insertion,
-but does not work on queries. When using q=(open==true), the result is empty even if there are fitting entities. This might make query tests faster than they would be in reality.
 
 #### Query with only "q"
 The scenario "QueryEntitiesByAttributeSimulation" cannot be executed, since Scorpio is not NGSI-LD compliant in that detail. According to the spec 6.4.3.2-1 "At least one among: type,attrs, q, or georel shall be present." for queries,
