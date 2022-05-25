@@ -50,7 +50,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       .repeat(numberOfUpdatesToSimulate) {
         exec(
           if (testConfig.keycloakAuthEnabled) {
-            updateEntityAction("humidity", tokenManager.getAccessToken.getToken)
+            updateEntityAction("humidity", tokenManager)
           } else {
             updateEntityAction("humidity")
           }

@@ -27,23 +27,23 @@ class EntityUpdateSimulation extends FiwareV2BaseSimulation {
       .repeat(testConfig.numUpdates) {
         exec(
           if(testConfig.keycloakAuthEnabled) {
-            updateEntityAction("temperature", tokenManager.getAccessToken.getToken)
+            updateEntityAction("temperature", tokenManager)
           } else {
             updateEntityAction("temperature")
           }
 
         )
-          // wait for the new values to be available
-          .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
-          .exec(
-            if(testConfig.keycloakAuthEnabled) {
-              updateEntityAction("humidity", tokenManager.getAccessToken.getToken)
-            } else {
-              updateEntityAction("humidity")
-            }
-          )
-          // wait for the new values to be available
-          .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
+        // wait for the new values to be available
+        .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
+        .exec(
+          if(testConfig.keycloakAuthEnabled) {
+            updateEntityAction("humidity", tokenManager)
+          } else {
+            updateEntityAction("humidity")
+          }
+        )
+        // wait for the new values to be available
+        .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       }
       // cleanup
       .exec(

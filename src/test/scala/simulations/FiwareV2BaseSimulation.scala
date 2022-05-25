@@ -93,14 +93,14 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   /*
    * updates an attribute of a single entity, id needs to be fed via session-attribute 'entityId'
    */
-  def updateEntityAction(attributeToUpdate: String, token: String = ""): ActionBuilder = {
+  def updateEntityAction(attributeToUpdate: String, token: TokenManager = null): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi:AirQualityObserved:" + s("entityId").as[String] + "/attrs")
       .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type": "Number", "value":""" + Random.nextFloat() * 10 + """, "metadata": {"TimeInstant":{"type": "DateTime", "value":"2022-05-25T09:43:44Z"}}}, "sent-time":{"type":"DateTime", "value":"2022-05-25T09:43:44Z"}}"""))
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "bearer " + token.getAccessToken().getToken())
   }
 
   /*
