@@ -11,14 +11,28 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
 
   override def beforeScenario(): Unit = {
     val subscription = getAllEntitiesSubscriptionAction(testConfig.notificationServerUrl)
-    val response = Http(baseUrl + "subscriptions").header("Content-Type", "application/json").postData(subscription).timeout(1000, 6000).asString
+    val request = Http(baseUrl + "subscriptions")
+      .header("Content-Type", "application/json")
+      .header("Fiware-Service", testConfig.fiwareService)
+      .header("Fiware-ServicePath", testConfig.fiwareServicePath)
+    if (testConfig.keycloakAuthEnabled) {
+      request.header("Authorization", "bearer " + tokenManager.getAccessToken.getToken)
+    }
+    val response = request.postData(subscription).timeout(1000, 6000).asString
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the Subscription. Response: " + response + ", Subscription:  " + subscription)
     }
   }
 
   override def afterScenario(): Unit = {
-    Http(baseUrl + "subscriptions/urn:ngsi-ld:Subscription:all").header("Content-Type", "application/json").method("DELETE").timeout(1000, 6000).asString
+    val request = Http(baseUrl + "subscriptions")
+      .header("Content-Type", "application/json")
+      .header("Fiware-Service", testConfig.fiwareService)
+      .header("Fiware-ServicePath", testConfig.fiwareServicePath)
+    if (testConfig.keycloakAuthEnabled) {
+      request.header("Authorization", "bearer " + tokenManager.getAccessToken.getToken)
+    }
+    val response = request.method("DELETE").timeout(1000, 6000).asString
   }
 
   override def getScenario(): ScenarioBuilder = {
@@ -26,19 +40,31 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
     scenario("Parallel entity updates with subscription")
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
-        createEntityAction()
+        if (testConfig.keycloakAuthEnabled) {
+          createEntityAction(tokenManager.getAccessToken.getToken)
+        } else {
+          createEntityAction()
+        }
       )
       .pause(updateDelay.toString, TimeUnit.SECONDS)
       .repeat(numberOfUpdatesToSimulate) {
         exec(
-          updateEntityAction("humidity")
+          if (testConfig.keycloakAuthEnabled) {
+            updateEntityAction("humidity", tokenManager.getAccessToken.getToken)
+          } else {
+            updateEntityAction("humidity")
+          }
         )
           // wait for the new values to be available
           .pause(updateDelay.toString, TimeUnit.SECONDS)
       }
       // cleanup
       .exec(
-        deleteEntityAction()
+        if (testConfig.keycloakAuthEnabled) {
+          deleteEntityAction(tokenManager.getAccessToken.getToken)
+        } else {
+          deleteEntityAction()
+        }
       )
   }
 }

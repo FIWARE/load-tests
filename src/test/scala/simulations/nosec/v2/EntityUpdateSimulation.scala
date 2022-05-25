@@ -17,24 +17,41 @@ class EntityUpdateSimulation extends FiwareV2BaseSimulation {
     scenario("Parallel entity updates")
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
-        createEntityAction()
+        if(testConfig.keycloakAuthEnabled) {
+          createEntityAction(tokenManager.getAccessToken.getToken)
+        } else {
+          createEntityAction()
+        }
       )
       .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       .repeat(testConfig.numUpdates) {
         exec(
-          updateEntityAction("temperature")
+          if(testConfig.keycloakAuthEnabled) {
+            updateEntityAction("temperature", tokenManager.getAccessToken.getToken)
+          } else {
+            updateEntityAction("temperature")
+          }
+
         )
           // wait for the new values to be available
           .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
           .exec(
-            updateEntityAction("humidity")
+            if(testConfig.keycloakAuthEnabled) {
+              updateEntityAction("humidity", tokenManager.getAccessToken.getToken)
+            } else {
+              updateEntityAction("humidity")
+            }
           )
           // wait for the new values to be available
           .pause(testConfig.updateDelay.toString, TimeUnit.SECONDS)
       }
       // cleanup
       .exec(
-        deleteEntityAction()
+        if(testConfig.keycloakAuthEnabled) {
+          deleteEntityAction(tokenManager.getAccessToken.getToken)
+        } else {
+          deleteEntityAction()
+        }
       )
   }
 }

@@ -17,6 +17,8 @@
         <scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 
+        <version.org.keycloak>18.0.0</version.org.keycloak>
+
         <version.org.openapitools.generator>4.3.1</version.org.openapitools.generator>
         <version.org.codehouse.mojo.build-helper>3.2.0</version.org.codehouse.mojo.build-helper>
         <uploadUrl>ftp://result-collector/</uploadUrl>
@@ -69,6 +71,17 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <version>${maven-jar-plugin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-authz-client</artifactId>
+            <version>${version.org.keycloak}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>${version.org.keycloak}</version>
         </dependency>
     </dependencies>
 
