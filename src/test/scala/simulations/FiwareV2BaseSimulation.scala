@@ -243,7 +243,11 @@ abstract class FiwareV2BaseSimulation extends Simulation {
               ]
            },
            "notification": {
-             "http": {
+             "httpCustom": {
+                "headers": {
+                  "fiware-service": """" + testConfig.fiwareService + """",
+                  "fiware-servicepath": """" + testConfig.fiwareServicePath + """"
+                },
                 "url": """" + serverUrl +
       """"
              },
