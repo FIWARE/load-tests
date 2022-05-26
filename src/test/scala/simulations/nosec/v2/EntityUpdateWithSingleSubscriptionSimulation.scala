@@ -19,7 +19,6 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
       .header("Authorization", "Bearer " + tokenManager.getAccessToken.getToken)
     val response = request.postData(subscription).timeout(1000, 6000).asString
-    // println("Original: " + response.header("location"))
     subscriptionLocation = response.header("location").get.replace("/v2/", "")
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the Subscription. Response: " + response + ", Subscription:  " + subscription)
@@ -32,9 +31,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
       .header("Authorization", "Bearer " + tokenManager.getAccessToken.getToken)
-    // println("Request: " + request)
     val response = request.method("DELETE").timeout(1000, 6000).asString
-    // println("Response: " + response)
   }
 
   override def getScenario(): ScenarioBuilder = {
