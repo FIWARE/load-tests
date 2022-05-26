@@ -87,7 +87,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .header("Content-Type", "application/json")
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   /*
@@ -100,7 +100,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", (s: Session) => "bearer " + token.getAccessToken().getToken())
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
@@ -111,7 +111,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .delete((s: Session) => "/entities/urn:ngsi:AirQualityObserved:" + s("entityId").as[String])
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   /**
@@ -122,7 +122,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .get((s: Session) => "/entities/urn:ngsi:AirQualityObserved:" + s("entityId").as[String])
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   /*
@@ -135,7 +135,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   /*
@@ -148,7 +148,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   /*
@@ -161,7 +161,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   def getEntityString(entityId: String): String = {
@@ -229,7 +229,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", "Bearer " + token)
   }
 
   def getAllEntitiesSubscriptionAction(serverUrl: String): String = {
