@@ -26,7 +26,6 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
   }
 
   override def afterScenario(): Unit = {
-    println("+++++ Remove Sub: " + subscriptionLocation + " +++++")
     val request = Http(baseUrl + subscriptionLocation)
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
