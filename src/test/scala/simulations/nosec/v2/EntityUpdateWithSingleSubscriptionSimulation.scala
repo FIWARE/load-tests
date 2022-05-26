@@ -43,7 +43,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
         if (testConfig.keycloakAuthEnabled) {
-          createEntityAction(tokenManager.getAccessToken.getToken)
+          createEntityAction(tokenManager)
         } else {
           createEntityAction()
         }
@@ -63,7 +63,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       // cleanup
       .exec(
         if (testConfig.keycloakAuthEnabled) {
-          deleteEntityAction(tokenManager.getAccessToken.getToken)
+          deleteEntityAction(tokenManager)
         } else {
           deleteEntityAction()
         }

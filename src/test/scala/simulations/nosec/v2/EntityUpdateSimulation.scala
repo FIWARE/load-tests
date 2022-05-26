@@ -18,7 +18,7 @@ class EntityUpdateSimulation extends FiwareV2BaseSimulation {
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
         if(testConfig.keycloakAuthEnabled) {
-          createEntityAction(tokenManager.getAccessToken.getToken)
+          createEntityAction(tokenManager)
         } else {
           createEntityAction()
         }
@@ -48,7 +48,7 @@ class EntityUpdateSimulation extends FiwareV2BaseSimulation {
       // cleanup
       .exec(
         if(testConfig.keycloakAuthEnabled) {
-          deleteEntityAction(tokenManager.getAccessToken.getToken)
+          deleteEntityAction(tokenManager)
         } else {
           deleteEntityAction()
         }
