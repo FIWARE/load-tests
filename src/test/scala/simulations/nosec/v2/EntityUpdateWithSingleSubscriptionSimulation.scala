@@ -9,29 +9,27 @@ import scalaj.http.Http
 
 class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulation {
 
+  var subscriptionLocation : String = ""
+
   override def beforeScenario(): Unit = {
     val subscription = getAllEntitiesSubscriptionAction(testConfig.notificationServerUrl)
     val request = Http(baseUrl + "subscriptions")
       .header("Content-Type", "application/json")
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-    if (testConfig.keycloakAuthEnabled) {
-      request.header("Authorization", "bearer " + tokenManager.getAccessToken.getToken)
-    }
+      .header("Authorization", "Bearer " + tokenManager.getAccessToken.getToken)
     val response = request.postData(subscription).timeout(1000, 6000).asString
+    subscriptionLocation = response.header("location").get.replace("/v2/", "")
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the Subscription. Response: " + response + ", Subscription:  " + subscription)
     }
   }
 
   override def afterScenario(): Unit = {
-    val request = Http(baseUrl + "subscriptions")
-      .header("Content-Type", "application/json")
+    val request = Http(baseUrl + subscriptionLocation)
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-    if (testConfig.keycloakAuthEnabled) {
-      request.header("Authorization", "bearer " + tokenManager.getAccessToken.getToken)
-    }
+      .header("Authorization", "Bearer " + tokenManager.getAccessToken.getToken)
     val response = request.method("DELETE").timeout(1000, 6000).asString
   }
 
@@ -41,7 +39,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       .exec(session => session.set("entityId", UUID.randomUUID()))
       .exec(
         if (testConfig.keycloakAuthEnabled) {
-          createEntityAction(tokenManager.getAccessToken.getToken)
+          createEntityAction(tokenManager)
         } else {
           createEntityAction()
         }
@@ -61,7 +59,7 @@ class EntityUpdateWithSingleSubscriptionSimulation extends EntityUpdateSimulatio
       // cleanup
       .exec(
         if (testConfig.keycloakAuthEnabled) {
-          deleteEntityAction(tokenManager.getAccessToken.getToken)
+          deleteEntityAction(tokenManager)
         } else {
           deleteEntityAction()
         }

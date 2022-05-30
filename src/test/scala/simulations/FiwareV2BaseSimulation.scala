@@ -80,14 +80,14 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   /*
    * creates a single entity, id needs to be fed via session-attribute 'entityId'
    */
-  def createEntityAction(token: String = ""): ActionBuilder = {
+  def createEntityAction(token: TokenManager = null): ActionBuilder = {
     http("create entity")
       .post("/entities")
       .body(StringBody((s: Session) => getEntityString(s("entityId").as[String])))
       .header("Content-Type", "application/json")
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
@@ -100,68 +100,68 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", (s: Session) => "bearer " + token.getAccessToken().getToken())
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
    * deletes a single entity, id needs to be fed via session-attribute 'entityId'
    */
-  def deleteEntityAction(token: String = ""): ActionBuilder = {
+  def deleteEntityAction(token: TokenManager = null): ActionBuilder = {
     http("delete entity")
       .delete((s: Session) => "/entities/urn:ngsi:AirQualityObserved:" + s("entityId").as[String])
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /**
    * Get a single entity. Id is expected as a session attribute
    */
-  def singleEntityGetAction(token: String = ""): ActionBuilder = {
+  def singleEntityGetAction(token: TokenManager = null): ActionBuilder = {
     http(" get a single entity")
       .get((s: Session) => "/entities/urn:ngsi:AirQualityObserved:" + s("entityId").as[String])
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
    * Create multiple entities as a batch. The number of the current batch should be feed as a session attribute
    */
-  def batchCreateEntitiesAction(batchSize: Int, idList: List[UUID], token: String = ""): ActionBuilder = {
+  def batchCreateEntitiesAction(batchSize: Int, idList: List[UUID], token: TokenManager = null): ActionBuilder = {
     http("create batch of entities")
       .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("append", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
    * Update multiple entities as a batch. The number of the current batch should be feed as a session attribute
    */
-  def batchUpdateEntitiesAction(batchSize: Int, idList: List[UUID], token: String = ""): ActionBuilder = {
+  def batchUpdateEntitiesAction(batchSize: Int, idList: List[UUID], token: TokenManager = null): ActionBuilder = {
     http("update batch of entities")
       .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("update", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   /*
    * Delete multiple entities as a batch. The number of the current batch should be feed as a session attribute
    */
-  def batchDeleteEntities(batchSize: Int, idList: List[UUID], token: String = ""): ActionBuilder = {
+  def batchDeleteEntities(batchSize: Int, idList: List[UUID], token: TokenManager = null): ActionBuilder = {
     http("delete batch of entities")
       .post("/op/update")
       .body(StringBody((s: Session) => getUpdateBody("delete", s("batchNumber").as[Int] * batchSize, (s("batchNumber").as[Int] + 1) * batchSize, idList)))
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   def getEntityString(entityId: String): String = {
@@ -192,7 +192,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   /*
    * Create a subscription. The id of the entity to  subscribe to needs to be fed as a session attribute.
    */
-  def createSubscriptionAction(serverUrl: String, token: String = ""): ActionBuilder = {
+  def createSubscriptionAction(serverUrl: String, token: TokenManager = null): ActionBuilder = {
     http("create subscriptions")
       .post((s: Session) => "/subscriptions")
       .body(StringBody((s: Session) =>
@@ -229,7 +229,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
       .asJson
       .header("Fiware-Service", testConfig.fiwareService)
       .header("Fiware-ServicePath", testConfig.fiwareServicePath)
-      .header("Authorization", "bearer " + token)
+      .header("Authorization", (s: Session) => "Bearer " + token.getAccessToken().getToken())
   }
 
   def getAllEntitiesSubscriptionAction(serverUrl: String): String = {
@@ -243,7 +243,11 @@ abstract class FiwareV2BaseSimulation extends Simulation {
               ]
            },
            "notification": {
-             "http": {
+             "httpCustom": {
+                "headers": {
+                  "fiware-service": """" + testConfig.fiwareService + """",
+                  "fiware-servicepath": """" + testConfig.fiwareServicePath + """"
+                },
                 "url": """" + serverUrl +
       """"
              },
