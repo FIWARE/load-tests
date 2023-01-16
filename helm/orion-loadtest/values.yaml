@@ -297,7 +297,7 @@ grafana:
                       [
                         {
                           "params": [
-                            "data_0_sent-time_value"
+                            "data_0_senttime_value"
                           ],
                           "type": "field"
                         },

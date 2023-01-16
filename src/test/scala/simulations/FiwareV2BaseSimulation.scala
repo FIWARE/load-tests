@@ -74,7 +74,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:TestEntity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"value":""" + Random.nextFloat() * 10 + """}, "sent-time":{"value":""" + System.currentTimeMillis() + """}}"""))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"value":""" + Random.nextFloat() * 10 + """}, "senttime":{"value":""" + System.currentTimeMillis() + """}}"""))
       .asJson
   }
 
@@ -125,7 +125,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   }
 
   def getEntityString(entityId: String): String = {
-    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """},"sent-time": {"value": """ + System.currentTimeMillis() + """}, "humidity":{"value":""".stripMargin + Random.nextFloat() + """}} """
+    """{"type":"TestEntity", "id":"urn:ngsi-ld:TestEntity:""" + entityId + """", "temperature":{"value":""" + Random.nextInt() + """},"senttime": {"value": """ + System.currentTimeMillis() + """}, "humidity":{"value":""".stripMargin + Random.nextFloat() + """}} """
   }
 
   def getUpdateBody(actionType: String, startPos: Int, endPos: Int, idList: List[UUID]): String = {
@@ -182,7 +182,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
              "attrs": [
                 "temperature",
                 "humidity",
-                "sent-time"
+                "senttime"
              ]
            }
           }"""))
@@ -207,7 +207,7 @@ abstract class FiwareV2BaseSimulation extends Simulation {
              "attrs": [
                 "temperature",
                 "humidity",
-                "sent-time"
+                "senttime"
              ]
            }
           }"""

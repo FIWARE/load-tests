@@ -237,7 +237,7 @@ looks as following:
 ```json
 {
     "type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:<ID>",
-    "sent-time": {
+    "senttime": {
         "type": "Property",
         "value":  System.currentTimeMillis()
     },
