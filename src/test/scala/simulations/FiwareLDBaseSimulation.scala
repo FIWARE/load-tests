@@ -111,7 +111,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -121,7 +121,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateTimedEntityAction(): ActionBuilder = {
     http("update humidity")
       .post((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "sent-time": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -205,7 +205,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
         },
-        "sent-time": {
+        "senttime": {
           "type": "Property",
           "value": """ +System.currentTimeMillis() + """
           },
@@ -228,7 +228,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def getNotificationTestEntity(entityId: String): String = {
     """{"type":"timed-entity", "id":"urn:ngsi-ld:timed-entity:""" + entityId +
       """",
-       "sent-time": {
+       "senttime": {
           "type": "Property",
           "value": """ + System.currentTimeMillis() +"""
           },
@@ -351,7 +351,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
              "attributes": [
                 "temperature",
                 "humidity",
-                "sent-time"
+                "senttime"
              ],
              "endpoint": {
                 "uri": """" + serverUrl +
