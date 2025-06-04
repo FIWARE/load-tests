@@ -11,14 +11,14 @@ class EntityUpdateWithTypeSubscriptionSimulation extends EntityUpdateSimulation 
 
   override def beforeScenario(): Unit = {
     val subscription = getTypeSubscriptionAction(testConfig.notificationServerUrl, "timed-entity")
-    val response = Http(baseUrl + "subscriptions").header("Content-Type", "application/ld+json").postData(subscription).timeout(1000, 6000).asString
+    val response = Http(baseCBUrl + "subscriptions").header("Content-Type", "application/ld+json").postData(subscription).timeout(1000, 6000).asString
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the Subscription. Response: " + response + ", Subscription:  " + subscription)
     }
   }
 
   override def afterScenario(): Unit = {
-    Http(baseUrl + "subscriptions/urn:ngsi-ld:Subscription:timed-entity").header("Content-Type", "application/ld+json").method("DELETE").timeout(1000, 6000).asString
+    Http(baseCBUrl + "subscriptions/urn:ngsi-ld:Subscription:timed-entity").header("Content-Type", "application/ld+json").method("DELETE").timeout(1000, 6000).asString
   }
 
   override def getScenario(): ScenarioBuilder = {

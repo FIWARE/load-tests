@@ -18,13 +18,13 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   val testConfig = TestConfiguration()
 
   val entitiesToSimulate = testConfig.numEntities
-  val baseUrl = testConfig.baseUrl
+  val baseCBUrl = testConfig.baseCBUrl
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
   val entitiesToPrefill = testConfig.numPrefillEntities
 
 
-  val httpConf = http.baseUrl(baseUrl)
+  val httpConf = http.baseUrl(baseCBUrl)
 
   val prefillEnitiyIdList: List[UUID] = Stream.fill(entitiesToPrefill)(UUID.randomUUID()).toList
 
@@ -38,7 +38,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       println("Will create " + batches + " batches.")
       for (a <- 0 to batches - 1) {
         println("Create batch from " + a * 100 + " to " + (a + 1) * 100)
-        val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 60000).asString
+        val response = Http(baseCBUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(getUpdateBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 60000).asString
 
         if (response.code != 200) {
           throw new RuntimeException("Was not able to prefill the database. Response: " + response)
@@ -54,7 +54,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       println("Delete " + entitiesToPrefill + " prefilled entities.")
       val batches: Int = (entitiesToPrefill / 100).ceil.toInt
       for (a <- 0 to batches - 1) {
-        println("Status: " + Http(baseUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
+        println("Status: " + Http(baseCBUrl + "entityOperations/delete").header("Content-Type", "application/ld+json").postData(getDeleteBody(a * 100, (a + 1) * 100, prefillEnitiyIdList)).timeout(10000, 20000).asString.code)
       }
     }
   }
@@ -111,7 +111,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateEntityAction(attributeToUpdate: String): ActionBuilder = {
     http("update temperature")
       .post((s: Session) => "/entities/urn:ngsi-ld:store:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"""" + attributeToUpdate + """":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://uri.fiware.org/ns/data-models"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -121,7 +121,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
   def updateTimedEntityAction(): ActionBuilder = {
     http("update humidity")
       .post((s: Session) => "/entities/urn:ngsi-ld:timed-entity:" + s("entityId").as[String] + "/attrs")
-      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://fiware.github.io/data-models/context.jsonld"}""".stripMargin))
+      .body(StringBody((s: Session) => """{"humidity":{"type":"Property", "value":""" + Random.nextFloat() * 10 + """}, "senttime": {"type":"Property", "value": """ + System.currentTimeMillis() +"""}, "@context": "https://uri.fiware.org/ns/data-models"}""".stripMargin))
       .header("Content-Type", "application/ld+json")
   }
 
@@ -217,7 +217,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
         "type": "Relationship",
         "object": "urn:ngsi-ld:owner:random-owner"
        },
-       "@context": "https://fiware.github.io/data-models/context.jsonld"
+       "@context": "https://uri.fiware.org/ns/data-models"
        }"""
   }
 
@@ -237,7 +237,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
           "value": """ + Random.nextFloat() +
       """
         },
-       "@context": "https://fiware.github.io/data-models/context.jsonld"
+       "@context": "https://uri.fiware.org/ns/data-models"
        }"""
   }
 
@@ -293,7 +293,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     """{
              "id" : "urn:ngsi-ld:Subscription:""" + entitiyType + """",
              "type": "Subscription",
-             "@context": "https://fiware.github.io/data-models/context.jsonld",
+             "@context": "https://uri.fiware.org/ns/data-models",
              "entities": [
                {
               "type": """" + entitiyType + """"
@@ -314,7 +314,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
     """{
              "id" : "urn:ngsi-ld:Subscription:everything",
              "type": "Subscription",
-             "@context": "https://fiware.github.io/data-models/context.jsonld",
+             "@context": "https://uri.fiware.org/ns/data-models",
              "entities": [
                {
               "idPattern": ".*"
@@ -337,7 +337,7 @@ abstract class FiwareLDBaseSimulation extends Simulation {
       .body(StringBody((s: Session) =>
         """{
             "type": "Subscription",
-            "@context": "https://fiware.github.io/data-models/context.jsonld",
+            "@context": "https://uri.fiware.org/ns/data-models",
             "entities": [
               {
                   "id": "urn:ngsi-ld:store:""" + s("entityId").as[String] +

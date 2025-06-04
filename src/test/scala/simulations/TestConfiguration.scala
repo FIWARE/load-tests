@@ -7,7 +7,10 @@ case class TestConfiguration() {
 
   var numPrefillEntities = config.getInt("numPrefillEntities")
 
-  var baseUrl = config.getString("baseUrl")
+  var baseCBUrl = config.getString("baseCBUrl")
+  var baseIoTProvisionUrl = config.getString("baseIoTProvisionUrl")
+  var baseIoTNotificationUrl = config.getString("baseIoTNotificationUrl")
+
   var numEntities = config.getInt("numEntities")
   var numUpdates = config.getInt("numUpdates")
   var numGets = config.getInt("numGets")

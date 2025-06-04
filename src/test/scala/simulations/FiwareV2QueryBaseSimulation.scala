@@ -72,14 +72,14 @@ abstract class FiwareV2QueryBaseSimulation extends FiwareLDBaseSimulation {
   }
 
   def postEntity(entity: String) = {
-    val response = Http(baseUrl + "entities").header("Content-Type", "application/json").postData(entity).timeout(1000, 6000).asString
+    val response = Http(baseCBUrl + "entities").header("Content-Type", "application/json").postData(entity).timeout(1000, 6000).asString
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the datastructure. Response: " + response + ", Entity:  " + entity)
     }
   }
 
   def deleteEntity(entityId: String) = {
-    Http(baseUrl + "entities/" + entityId).method("DELETE").timeout(1000, 6000).asString
+    Http(baseCBUrl + "entities/" + entityId).method("DELETE").timeout(1000, 6000).asString
   }
 
   /**

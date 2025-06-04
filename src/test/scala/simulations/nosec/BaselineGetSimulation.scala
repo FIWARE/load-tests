@@ -8,9 +8,9 @@ class BaselineGetSimulation extends Simulation {
   val testConfig = TestConfiguration()
 
   val entitiesToSimulate = testConfig.numEntities
-  val baseUrl = testConfig.baseUrl
+  val baseCBUrl = testConfig.baseCBUrl
 
-  val httpConf = http.baseUrl(baseUrl)
+  val httpConf = http.baseUrl(baseCBUrl)
 
   val scn = scenario("Parallel GET version")
     .repeat(testConfig.numUpdates) {

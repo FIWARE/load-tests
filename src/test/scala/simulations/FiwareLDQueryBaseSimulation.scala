@@ -73,14 +73,14 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
   }
 
   def postEntity(entity: String) = {
-    val response = Http(baseUrl + "entities").header("Content-Type", "application/ld+json").postData(entity).timeout(1000, 6000).asString
+    val response = Http(baseCBUrl + "entities").header("Content-Type", "application/ld+json").postData(entity).timeout(1000, 6000).asString
     if (response.code > 299 || response.code < 200) {
       println("Was not able to setup the datastructure. Response: " + response + ", Entity:  " + entity)
     }
   }
 
   def deleteEntity(entityId: String) = {
-    Http(baseUrl + "entities/" + entityId).header("Content-Type", "application/ld+json").method("DELETE").timeout(1000, 6000).asString
+    Http(baseCBUrl + "entities/" + entityId).header("Content-Type", "application/ld+json").method("DELETE").timeout(1000, 6000).asString
   }
 
   /**
@@ -116,7 +116,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
     val id = "urn:ngsi-ld:owner:" + ownerName;
     """
        {
-         "@context": "https://fiware.github.io/data-models/context.jsonld",
+         "@context": "https://uri.fiware.org/ns/data-models",
         "id":"""" + id +
       """",
         "type": "owner",
@@ -133,7 +133,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
     val id = "urn:ngsi-ld:store:" + name;
     """
        {
-         "@context": "https://fiware.github.io/data-models/context.jsonld",
+         "@context": "https://uri.fiware.org/ns/data-models",
         "id": """" + id +
       """",
         "type": "store",
@@ -155,7 +155,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
     val id = "urn:ngsi-ld:product:" + name;
     """
        {
-         "@context": "https://fiware.github.io/data-models/context.jsonld",
+         "@context": "https://uri.fiware.org/ns/data-models",
         "id": """" + id +
       """",
         "type": "product",
@@ -172,7 +172,7 @@ abstract class FiwareLDQueryBaseSimulation extends FiwareLDBaseSimulation {
     val id = "urn:ngsi-ld:inventory:" + name;
     """
        {
-         "@context": "https://fiware.github.io/data-models/context.jsonld",
+         "@context": "https://uri.fiware.org/ns/data-models",
         "id": """" + id +
       """",
         "type": "inventory",

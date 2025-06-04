@@ -17,12 +17,12 @@ abstract class FiwareV2BaseSimulation extends Simulation {
   val testConfig = TestConfiguration()
 
   val entitiesToSimulate = testConfig.numEntities
-  val baseUrl = testConfig.baseUrl
+  val baseCBUrl = testConfig.baseCBUrl
   val numberOfUpdatesToSimulate = testConfig.numUpdates
   val updateDelay = testConfig.updateDelay
 
 
-  val httpConf = http.baseUrl(baseUrl)
+  val httpConf = http.baseUrl(baseCBUrl)
 
   before {
     beforeScenario();

@@ -27,7 +27,7 @@ class EntityUpdateWithBeforeCreationSimulation extends FiwareLDBaseSimulation {
       val body = getUpdateBodyFromStringList(a * 100, (a + 1) * 100,  entityIdList)
       println("Create batch from " + a * 100 + " to " + (a + 1) * 100)
 
-      val response = Http(baseUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
+      val response = Http(baseCBUrl + "entityOperations/create").header("Content-Type", "application/ld+json").postData(body).timeout(10000, 60000).asString
 
       if (response.code != 201) {
         throw new RuntimeException("Was not able to setup the scenario. Response: " + response + ", body: " + body)
