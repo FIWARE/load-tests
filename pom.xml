@@ -93,7 +93,52 @@
                     <configFolder>${project.basedir}/src/test/resources</configFolder>
                     <resultsFolder>${project.build.directory}/gatling/results</resultsFolder>
                     <simulationsFolder>${project.basedir}/src/test/scala/simulations</simulationsFolder>
-                    <runMultipleSimulations>false</runMultipleSimulations>
+                    <runMultipleSimulations>true</runMultipleSimulations>
+                    <executions>
+                        <execution>
+                            <id>ld</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <simulations>
+                                    <simulation>simulations.nosec.ld.QueryEntitiesByAttributeSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.BatchUpdateWithSubscriptionSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.GetSingleEntitiesSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.EntityUpdateSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.BatchUpdateSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.EntityCDOnlySimulation</simulation>
+                                    <simulation>simulations.nosec.ld.QueryEntitiesByTypeSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.EntityUpdateWithBeforeCreationSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.EntityUpdateWithSubscriptionSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.EntityUpdateWithTypeSubscriptionSimulation</simulation>
+                                    <simulation>simulations.nosec.ld.ComplexQueryEntitiesByAttributeSimulation</simulation>
+                                </simulations>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>v2</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <simulations>
+                                    <simulation>simulations.nosec.iot.IoTAgentSimulation</simulation>
+                                </simulations>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>iot</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <simulations>
+                                    <simulation>simulations.nosec.iot.IoTAgentSimulation</simulation>
+                                </simulations>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </configuration>
             </plugin>
             <plugin>

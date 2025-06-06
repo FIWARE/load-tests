@@ -100,7 +100,7 @@ A number of entities(see [store-entity](doc/store-entity.md) for structure of th
 
 | Parameter   | Description                                             | Example          |
 | ----------- | ------------------------------------------------------- | ---------------- |
-| baseUrl     | Url of the broker                                       | http://localhost |
+| baseCBUrl   | URL of the broker                                       | http://localhost |
 | numEntities | Number of entities to be simulated.                     | 100              |
 | numUpdates  | How many updates should be executed for each attribute. | 100              |
 | updateDelay | Delay between attribute updates in seconds.             | 1                |
@@ -119,7 +119,7 @@ The creation is done via `POST /entityOperations/create`, the updates via `POST 
 
 | Parameter   | Description                                             | Example          |
 | ----------- | ------------------------------------------------------- | ---------------- |
-| baseUrl     | Url of the broker                                       | http://localhost |
+| baseCBUrl   | URL of the broker                                       | http://localhost |
 | numEntities | Number of entities to be simulated.                     | 100              |
 | numUpdates  | How many updates should be executed for each attribute. | 100              |
 | updateDelay | Delay between attribute updates in seconds.             | 1                |
@@ -140,7 +140,7 @@ also used in the test [helm-charts](helm/orion-loadtest).
 
 | Parameter             | Description                                             | Example            |
 | --------------------- | ------------------------------------------------------- | ------------------ |
-| baseUrl               | Url of the broker                                       | http://localhost   |
+| baseCBUrl             | URL of the broker                                       | http://localhost   |
 | numEntities           | Number of entities to be simulated.                     | 100                |
 | numUpdates            | How many updates should be executed for each attribute. | 100                |
 | updateDelay           | Delay between attribute updates in seconds.             | 1                  |
@@ -157,7 +157,7 @@ will be retrieved via GET /entities/<ID> in parallel.
 
 | Parameter   | Description                         | Example          |
 | ----------- | ----------------------------------- | ---------------- |
-| baseUrl     | Url of the broker                   | http://localhost |
+| baseCBUrl   | URL of the broker                   | http://localhost |
 | numEntities | Number of entities to be simulated. | 100              |
 | numGets     | How many gets should be executed.   | 100              |
 
@@ -173,7 +173,7 @@ them will be retrieved via a query matching to a specific attribute(`producer`).
 
 | Parameter          | Description                                   | Example          |
 | ------------------ | --------------------------------------------- | ---------------- |
-| baseUrl            | Url of the broker                             | http://localhost |
+| baseCBUrl          | URL of the broker                             | http://localhost |
 | numParallelQueries | Number of queries to be executed in parallel. | 100              |
 | numQueries         | How often should the queries be repeated.     | 100              |
 
@@ -189,7 +189,7 @@ them will be retrieved via a query matching to a specific type(`owner`). The que
 
 | Parameter          | Description                                   | Example          |
 | ------------------ | --------------------------------------------- | ---------------- |
-| baseUrl            | Url of the broker                             | http://localhost |
+| baseCBUrl          | URL of the broker                             | http://localhost |
 | numParallelQueries | Number of queries to be executed in parallel. | 100              |
 | numQueries         | How often should the queries be repeated.     | 100              |
 
@@ -205,7 +205,7 @@ them will be retrieved via a query matching to some attributes and types. The qu
 
 | Parameter          | Description                                   | Example          |
 | ------------------ | --------------------------------------------- | ---------------- |
-| baseUrl            | Url of the broker                             | http://localhost |
+| baseCBUrl          | URL of the broker                             | http://localhost |
 | numParallelQueries | Number of queries to be executed in parallel. | 100              |
 | numQueries         | How often should the queries be repeated.     | 100              |
 
@@ -278,7 +278,7 @@ updates.
 
 | Parameter             | Description                                             | Example                       |
 | --------------------- | ------------------------------------------------------- | ----------------------------- |
-| baseUrl               | Url of the broker                                       | http://localhost              |
+| baseCBUrl             | URL of the broker                                       | http://localhost              |
 | numEntities           | Number of entities to be simulated.                     | 100                           |
 | numUpdates            | How many updates should be executed for each attribute. | 100                           |
 | updateDelay           | Delay between attribute updates in seconds.             | 1                             |
@@ -298,7 +298,7 @@ A number of such entities will be created, then 2 attributes(timestamp and humid
 
 | Parameter             | Description                                             | Example                       |
 | --------------------- | ------------------------------------------------------- | ----------------------------- |
-| baseUrl               | Url of the broker                                       | http://localhost              |
+| baseCBUrl             | URL of the broker                                       | http://localhost              |
 | numEntities           | Number of entities to be simulated.                     | 100                           |
 | numUpdates            | How many updates should be executed for each attribute. | 100                           |
 | updateDelay           | Delay between attribute updates in seconds.             | 1                             |

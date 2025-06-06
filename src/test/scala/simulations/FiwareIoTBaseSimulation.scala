@@ -19,7 +19,6 @@ abstract class FiwareIoTBaseSimulation extends Simulation {
 
   val entitiesToSimulate = testConfig.numEntities
 
-  // val baseCBUrl = testConfig.baseCBUrl
   val baseIoTNotificationUrl = testConfig.baseIoTNotificationUrl
   val baseIoTProvisionUrl = testConfig.baseIoTProvisionUrl
 
@@ -35,7 +34,7 @@ abstract class FiwareIoTBaseSimulation extends Simulation {
     println("++++++++++++++++++++++++++++++++++++ EXECUTE BEFORE ++++++++++++++++++++++++++++++++++")
     println("Provisioning Group Service.")
 
-    val response1 = Http(baseIoTProvisionUrl + "/iot/services")
+    var response = Http(baseIoTProvisionUrl + "/iot/services")
                     .header("Content-Type", "application/json")
                     .header("Fiware-Service", "openiot")
                     .header("Fiware-ServicePath", "/")
@@ -43,12 +42,12 @@ abstract class FiwareIoTBaseSimulation extends Simulation {
                     .timeout(10000, 60000)
                     .asString
 
-    if (response1.code != 201) {
-      throw new RuntimeException("Was not able to provision the Service Group. Response: \n" + response1)
+    if (response.code != 201) {
+      throw new RuntimeException("Was not able to provision the Service Group. Response: \n" + response)
     }
 
     println("Provisioning Device.")
-    val response2 = Http(baseIoTProvisionUrl + "/iot/devices")
+    response = Http(baseIoTProvisionUrl + "/iot/devices")
                 .header("Content-Type", "application/json")
                 .header("Fiware-Service", "openiot")
                 .header("Fiware-ServicePath", "/")
@@ -57,8 +56,8 @@ abstract class FiwareIoTBaseSimulation extends Simulation {
                 .asString
 
 
-    if (response2.code != 201) {
-      throw new RuntimeException("Was not able to provision Device. Response: \n" + response2)
+    if (response.code != 201) {
+      throw new RuntimeException("Was not able to provision Device. Response: \n" + response)
     }
 
 }
@@ -92,46 +91,6 @@ abstract class FiwareIoTBaseSimulation extends Simulation {
    */
   def afterScenario() = {};
 
-  /**
-    * Provisioning a Service group in an IoT Agent
-    */
-  /*def provisioningServiceGroupAction(): String = {
-    Http(baseIoTProvisionUrl + "/iot/services")
-    .header("Content-Type", "application/json")
-    .header("Fiware-Service", "openiot")
-    .header("Fiware-ServicePath", "")
-    .postData(StringBody((s: Session) => getProvisionServiceString()))
-    .timeout(10000, 60000)
-
-    /*http("provision service group")
-      .baseURL(baseIoTProvisionUrl)
-      .post("/iot/services")
-      .body(StringBody((s: Session) => getProvisionServiceString()))
-      .header("Content-Type", "application/json")
-      .header("Fiware-Service", "openiot")
-      .header("Fiware-ServicePath", "")
-      .asString*/
-  }
-
-  def provisionSensorAction(): String = {
-    Http(baseIoTProvisionUrl + "/iot/devices")
-    .header("Content-Type", "application/json")
-    .header("Fiware-Service", "openiot")
-    .header("Fiware-ServicePath", "")
-    .postData(StringBody((s: Session) => getProvisionSensorString()))
-    .timeout(10000, 60000)
-    .asString
-
-    /*http("provision sensor")
-      .baseURL(baseIoTProvisionUrl)
-      .post("/iot/devices")
-      .body(StringBody((s: Session) => getProvisionSensorString()))
-      .header("Content-Type", "application/json")
-      .header("Fiware-Service", "openiot")
-      .header("Fiware-ServicePath", "/")
-      .asString*/
-  }
-*/
   def sendDeviceMeasurementAction(): ActionBuilder = {
     val queryString = "/iot/json?k=4jggokgpepnvsb2uv4s40d59ov&i=temperature001"    
     http("send device measurement")

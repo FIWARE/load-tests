@@ -1,0 +1,7 @@
+# IDE and tools folders
+.vscode/
+.idea/
+.metals/
+
+# Build directories
+target/
